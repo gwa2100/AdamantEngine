@@ -1,10 +1,23 @@
 //
-//  CApp_Timer.cpp
-//  SkyFarm
+//  Timer.cpp
+//  AdamantEngine
 //
 //  Created by Timothy Carlisle on 11/5/11.
-//  Copyright 2011 EnvironTek Games, LLC. All rights reserved.
-//
+/*
+   Copyright 2011-2012 Timothy Carlisle
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "CApp.h"
 
@@ -14,28 +27,28 @@ Timer::Timer()
     startTicks = 0;
     pausedTicks = 0;
     paused = false;
-    started = false;    
+    started = false;
 }
 
 void Timer::start()
 {
     //Start the timer
     started = true;
-    
+
     //Unpause the timer
     paused = false;
-    
+
     //Get the current clock time
-    startTicks = SDL_GetTicks();    
+    startTicks = SDL_GetTicks();
 }
 
 void Timer::stop()
 {
     //Stop the timer
     started = false;
-    
+
     //Unpause the timer
-    paused = false;    
+    paused = false;
 }
 
 
@@ -54,11 +67,11 @@ int Timer::get_ticks()
         {
             //Return the current time minus the start time
             return SDL_GetTicks() - startTicks;
-        }    
+        }
     }
-    
+
     //If the timer isn't running
-    return 0;    
+    return 0;
 }
 
 
@@ -69,7 +82,7 @@ void Timer::pause()
     {
         //Pause the timer
         paused = true;
-        
+
         //Calculate the paused ticks
         pausedTicks = SDL_GetTicks() - startTicks;
     }
@@ -83,10 +96,10 @@ void Timer::unpause()
     {
         //Unpause the timer
         paused = false;
-        
+
         //Reset the starting ticks
         startTicks = SDL_GetTicks() - pausedTicks;
-        
+
         //Reset the paused ticks
         pausedTicks = 0;
     }
@@ -95,10 +108,10 @@ void Timer::unpause()
 
 bool Timer::is_started()
 {
-    return started;    
+    return started;
 }
 
 bool Timer::is_paused()
 {
-    return paused;    
+    return paused;
 }

@@ -1,10 +1,23 @@
 //
 //  Sprite.h
-//  SkyFarm
+//  AdamantEngine
 //
 //  Created by Timothy Carlisle on 11/6/11.
-//  Copyright 2011 EnvironTek Games, LLC. All rights reserved.
-//
+/*
+   Copyright 2011-2012 Timothy Carlisle
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #ifndef SkyFarm_Sprite_h
 #define SkyFarm_Sprite_h
@@ -14,23 +27,6 @@
 #include <SDL.h>
 #include <vector>
 #include <algorithm>
-
-/*
-Notes:
-<Use this format>
-Your Name
-Date/Time
-Notes
-<IE>
-Tim Carlisle
-11:11 11/11/11
-This is an Example.
-<END>
-
-Tim Carlisle
-5:47PM 11/28/2011
-Going to be adding support for the sprite sheet loading.
-*/
 
 //Definetly the most mixed up class! Needs a lot of cleanup!
 class Sprite {
