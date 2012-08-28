@@ -37,3 +37,41 @@
 
 1346026224 c:\users\gaming\desktop\adamantengine\source\headers\positiondatatypes.h
 
+1346020691 source:c:\users\gaming\documents\github\adamantengine\sidescrollerdemo\source\main.cpp
+	<iostream>
+	"AdamantEngine.h"
+
+1346020267 c:\users\gaming\documents\github\adamantengine\engine\source\headers\adamantengine.h
+	"CApp.h"
+
+1346029506 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
+	<SDL.h>
+	<vector>
+	<algorithm>
+	<string>
+	"Timer.h"
+	"CSound.h"
+	<SDL_mixer.h>
+	<Sprite.h>
+	"PositionDataTypes.h"
+
+1346021184 c:\users\gaming\documents\github\adamantengine\engine\source\headers\timer.h
+	<SDL.h>
+	<vector>
+	<algorithm>
+	"Sprite.h"
+	"CApp.h"
+
+1346021184 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
+	<CApp.h>
+	"CSound.h"
+	<SDL.h>
+	<vector>
+	<algorithm>
+
+1346021184 c:\users\gaming\documents\github\adamantengine\engine\source\headers\csound.h
+	"CApp.h"
+	<SDL_Mixer.h>
+
+1346026224 c:\users\gaming\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
+
