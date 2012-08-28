@@ -22,9 +22,8 @@
 #ifndef Sprite_h
 #define Sprite_h
 
-#include <CApp.h>
+#include "CApp.h"
 #include "CSound.h"
-#include <SDL.h>
 #include <vector>
 #include <algorithm>
 

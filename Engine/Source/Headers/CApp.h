@@ -22,13 +22,13 @@
 #ifndef CApp_h
 #define CApp_h
 
-#include "SDL/SDL.h"
+#include <SDL/SDL.h>
 #include <vector>
 #include <algorithm>
 #include <string>
 #include "Timer.h"
 #include "CSound.h"
-#include "SDL/SDL_mixer.h"
+#include <SDL/SDL_mixer.h>
 #include <Sprite.h>
 #include "PositionDataTypes.h"
 

@@ -16,7 +16,7 @@
 					<Add directory="..\Engine\Source\Headers" />
 				</Compiler>
 				<Linker>
-					<Add library="..\Engine\bin\Debug\libAdamantEngine.a" />
+					<Add library="..\bin\Debug\libAdamantEngine.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">

@@ -22,7 +22,6 @@
 #ifndef Timer_h
 #define Timer_h
 
-#include <SDL.h>
 #include <vector>
 #include <algorithm>
 #include "Sprite.h"

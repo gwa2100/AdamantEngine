@@ -21,9 +21,8 @@
 
 #ifndef CSound_h
 #define CSound_h
+#include <SDL/SDL_mixer.h>
 
-#include "CApp.h"
-#include <SDL_Mixer.h>
 
 
 class CSound{
