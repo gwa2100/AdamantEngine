@@ -20,10 +20,10 @@
 					<Add directory="Source\Headers" />
 				</Compiler>
 				<Linker>
-					<Add option="-lmingw32 -lSDLmain -lSDL -lSDL_mixer" />
 					<Add library="user32" />
 					<Add library="libs\libSDL.dll.a" />
 					<Add library="libs\libSDLmain.a" />
+					<Add directory="libs" />
 				</Linker>
 			</Target>
 			<Target title="Release">
