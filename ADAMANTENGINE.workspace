@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="AdamantEngine">
-		<Project filename="AdamantEngine/AdamantEngine.cbp" />
+		<Project filename="Engine/AdamantEngine.cbp" />
 		<Project filename="BreakoutcloneDemo/BreakoutcloneDemo.cbp" />
 		<Project filename="SideScrollerDemo/SideScrollerDemo.cbp" />
 	</Workspace>
