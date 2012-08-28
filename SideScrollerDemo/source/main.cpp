@@ -4,7 +4,7 @@
 //
 //  Created by Bryan Monsalvatge on 8/28/12.
 /*
-   Copyright 2011-2012 Timothy Carlisle
+   Copyright 2011-2012 Bryan Monsalvatge
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

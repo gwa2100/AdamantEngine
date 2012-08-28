@@ -1,10 +1,4 @@
-//
-//  main.h
-//  AdamantEngine::BreakoutcloneDemo
-//
-//  Created by Timothy Carlisle on 8/28/12.
-/*
-   Copyright 2011-2012 Timothy Carlisle
+Copyright 2011-2012 Adamant Engine Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,15 +11,3 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
-
-
-#ifndef MAIN_H_INCLUDED
-#define MAIN_H_INCLUDED
-
-#include "AdamantEngine.h"
-#include "Ball.h"
-#include "Bricks.h"
-
-
-#endif // MAIN_H_INCLUDED
