@@ -236,7 +236,6 @@ Sprite::Sprite()
     usesInput = false;
     usesGravity = false;
     usesCollision = false;
-
     spriteVelX = 0;
     spriteVelY = 0;
     frames = 0;

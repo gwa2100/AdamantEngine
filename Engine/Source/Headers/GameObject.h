@@ -19,17 +19,17 @@
    limitations under the License.
 */
 
-#ifndef OBJECTS_H_INCLUDED
-#define OBJECTS_H_INCLUDED
+#ifndef GAMEOBJECT_H_INCLUDED
+#define GAMEOBJECT_H_INCLUDED
 
 #include <CApp.h>
 #include "CSound.h"
 #include <SDL.h>
 #include <vector>
 #include <algorithm>
-#include "DataHolders.h"
+#include "PositionDataTypes.h"
 
-class Object
+class GameObject
 {
 protected:
     Pos3i position;
@@ -41,4 +41,4 @@ protected:
 };
 
 
-#endif // OBJECTS_H_INCLUDED
+#endif // GAMEOBJECT_H_INCLUDED

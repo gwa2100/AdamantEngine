@@ -1,8 +1,8 @@
 //
-//  CApp_OnRender.cpp
+//  Ball.h
 //  AdamantEngine
 //
-//  Created by Timothy Carlisle on 10/26/11.
+//  Created by Timothy Carlisle on 07/26/12.
 /*
    Copyright 2011-2012 Timothy Carlisle
 
@@ -19,29 +19,26 @@
    limitations under the License.
 */
 
-#include "CApp.h"
+#ifndef BALL_H
+#define BALL_H
 
-void CApp::OnRender(){
-    DrawSurface(Surf_Background, Surf_Display, 1, 1);
-
-    //SpriteList SpriteDrawing!
-
-    for (unsigned int x = 0; x < SpriteList.size(); x++) {
-        if (SpriteList[x]->usesRender)
-        {
-            SpriteList[x]->DrawSprite(Surf_Display);
-        }
-    }
-   /* for (int x = 0; x < 10; x++)
-    {
+#include "main.h"
 
 
-            Arr_Bricks[x].DrawSprite(Surf_Display);
+class Ball : public Sprite
+{
+    public:
+        virtual bool OnCollision(int side);
+        virtual bool Update();
+        int direction; //1 NW 2 NE 3 SW 4 SE 0 STILL
+        /** Default constructor */
+        Ball();
+        /** Default destructor */
+        virtual ~Ball();
+    protected:
+    private:
 
-    }
-*/
 
-    SDL_Flip(Surf_Display);
+};
 
-
-}
+#endif // BALL_H

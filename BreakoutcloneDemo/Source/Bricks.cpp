@@ -1,8 +1,8 @@
 //
-//  CSound.cpp
+//  Bricks.cpp
 //  AdamantEngine
 //
-//  Created by Timothy Carlisle on 11/05/11.
+//  Created by Timothy Carlisle on 07/26/12.
 /*
    Copyright 2011-2012 Timothy Carlisle
 
@@ -18,26 +18,36 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#include "Headers/main.h"
 
-#ifndef SkyFarm_CSound_h
-#define SkyFarm_CSound_h
+bool Bricks::OnCollision()
+{
+    Bricks::Impact();
+    return true;
+}
 
-#include "CApp.h"
-#include <SDL_Mixer.h>
+bool Bricks::Impact()
+{
+    //Destroy on impact!
+    //We will just make it uncollidable.
+    Bricks::usesCollision = false;
+    Bricks::usesRender = false;
+    return true;
+}
 
+bool Bricks::Update()
+{
+    //No required update at this time.
+    return true;
+}
 
-class CSound{
-private:
-	Mix_Music* sample;
-public:
-    CSound();
-    ~CSound();
+Bricks::Bricks()
+{
+    //ctor
+    Surf = NULL;
+}
 
-	bool loadSound(const char *filename);
-	void play();
-	void freeMusic();
-};
-
-#endif
-
-
+Bricks::~Bricks()
+{
+    //dtor
+}

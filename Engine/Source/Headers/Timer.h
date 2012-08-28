@@ -19,8 +19,8 @@
    limitations under the License.
 */
 
-#ifndef SkyFarm_Timer_h
-#define SkyFarm_Timer_h
+#ifndef Timer_h
+#define Timer_h
 
 #include <SDL.h>
 #include <vector>

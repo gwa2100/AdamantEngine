@@ -19,8 +19,8 @@
    limitations under the License.
 */
 
-#ifndef SkyFarm_CApp_h
-#define SkyFarm_CApp_h
+#ifndef CApp_h
+#define CApp_h
 
 #include <SDL.h>
 #include <vector>
@@ -30,8 +30,7 @@
 #include "CSound.h"
 #include <SDL_mixer.h>
 #include <Sprite.h>
-#include <Ball.h>
-#include <Bricks.h>
+#include "PositionDataTypes.h"
 
 
 
@@ -42,20 +41,6 @@ const unsigned int MOVE_SPD = 5;
 class CApp {
 private:
     bool Running;
-
-    //Some surfaces. These will be taken out, as they were for testing uses only!
-    SDL_Surface* Surf_Display;
-    SDL_Surface* Surf_Background;
-    SDL_Surface* Surf_Sprite_Player;
-    SDL_Surface* Surf_Static_Sprite_Platform;
-
-    //Not sure how I am going to go about this.  This is the declaration of the 2 sprites.
-    //They get registered to the SpriteBind system...So maybe I need to find a way to get rid of these!
-
-    Sprite Spr_Player;
-    Ball Spr_Ball;
-    Bricks Arr_Bricks[10];
-
 public:
 
     CApp();
@@ -68,6 +53,8 @@ public:
     void OnRender();
     void OnCleanup();
 
+    SDL_Surface* Surf_Display;
+
 
     //Some nice helper functions for graphics!
     SDL_Surface* LoadSprite(const char *fileName);
@@ -76,9 +63,8 @@ public:
     bool DrawSurface(SDL_Surface *src, SDL_Surface *dst, int dst_x, int dst_y);
 
     //Input data.
-    int inputVelocityX;
-    int inputVelocityY;
-    int movementSpeed;
+    Pos2i inputVelocity;
+    short unsigned int movementSpeed;
 
 
 
@@ -97,12 +83,6 @@ public:
     bool alreadyJump;
     int jumpTime;
     int jumpPower;
-
-
-    SDL_Rect TopWall;
-    SDL_Rect LeftWall;
-    SDL_Rect RightWall;
-    SDL_Rect BottomWall;
 
     //Use this to make it easy to make a SDL_Rect using integers, good for when a function requires SDL_RECT.
     SDL_Rect RectFiller(int x, int y, int h, int w);

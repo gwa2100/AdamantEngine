@@ -22,7 +22,7 @@
 #ifndef BRICKS_H
 #define BRICKS_H
 
-#include <CApp.h>
+#include "main.h"
 
 
 class Bricks : public Sprite

@@ -1,5 +1,5 @@
 //
-//  Bricks.cpp
+//  Ball.cpp
 //  AdamantEngine
 //
 //  Created by Timothy Carlisle on 07/26/12.
@@ -18,36 +18,43 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#include "CApp.h"
 
-bool Bricks::OnCollision()
+#include "Headers/main.h"
+
+bool Ball::OnCollision(int side)
 {
-    Bricks::Impact();
+    //Act on collision
+    if (side == 1)
+    {
+        //flip y
+        Ball::SetSpriteVel(GetSpriteXVel(),GetSpriteYVel() * -1);
+    }
+    if (side == 2)
+    {
+        //flip x
+        Ball::SetSpriteVel(GetSpriteXVel() * - 1,GetSpriteYVel());
+    }
+    if (side == 3)
+    {
+        //flip x and y
+        Ball::SetSpriteVel(GetSpriteXVel() * - 1,GetSpriteYVel() * - 1);
+    }
+
     return true;
 }
 
-bool Bricks::Impact()
+bool Ball::Update()
 {
-    //Destroy on impact!
-    //We will just make it uncollidable.
-    Bricks::usesCollision = false;
-    Bricks::usesRender = false;
+    Ball::MoveSprite(GetSpriteXVel(),GetSpriteYVel());
     return true;
 }
 
-bool Bricks::Update()
+Ball::Ball()
 {
-    //No required update at this time.
-    return true;
+    Ball::direction = 0;
 }
 
-Bricks::Bricks()
-{
-    //ctor
-    Surf = NULL;
-}
-
-Bricks::~Bricks()
+Ball::~Ball()
 {
     //dtor
 }

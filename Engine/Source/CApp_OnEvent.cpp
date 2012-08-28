@@ -28,16 +28,16 @@ void CApp::OnEvent(SDL_Event* Event) {
     if (Event->type == SDL_KEYDOWN) {
         switch (Event->key.keysym.sym){
             case SDLK_LEFT:
-                inputVelocityX = -1;
+                inputVelocity.x = -1;
                 break;
             case SDLK_RIGHT:
-                inputVelocityX = 1;
+                inputVelocity.x = 1;
                 break;
             case SDLK_UP:
-                jump = true;
+                inputVelocity.y = -1;
                 break;
             case SDLK_DOWN:
-                inputVelocityY = 1;
+                inputVelocity.y = 1;
                 break;
             case SDLK_ESCAPE:
                 CApp::Running = false;
@@ -48,16 +48,16 @@ void CApp::OnEvent(SDL_Event* Event) {
     if (Event->type == SDL_KEYUP) {
         switch (Event->key.keysym.sym){
             case SDLK_LEFT:
-                inputVelocityX = 0;
+                inputVelocity.x = 0;
                 break;
             case SDLK_RIGHT:
-                inputVelocityX = 0;
+                inputVelocity.x = 0;
                 break;
             case SDLK_UP:
-                inputVelocityY = 0;
+                inputVelocity.y = 0;
                 break;
             case SDLK_DOWN:
-                inputVelocityY = 0;
+                inputVelocity.y = 0;
                 break;
             default:
                 break;

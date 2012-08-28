@@ -19,8 +19,8 @@
    limitations under the License.
 */
 
-#ifndef SkyFarm_Sprite_h
-#define SkyFarm_Sprite_h
+#ifndef Sprite_h
+#define Sprite_h
 
 #include <CApp.h>
 #include "CSound.h"

@@ -32,11 +32,6 @@ bool operator < (Sprite& left,Sprite& right)
 
 CApp::CApp(){
     Surf_Display = NULL;
-    Surf_Background = NULL;
-    Surf_Sprite_Player = NULL;
-    Surf_Static_Sprite_Platform = NULL;
-
-
     Running = true;
 }
 
@@ -95,7 +90,3 @@ void CApp::BindSprite(Sprite *bindMe)
     bindMe->bindID = beforeSize;
 }
 
-int main(int argc, char* argv[]) {
-    CApp theApp;
-    return theApp.OnExecute();
-}

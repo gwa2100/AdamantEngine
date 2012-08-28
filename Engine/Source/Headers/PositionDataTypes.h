@@ -1,8 +1,8 @@
 //
-//  Ball.h
+//  POSITIONDATATYPES.h
 //  AdamantEngine
 //
-//  Created by Timothy Carlisle on 07/26/12.
+//  Created by Timothy Carlisle on 08/26/12.
 /*
    Copyright 2011-2012 Timothy Carlisle
 
@@ -19,26 +19,28 @@
    limitations under the License.
 */
 
-#ifndef BALL_H
-#define BALL_H
+#ifndef POSITIONDATATYPES_H_INCLUDED
+#define POSITIONDATATYPES_H_INCLUDED
 
-#include <CApp.h>
-
-
-class Ball : public Sprite
+struct Pos3i
 {
-    public:
-        virtual bool OnCollision(int side);
-        virtual bool Update();
-        int direction; //1 NW 2 NE 3 SW 4 SE 0 STILL
-        /** Default constructor */
-        Ball();
-        /** Default destructor */
-        virtual ~Ball();
-    protected:
-    private:
-
-
+    int x,y,z;
 };
 
-#endif // BALL_H
+struct Pos2i
+{
+    int x, y;
+};
+
+struct Pos3f
+{
+    float x,y,z;
+};
+
+struct Pos2f
+{
+    float x,y;
+};
+
+
+#endif // POSITIONDATATYPES_H_INCLUDED
