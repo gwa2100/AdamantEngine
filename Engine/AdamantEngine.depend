@@ -1,1 +1,264 @@
 # depslib dependency file v1.0
+1346122822 source:c:\users\gaming\documents\github\adamantengine\engine\source\sprite.cpp
+	"CApp.h"
+
+1346124890 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
+	"SDL/SDL.h"
+	<vector>
+	<algorithm>
+	<string>
+	"Timer.h"
+	"CSound.h"
+	"SDL/SDL_mixer.h"
+	<Sprite.h>
+	"PositionDataTypes.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1326114587 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_config.h
+	"SDL_platform.h"
+	"SDL_config_dreamcast.h"
+	"SDL_config_macos.h"
+	"SDL_config_macosx.h"
+	"SDL_config_symbian.h"
+	"SDL_config_win32.h"
+	"SDL_config_os2.h"
+	"SDL_config_minimal.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_platform.h
+
+1326114594 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_config_win32.h
+	"SDL_platform.h"
+
+1326114600 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\begin_code.h
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\close_code.h
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_keysym.h
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1346021184 c:\users\gaming\documents\github\adamantengine\engine\source\headers\timer.h
+	<SDL.h>
+	<vector>
+	<algorithm>
+	"Sprite.h"
+	"CApp.h"
+
+1346021184 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
+	<CApp.h>
+	"CSound.h"
+	<SDL.h>
+	<vector>
+	<algorithm>
+
+1346021184 c:\users\gaming\documents\github\adamantengine\engine\source\headers\csound.h
+	"CApp.h"
+	<SDL_Mixer.h>
+
+1258271552 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_mixer.h
+	"SDL_types.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325742239 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_types.h
+	"SDL_stdinc.h"
+
+1346026224 c:\users\gaming\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
+
+1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\timer.cpp
+	"CApp.h"
+
+1346025117 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp.cpp
+	"CApp.h"
+
+1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_graphics.cpp
+	"CApp.h"
+
+1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_oncleanup.cpp
+	"CApp.h"
+
+1346025033 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_onevent.cpp
+	"CApp.h"
+
+1346025098 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_oninit.cpp
+	"CApp.h"
+
+1346025108 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_onloop.cpp
+	"CApp.h"
+
+1346025132 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_onrender.cpp
+	"CApp.h"
+
+1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\csound.cpp
+	"CApp.h"
+
