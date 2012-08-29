@@ -23,7 +23,7 @@
 
 bool Sprite::DrawSprite(SDL_Surface *dst_Surf)
 {
-    if (SDL_BlitSurface(Surf, NULL, dst_Surf, &CApp::RectFiller(GetPosition3i().x,GetPosition3i().y,GetDimensions2i().x,GetDimensions2i().y)) != 1)
+    if (SDL_BlitSurface(Surf, NULL, dst_Surf, &RectFiller(GetPosition3i().x,GetPosition3i().y,GetDimensions2i().x,GetDimensions2i().y)) != 1)
     {
         return false;
     }

@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1346202434 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp.cpp
+1346200227 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp.cpp
 	"PositionDataTypes.h"
 	"CApp.h"
 
-1346204778 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
+1346201511 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
 	<SDL/SDL.h>
 	<vector>
 	<algorithm>
@@ -11,6 +11,8 @@
 	"Timer.h"
 	"CSound.h"
 	<SDL/SDL_mixer.h>
+	"GameObject.h"
+	<Sprite.h>
 	"PositionDataTypes.h"
 
 1255800449 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl.h
@@ -256,7 +258,11 @@
 	"GameObject.h"
 	"CApp.h"
 
-1346205008 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
+1346201762 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
+	<CApp.h>
+	"CSound.h"
+	<SDL/SDL.h>
+	<vector>
+	<algorithm>
 	"PositionDataTypes.h"
-	"CApp.h"
 
