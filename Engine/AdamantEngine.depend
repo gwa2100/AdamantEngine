@@ -3,7 +3,7 @@
 	"PositionDataTypes.h"
 	"CApp.h"
 
-1346208090 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
+1346208388 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
 	<SDL/SDL.h>
 	<vector>
 	<algorithm>
@@ -11,7 +11,6 @@
 	"Timer.h"
 	"CSound.h"
 	<SDL/SDL_mixer.h>
-	"GameObject.h"
 	<Sprite.h>
 	"PositionDataTypes.h"
 
@@ -258,7 +257,7 @@
 	"GameObject.h"
 	"CApp.h"
 
-1346208105 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
+1346208293 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
 	"PositionDataTypes.h"
 	"CApp.h"
 

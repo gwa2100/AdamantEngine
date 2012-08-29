@@ -48,7 +48,7 @@ public:
 
 
 
-    GameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = CDefault_Rect,
+    GameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = CDefault_Rect(),
                bool iUsesCollision = false, bool iUsesUpdate = false, bool iUsesRender = false,
                bool iUsesEvent = false, bool iUsesCleanup = false);
 

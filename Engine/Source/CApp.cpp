@@ -20,7 +20,7 @@
 */
 
 const int FrameCap = 60;
-
+#include "GameObject.h"
 #include "PositionDataTypes.h"
 #include "CApp.h"
 

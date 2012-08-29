@@ -29,7 +29,6 @@
 #include "Timer.h"
 #include "CSound.h"
 #include <SDL/SDL_mixer.h>
-#include "GameObject.h"
 #include <Sprite.h>
 #include "PositionDataTypes.h"
 
@@ -39,10 +38,13 @@ using namespace std;
 
 const unsigned int MOVE_SPD = 5;
 //SDL_Rect.x
-struct CDefault_Rect : public SDL_Rect
+class CDefault_Rect : public SDL_Rect
 {
+public:
     CDefault_Rect( int nX = 0, int nY = 0, int nW = 0, int nH = 0) { x = nX; y = nY; w = nW; h = nH;};
 };
+
+class GameObject;
 
 
 
