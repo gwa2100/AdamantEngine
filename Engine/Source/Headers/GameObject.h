@@ -135,6 +135,8 @@ class CGameObjectPtrVector : public vector< CGameObject* >
             delete ppObjects[n];
         }
 
+        clear();
+
         CGameObjectPtrVector().swap( *this );
     }
 
