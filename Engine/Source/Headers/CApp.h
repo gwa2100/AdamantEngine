@@ -29,6 +29,7 @@
 #include "Timer.h"
 #include "CSound.h"
 #include <SDL/SDL_mixer.h>
+#include "GameObject.h"
 #include <Sprite.h>
 #include "PositionDataTypes.h"
 
@@ -84,13 +85,23 @@ public:
     int jumpTime;
     int jumpPower;
 
+
+    //Create Pos3i from x,y,z
+    static Pos3i Pos3iFiller(int x, int y, int z);
+    //Create Pos2i from x,y
+    static Pos2i Pos2iFiller(int x, int y);
+    //Create Pos3f from x,y,z
+    static Pos3f Pos3fFiller(float x, float y, float z);
+    //Create Pos2f from x,y
+    static Pos2f Pos2fFiller(float x, float y);
+
     //Use this to make it easy to make a SDL_Rect using integers, good for when a function requires SDL_RECT.
-    SDL_Rect RectFiller(int x, int y, int h, int w);
+    static SDL_Rect RectFiller(int x, int y, int h, int w);
 
     //Used for the Sprite Pointer Vector for automated rendering and updating, etc.
     //You will pretty much always bind a new Sprite to this system. Just use BindSprite, passing it the pointer to the sprite object.
-    std::vector<Sprite*> SpriteList;
-    void BindSprite(Sprite* bindMe);
+    std::vector<GameObject*> SpriteList;
+    void BindSprite(GameObject* bindMe);
 
     CSound TestSound;
 
@@ -103,6 +114,6 @@ public:
 
 
 
-bool operator < (Sprite& left,Sprite& right);
+bool operator < (GameObject& left,GameObject& right);
 
 #endif

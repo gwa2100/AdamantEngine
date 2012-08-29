@@ -22,6 +22,8 @@
 #ifndef POSITIONDATATYPES_H_INCLUDED
 #define POSITIONDATATYPES_H_INCLUDED
 
+#include <SDL/SDL.h>
+
 struct Pos3i
 {
     int x,y,z;
@@ -41,6 +43,8 @@ struct Pos2f
 {
     float x,y;
 };
+
+
 
 
 #endif // POSITIONDATATYPES_H_INCLUDED

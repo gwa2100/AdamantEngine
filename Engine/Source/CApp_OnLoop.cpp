@@ -24,19 +24,15 @@
 
 using namespace std;
 
-void CApp::OnLoop(){
-    //SpriteList UserInput!
+void CApp::OnLoop()
+{
+    //TODO: Write code for sending events to object event processor.
 
-    for (unsigned int x = 0; x < SpriteList.size(); x++) {
-        if (SpriteList[x]->usesInput)
-        {
-            SpriteList[x]->SetSpriteVel(inputVelocity.x * movementSpeed ,0);     //(inputVelocityX * movementSpeed, inputVelocityY * movementSpeed);
-        }
-    }
+
 
     //Run Update
     for (unsigned int x = 0; x < SpriteList.size(); x++) {
-        if (SpriteList[x]->needUpdate)
+        if (SpriteList[x]->usesUpdate)
         {
             SpriteList[x]->Update();
         }

@@ -21,12 +21,13 @@
 
 const int FrameCap = 60;
 
+#include "PositionDataTypes.h"
 #include "CApp.h"
 
 //Z Comparison (DEPTH)
-bool operator < (Sprite& left,Sprite& right)
+bool operator < (GameObject& left,GameObject& right)
 {
-	if  (left.GetLayer() < right.GetLayer()) return true;
+	if  (left.GetPosition3i().z < right.GetPosition3i().z) return true;
 	return false;
 }
 
@@ -72,6 +73,45 @@ int CApp::OnExecute() {
     return 0;
 }
 
+
+//ENGINE TOOLS
+
+//Create Pos3i from x,y,z
+Pos3i CApp::Pos3iFiller(int x, int y, int z)
+{
+    Pos3i temp;
+    temp.x = x;
+    temp.y = y;
+    temp.z = z;
+    return temp;
+}
+//Create Pos2i from x,y
+Pos2i CApp::Pos2iFiller(int x, int y)
+{
+    Pos2i temp;
+    temp.x = x;
+    temp.y = y;
+    return temp;
+}
+//Create Pos3f from x,y,z
+Pos3f CApp::Pos3fFiller(float x, float y, float z)
+{
+    Pos3f temp;
+    temp.x = x;
+    temp.y = y;
+    temp.z = z;
+    return temp;
+}
+//Create Pos2f from x,y
+Pos2f CApp::Pos2fFiller(float x, float y)
+{
+    Pos2f temp;
+    temp.x = x;
+    temp.y = y;
+    return temp;
+}
+
+//Create rect from x,y,h,w
 SDL_Rect CApp::RectFiller(int x, int y, int h, int w)
 {
     SDL_Rect Temp;
@@ -82,11 +122,11 @@ SDL_Rect CApp::RectFiller(int x, int y, int h, int w)
     return Temp;
 }
 
-void CApp::BindSprite(Sprite *bindMe)
+
+void CApp::BindSprite(GameObject *bindMe)
 {
     int beforeSize = SpriteList.size();
     SpriteList.resize(beforeSize + 1);
     SpriteList[beforeSize] = bindMe;
-    bindMe->bindID = beforeSize;
 }
 
