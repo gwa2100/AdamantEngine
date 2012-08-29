@@ -22,7 +22,7 @@
 #ifndef Sprite_h
 #define Sprite_h
 
-#include "CApp.h"
+
 #include "GameObject.h"
 #include "CSound.h"
 #include <vector>

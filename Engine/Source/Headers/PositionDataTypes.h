@@ -48,6 +48,12 @@ struct Pos2f
     float x,y;
 };
 
+class CDefault_Rect : public SDL_Rect
+{
+public:
+    CDefault_Rect( int nX = 0, int nY = 0, int nW = 0, int nH = 0) { x = nX; y = nY; w = nW; h = nH;};
+};
+
 
 
 

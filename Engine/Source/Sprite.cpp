@@ -19,11 +19,22 @@
    limitations under the License.
 */
 
-#include "CApp.h"
+#include "Sprite.h"
+#include "PositionDataTypes.h"
+
+
+
 
 bool Sprite::DrawSprite(SDL_Surface *dst_Surf)
 {
-    if (SDL_BlitSurface(Surf, NULL, dst_Surf, &RectFiller(GetPosition3i().x,GetPosition3i().y,GetDimensions2i().x,GetDimensions2i().y)) != 1)
+    Pos3i pos = GetPosition3i();
+    Pos2i dim = GetDimensions2i();
+    SDL_Rect temp;
+    temp.x = pos.x;
+    temp.y = pos.y;
+    temp.w = dim.x;
+    temp.h = dim.y;
+    if (SDL_BlitSurface(Surf, NULL, dst_Surf, &temp) != 1)
     {
         return false;
     }

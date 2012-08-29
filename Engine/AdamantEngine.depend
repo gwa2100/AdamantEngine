@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1346202434 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp.cpp
+1346208431 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp.cpp
+	"GameObject.h"
 	"PositionDataTypes.h"
 	"CApp.h"
 
-1346208388 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
+1346208929 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
 	<SDL/SDL.h>
 	<vector>
 	<algorithm>
@@ -200,8 +201,7 @@
 	"Sprite.h"
 	"CApp.h"
 
-1346199339 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
-	"CApp.h"
+1346212623 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
 	"GameObject.h"
 	"CSound.h"
 	<vector>
@@ -222,7 +222,7 @@
 1255800450 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_types.h
 	"SDL_stdinc.h"
 
-1346206565 c:\users\gaming\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
+1346208929 c:\users\gaming\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
 	<SDL/SDL.h>
 
 1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_graphics.cpp
@@ -231,8 +231,10 @@
 1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_oncleanup.cpp
 	"CApp.h"
 
-1346200808 source:c:\users\gaming\documents\github\adamantengine\engine\source\sprite.cpp
-	"CApp.h"
+1346209718 source:c:\users\gaming\documents\github\adamantengine\engine\source\sprite.cpp
+	"GameObject.h"
+	"Sprite.h"
+	"PositionDataTypes.h"
 
 1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\timer.cpp
 	"CApp.h"
@@ -257,7 +259,6 @@
 	"GameObject.h"
 	"CApp.h"
 
-1346208293 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
+1346208929 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
 	"PositionDataTypes.h"
-	"CApp.h"
 
