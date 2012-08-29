@@ -22,42 +22,37 @@
 #ifndef Timer_h
 #define Timer_h
 
-#include <vector>
-#include <algorithm>
-#include "Sprite.h"
-#include "CApp.h"
+#include "SDL/SDL_stdinc.h"
 
-
-
-class Timer
+class CTimer
 {
 private:
     //The clock time when the timer started
-    int startTicks;
+    Uint32 m_uStartTicks;
 
     //The ticks stored when the timer was paused
-    int pausedTicks;
+    Uint32 m_uPausedTicks;
 
     //The timer status
-    bool paused;
-    bool started;
+    bool m_bPaused;
+    bool m_bStarted;
 
 public:
     //Initializes variables
-    Timer();
+    CTimer();
 
     //The various clock actions
-    void start();
-    void stop();
-    void pause();
-    void unpause();
+    void Start();
+    void Stop();
+    void Pause();
+    void Resume();
 
     //Gets the timer's time
-    int get_ticks();
+    Uint32 GetTicks();
 
     //Checks the status of the timer
-    bool is_started();
-    bool is_paused();
+    bool IsStarted() const;
+    bool IsPaused() const;
 };
 
 #endif

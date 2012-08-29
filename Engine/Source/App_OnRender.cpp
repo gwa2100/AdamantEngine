@@ -1,5 +1,5 @@
 //
-//  CApp_OnCleanup.cpp
+//  CApp_OnRender.cpp
 //  AdamantEngine
 //
 //  Created by Timothy Carlisle on 10/26/11.
@@ -19,8 +19,27 @@
    limitations under the License.
 */
 
-#include "CApp.h"
+#include "App.h"
+#include <SDL/SDL.h>
 
-void CApp::OnCleanup(){
-    SDL_Quit();
+
+void CApp::OnRender(){
+    //SpriteList SpriteDrawing!
+    size_t uSize = m_arSpriteList.size();
+
+    if ( uSize > 0)
+    {
+        CGameObject** ppObjects = m_arSpriteList.data();
+
+        for (size_t x = 0; x < uSize; x++) {
+            if ( ppObjects[x]->m_bUsesRender )
+            {
+                //ppObjects[x]->DrawSprite(m_pSurfDisplay);
+
+            }
+        }
+
+    }
+
+    SDL_Flip(m_pSurfDisplay);
 }

@@ -22,38 +22,33 @@
 #ifndef Sprite_h
 #define Sprite_h
 
-
 #include "GameObject.h"
-#include "CSound.h"
-#include <vector>
-#include <algorithm>
+
+class SDL_Surface;
 
 //Definetly the most mixed up class! Needs a lot of cleanup!
-class Sprite : public GameObject
+class CSprite : public CGameObject
 {
 protected:
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Variables<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     //Our surface pointers for holding the surface!
     //Surf will hold the sprite image.
-    SDL_Surface* Surf;
+    SDL_Surface* m_pSurf;
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Functions<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 public:
     //Update Function
-    virtual bool Update();
+    virtual bool Update() { return false;}
 
     //On Collision Function
     virtual bool OnCollision();
 
     //Draw the sprite!
-    bool DrawSprite(SDL_Surface* dst_Surf);
+    bool DrawSprite(SDL_Surface* pDestSurf);
 
-    Sprite();
-    virtual ~Sprite();
-
-
-
+    CSprite();
+    ~CSprite();
 };
 
 

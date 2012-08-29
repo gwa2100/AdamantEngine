@@ -18,11 +18,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
-#include "CApp.h"
-
-
-
+#include "Sound.h"
 
 CSound::CSound()
 {
@@ -33,7 +29,6 @@ CSound::~CSound()
     Mix_FreeMusic(sample);
     sample = NULL;
 }
-
 
 bool CSound::loadSound(const char *filename)
 {

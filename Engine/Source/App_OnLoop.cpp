@@ -19,10 +19,9 @@
    limitations under the License.
 */
 
-#include "CApp.h"
+#include "App.h"
 //#include <iostream>
-
-using namespace std;
+//using std::
 
 void CApp::OnLoop()
 {
@@ -31,29 +30,32 @@ void CApp::OnLoop()
 
 
     //Run Update
-    for (unsigned int x = 0; x < SpriteList.size(); x++) {
-        if (SpriteList[x]->usesUpdate)
+    size_t uSize = m_arSpriteList.size();
+    if ( uSize == 0 ) return;
+
+    CGameObject** ppObjects = m_arSpriteList.data();
+
+    for (size_t x = 0; x < uSize; x++) {
+        if (ppObjects[x]->m_bUsesUpdate)
         {
             //SpriteList[x]->Update();
         }
     }
 
-
-
     //SpriteList UpdatePosition!
 /*
-    for (unsigned int x = 0; x < SpriteList.size(); x++) {
-        SpriteList[x]->MoveSprite(SpriteList[x]->GetSpriteXVel(), SpriteList[x]->GetSpriteYVel());
+    for (size_t x = 0; x < uSize; x++) {
+        ppObjects[x]->MoveSprite(ppObjects[x]->GetSpriteXVel(), ppObjects[x]->GetSpriteYVel());
     }
 */
 
 //Run Animation updates
 //NOT USED RIGHT NOW!
 /*
-    for (unsigned int x = 0; x < SpriteList.size(); x++) {
-        if (SpriteList[x]->usesAnimation)
+    for (size_t x = 0; x < uSize; x++) {
+        if (ppObjects[x]->m_bUsesAnimation)
         {
-            //SpriteList[x]->AnimationUpdate();
+            //ppObjects[x]->AnimationUpdate();
         }
     }
 */

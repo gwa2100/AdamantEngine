@@ -22,12 +22,9 @@
 #ifndef GAMEOBJECT_H_INCLUDED
 #define GAMEOBJECT_H_INCLUDED
 
-
 #include "PositionDataTypes.h"
 
-
-
-class GameObject
+class CGameObject
 {
 protected:
     //Position of GameObject X,Y,Z in Pos3i format
@@ -40,63 +37,64 @@ protected:
     Pos3i velocity;
 
 public:
-    bool usesCollision;
-    bool usesUpdate;
-    bool usesRender;
-    bool usesEvent;
-    bool usesCleanup;
+    //KMS: maybe make these private and have a const getter..
+    bool m_bUsesCollision;
+    bool m_bUsesUpdate;
+    bool m_bUsesRender;
+    bool m_bUsesEvent;
+    bool m_bUsesCleanup;
 
 
 
-    GameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = (SDL_Rect)CDefault_Rect(),
-               bool iUsesCollision = false, bool iUsesUpdate = false, bool iUsesRender = false,
-               bool iUsesEvent = false, bool iUsesCleanup = false);
+    CGameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = (SDL_Rect)CDefault_Rect(),
+               bool bUsesCollision = false, bool bUsesUpdate = false, bool bUsesRender = false,
+               bool bUsesEvent = false, bool bUsesCleanup = false);
 
 
     //Main Functions
 
     //Move Object Directly
-    bool Move(Pos3i);
-    bool Move(Pos2i);
-    bool Move(Pos3f);
-    bool Move(Pos2f);
+    bool Move(const Pos3i& pos);
+    bool Move(const Pos2i& pos);
+    bool Move(const Pos3f& pos);
+    bool Move(const Pos2f& pos);
 
     //Set Positions
-    bool SetPosition(Pos3i);
-    bool SetPosition(Pos2i);
-    bool SetPosition(Pos3f);
-    bool SetPosition(Pos2f);
+    bool SetPosition(const Pos3i& pos);
+    bool SetPosition(const Pos2i& pos);
+    bool SetPosition(const Pos3f& pos);
+    bool SetPosition(const Pos2f& pos);
 
     //Get Position
-    Pos3i GetPosition3i();
+    Pos3i GetPosition3i() const;
 
     //Get Dimensions
-    Pos2i GetDimensions2i();
+    Pos2i GetDimensions2i() const;
 
     //Get Velocity
-    Pos3i GetVelocity3i();
+    Pos3i GetVelocity3i() const;
 
     //Move Velocity
-    bool MoveVelocity(Pos3i);
-    bool MoveVelocity(Pos2i);
-    bool MoveVelocity(Pos3f);
-    bool MoveVelocity(Pos2f);
+    bool MoveVelocity(const Pos3i& vel);
+    bool MoveVelocity(const Pos2i& vel);
+    bool MoveVelocity(const Pos3f& vel);
+    bool MoveVelocity(const Pos2f& vel);
 
     //Set Velocity
-    bool SetVelocity(Pos3i);
-    bool SetVelocity(Pos2i);
-    bool SetVelocity(Pos3f);
-    bool SetVelocity(Pos2f);
+    bool SetVelocity(const Pos3i& vel);
+    bool SetVelocity(const Pos2i& vel);
+    bool SetVelocity(const Pos3f& vel);
+    bool SetVelocity(const Pos2f& vel);
 
     //Set Bounding Box for collision
-    bool SetBoundingBox(SDL_Rect);
+    bool SetBoundingBox(const SDL_Rect& rect);
 
     //Enable Functions
-    bool EnableCollision(bool);
-    bool EnableUpdate(bool);
-    bool EnableRender(bool);
-    bool EnableEvent(bool);
-    bool EnableCleanup(bool);
+    bool EnableCollision(bool bEnable);
+    bool EnableUpdate(bool bEnable);
+    bool EnableRender(bool bEnable);
+    bool EnableEvent(bool bEnable);
+    bool EnableCleanup(bool bEnable);
 
     //Overidable Virtual Function for creating object functionality.
     //These will be run by the engine based on the bool values above.
@@ -112,8 +110,36 @@ public:
     //right before shutdown.
     virtual bool Cleanup();
 
-    virtual ~GameObject();
+    virtual ~CGameObject();
 };
+
+#include <vector>
+using std::vector;
+
+class CGameObjectPtrVector : public vector< CGameObject* >
+{
+    public:
+    CGameObjectPtrVector() {}
+    ~CGameObjectPtrVector()
+    {
+        ResetContent();
+    }
+
+    void ResetContent()
+    {
+        if ( size() == 0 ) return;
+
+        CGameObject** ppObjects = data();
+        for(size_t n = 0; n < size(); n++)
+        {
+            delete ppObjects[n];
+        }
+
+        CGameObjectPtrVector().swap( *this );
+    }
+
+};
+
 
 
 #endif // GAMEOBJECT_H_INCLUDED

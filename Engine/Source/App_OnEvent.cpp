@@ -19,45 +19,46 @@
    limitations under the License.
 */
 
-#include "CApp.h"
+#include "App.h"
+#include <SDL/SDL.h>
 
-void CApp::OnEvent(SDL_Event* Event) {
-    if (Event->type == SDL_QUIT) {
-        Running = false;
+void CApp::OnEvent(SDL_Event* pEvent) {
+    if (pEvent->type == SDL_QUIT) {
+        m_bRunning = false;
     }
-    if (Event->type == SDL_KEYDOWN) {
-        switch (Event->key.keysym.sym){
+    if (pEvent->type == SDL_KEYDOWN) {
+        switch (pEvent->key.keysym.sym){
             case SDLK_LEFT:
-                inputVelocity.x = -1;
+                m_inputVelocity.x = -1;
                 break;
             case SDLK_RIGHT:
-                inputVelocity.x = 1;
+                m_inputVelocity.x = 1;
                 break;
             case SDLK_UP:
-                inputVelocity.y = -1;
+                m_inputVelocity.y = -1;
                 break;
             case SDLK_DOWN:
-                inputVelocity.y = 1;
+                m_inputVelocity.y = 1;
                 break;
             case SDLK_ESCAPE:
-                CApp::Running = false;
+                m_bRunning = false;
             default:
                 break;
         }
     }
-    if (Event->type == SDL_KEYUP) {
-        switch (Event->key.keysym.sym){
+    if (pEvent->type == SDL_KEYUP) {
+        switch (pEvent->key.keysym.sym){
             case SDLK_LEFT:
-                inputVelocity.x = 0;
+                m_inputVelocity.x = 0;
                 break;
             case SDLK_RIGHT:
-                inputVelocity.x = 0;
+                m_inputVelocity.x = 0;
                 break;
             case SDLK_UP:
-                inputVelocity.y = 0;
+                m_inputVelocity.y = 0;
                 break;
             case SDLK_DOWN:
-                inputVelocity.y = 0;
+                m_inputVelocity.y = 0;
                 break;
             default:
                 break;

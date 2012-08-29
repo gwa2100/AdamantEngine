@@ -22,19 +22,13 @@
 #include "Sprite.h"
 #include "PositionDataTypes.h"
 
-
-
-
-bool Sprite::DrawSprite(SDL_Surface *dst_Surf)
+bool CSprite::DrawSprite(SDL_Surface *pDestSurf)
 {
     Pos3i pos = GetPosition3i();
     Pos2i dim = GetDimensions2i();
-    SDL_Rect temp;
-    temp.x = pos.x;
-    temp.y = pos.y;
-    temp.w = dim.x;
-    temp.h = dim.y;
-    if (SDL_BlitSurface(Surf, NULL, dst_Surf, &temp) != 1)
+    SDL_Rect rect = CDefault_Rect(pos.x, pos.y, dim.x, dim.y);
+
+    if (SDL_BlitSurface(m_pSurf, NULL, pDestSurf, &rect) != 1)
     {
         return false;
     }
@@ -46,22 +40,23 @@ bool Sprite::DrawSprite(SDL_Surface *dst_Surf)
 }
 
 
-bool Sprite::OnCollision()
+bool CSprite::OnCollision()
 {
     //Anything for when collision is thrown, typical action is played out by Check Collision, should really be changed to work inside here!
     return true;
 }
 
-Sprite::Sprite()
+CSprite::CSprite()
+: m_pSurf(NULL)
 {
-    Surf = NULL;
+
 }
 
-Sprite::~Sprite()
+CSprite::~CSprite()
 {
-    if (Surf != NULL)
+    if (m_pSurf != NULL)
     {
-        SDL_FreeSurface(Surf);
+        SDL_FreeSurface(m_pSurf);
     }
 }
 

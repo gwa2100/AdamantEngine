@@ -18,55 +18,54 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#include "Timer.h"
+#include <SDL/SDL_timer.h>
 
-#include "CApp.h"
-
-Timer::Timer()
+CTimer::CTimer()    //Initialize the variables
+ : m_uStartTicks(0)
+ , m_uPausedTicks(0)
+ , m_bPaused(false)
+ , m_bStarted(false)
 {
-    //Initialize the variables
-    startTicks = 0;
-    pausedTicks = 0;
-    paused = false;
-    started = false;
 }
 
-void Timer::start()
+void CTimer::Start()
 {
     //Start the timer
-    started = true;
+    m_bStarted = true;
 
     //Unpause the timer
-    paused = false;
+    m_bPaused = false;
 
     //Get the current clock time
-    startTicks = SDL_GetTicks();
+    m_uStartTicks = SDL_GetTicks();
 }
 
-void Timer::stop()
+void CTimer::Stop()
 {
     //Stop the timer
-    started = false;
+    m_bStarted = false;
 
     //Unpause the timer
-    paused = false;
+    m_bPaused = false;
 }
 
 
-int Timer::get_ticks()
+Uint32 CTimer::GetTicks()
 {
     //If the timer is running
-    if( started == true )
+    if( m_bStarted == true )
     {
         //If the timer is paused
-        if( paused == true )
+        if( m_bPaused == true )
         {
             //Return the number of ticks when the timer was paused
-            return pausedTicks;
+            return m_uPausedTicks;
         }
         else
         {
             //Return the current time minus the start time
-            return SDL_GetTicks() - startTicks;
+            return SDL_GetTicks() - m_uStartTicks;
         }
     }
 
@@ -75,43 +74,43 @@ int Timer::get_ticks()
 }
 
 
-void Timer::pause()
+void CTimer::Pause()
 {
     //If the timer is running and isn't already paused
-    if( ( started == true ) && ( paused == false ) )
+    if( ( m_bStarted == true ) && ( m_bPaused == false ) )
     {
         //Pause the timer
-        paused = true;
+        m_bPaused = true;
 
         //Calculate the paused ticks
-        pausedTicks = SDL_GetTicks() - startTicks;
+        m_uPausedTicks = SDL_GetTicks() - m_uStartTicks;
     }
 }
 
 
-void Timer::unpause()
+void CTimer::Resume()
 {
     //If the timer is paused
-    if( paused == true )
+    if( m_bPaused == true )
     {
         //Unpause the timer
-        paused = false;
+        m_bPaused = false;
 
         //Reset the starting ticks
-        startTicks = SDL_GetTicks() - pausedTicks;
+        m_uStartTicks = SDL_GetTicks() - m_uPausedTicks;
 
         //Reset the paused ticks
-        pausedTicks = 0;
+        m_uPausedTicks = 0;
     }
 }
 
 
-bool Timer::is_started()
+bool CTimer::IsStarted() const
 {
-    return started;
+    return m_bStarted;
 }
 
-bool Timer::is_paused()
+bool CTimer::IsPaused() const
 {
-    return paused;
+    return m_bPaused;
 }

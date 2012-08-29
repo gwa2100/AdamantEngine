@@ -19,35 +19,34 @@
    limitations under the License.
 */
 
-#include "CApp.h"
+#include "App.h"
+#include <SDL/SDL.h>
 
-SDL_Surface* CApp::LoadSprite(const char *fileName)
+SDL_Surface* CApp::LoadSprite(const char* pszFileName)
 {
-    SDL_Surface* Surf_Temp = NULL;
-    SDL_Surface* Surf_Return = NULL;
+    SDL_Surface* pSurfTemp = NULL;
+    SDL_Surface* pSurfReturn = NULL;
 
-    if ((Surf_Temp = SDL_LoadBMP(fileName)) == NULL) {
+    if ((pSurfTemp = SDL_LoadBMP(pszFileName)) == NULL) {
         return NULL;
     }
 
-    Surf_Return = SDL_DisplayFormat(Surf_Temp);
+    pSurfReturn = SDL_DisplayFormat(pSurfTemp);
 
-    SDL_FreeSurface(Surf_Temp);
-
+    SDL_FreeSurface(pSurfTemp);
 
     //Uint32 colorKey = SDL_MapRGB( Surf_Return->format,0, 0xFF, 0xFF);
     //SDL_SetColorKey(Surf_Return, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorKey);
 
-    SDL_SetColorKey(Surf_Return, SDL_SRCCOLORKEY, SDL_MapRGB(Surf_Return->format, 153,217,234));
+    SDL_SetColorKey(pSurfReturn, SDL_SRCCOLORKEY, SDL_MapRGB(pSurfReturn->format, 153,217,234));
 
-
-    return Surf_Return;
+    return pSurfReturn;
 
 }
 
-bool CApp::DrawSurface(SDL_Surface *src, SDL_Surface *dst)
+bool CApp::DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst)
 {
-    if (SDL_BlitSurface(src, NULL, dst, NULL) != 1)
+    if (SDL_BlitSurface(pSrc, NULL, pDst, NULL) != 1)
     {
         return false;
     }
@@ -59,14 +58,11 @@ bool CApp::DrawSurface(SDL_Surface *src, SDL_Surface *dst)
 }
 
 
-bool CApp::DrawSurface(SDL_Surface *src, SDL_Surface *dst, int dst_x, int dst_y)
+bool CApp::DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY)
 {
-    SDL_Rect dst_rect;
+    SDL_Rect rect = CDefault_Rect( nDstX, nDstY );
 
-    dst_rect.x = dst_x;
-    dst_rect.y = dst_y;
-
-    if (SDL_BlitSurface(src, NULL, dst, &dst_rect) != 1)
+    if (SDL_BlitSurface(pSrc, NULL, pDst, &rect) != 1)
     {
         return false;
     }
@@ -78,17 +74,12 @@ bool CApp::DrawSurface(SDL_Surface *src, SDL_Surface *dst, int dst_x, int dst_y)
 }
 
 
-bool CApp::DrawSurface(SDL_Surface *src, int src_x, int src_y, SDL_Surface *dst, int dst_x, int dst_y)
+bool CApp::DrawSurface(SDL_Surface* pSrc, Sint16 nSrcX, Sint16 nSrcY, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY)
 {
-    SDL_Rect src_rect;
-    SDL_Rect dst_rect;
+    SDL_Rect rcSrc = CDefault_Rect( nSrcX, nSrcY);
+    SDL_Rect rcDst = CDefault_Rect( nDstX, nDstY);
 
-    src_rect.x = src_x;
-    src_rect.y = src_y;
-    dst_rect.x = dst_x;
-    dst_rect.y = dst_y;
-
-    if (SDL_BlitSurface(src, &src_rect, dst, &dst_rect) != 1)
+    if (SDL_BlitSurface(pSrc, &rcSrc, pDst, &rcDst) != 1)
     {
         return false;
     }

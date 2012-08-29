@@ -51,7 +51,7 @@ struct Pos2f
 class CDefault_Rect : public SDL_Rect
 {
 public:
-    CDefault_Rect( int nX = 0, int nY = 0, int nW = 0, int nH = 0) { x = nX; y = nY; w = nW; h = nH;};
+    CDefault_Rect( Sint16 nX = 0, Sint16 nY = 0, Uint16 uW = 0, Uint16 uH = 0) { x = nX; y = nY; w = uW; h = uH;};
 };
 
 

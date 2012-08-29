@@ -19,7 +19,9 @@
    limitations under the License.
 */
 
-#include "CApp.h"
+#include "App.h"
+#include <SDL/SDL.h>
+
 
 bool CApp::OnInit() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -29,16 +31,16 @@ bool CApp::OnInit() {
 
 
 // load support for the OGG and MOD sample/music formats
-    int flags=MIX_INIT_OGG|MIX_INIT_MOD;
-    int initted=Mix_Init(flags);
-    if((initted&flags) != flags) {
+    int flags = MIX_INIT_OGG|MIX_INIT_MOD;
+    int initted = Mix_Init(flags);
+    if((initted & flags) != flags) {
         printf("Mix_Init: Failed to init required ogg and mod support!\n");
         printf("Mix_Init: %s\n", Mix_GetError());
         // handle error
     }
 
 
-    if ((Surf_Display = SDL_SetVideoMode(CApp::ScreenResoultionX, CApp::ScreenResolutionY, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN)) == NULL)
+    if ((m_pSurfDisplay = SDL_SetVideoMode(m_ciScreenResoultionX, m_ciScreenResolutionY, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN)) == NULL)
     {
         return false;
     }
@@ -46,20 +48,20 @@ bool CApp::OnInit() {
     //Set the window caption
     SDL_WM_SetCaption( "Adamant Engine by: Timothy Carlisle. Copyright All Rights Reserved 2011-2012", NULL);
 
-    CApp::inputVelocity.x = 0;
-    CApp::inputVelocity.y = 0;
-    CApp::movementSpeed = MOVE_SPD;
-    CApp::prevTime = 0;
-    CApp::currTime = 0;
-    CApp::accTime = 0;
-    CApp::gravRate = 7;
-    CApp::gravFrame = 0;
+    m_inputVelocity.x = 0;
+    m_inputVelocity.y = 0;
+    m_uMovementSpeed = MOVE_SPD;
+    m_uPrevTime = 0;
+    m_uCurrTime = 0;
+    m_uAccTime = 0;
+    m_nGravRate = 7;
+    m_nGravFrame = 0;
 
     //Jump stuff
-    jump = false;
-    alreadyJump = false;
-    jumpTime = 0;
-    jumpPower = 7;
+    m_bJump = false;
+    m_bAlreadyJump = false;
+    m_nJumpTime = 0;
+    m_nJumpPower = 7;
 
     return true;
 }
