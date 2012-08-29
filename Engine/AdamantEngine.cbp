@@ -44,22 +44,23 @@
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="Source\CApp.cpp" />
-		<Unit filename="Source\CApp_Graphics.cpp" />
-		<Unit filename="Source\CApp_OnCleanup.cpp" />
-		<Unit filename="Source\CApp_OnEvent.cpp" />
-		<Unit filename="Source\CApp_OnInit.cpp" />
-		<Unit filename="Source\CApp_OnLoop.cpp" />
-		<Unit filename="Source\CApp_OnRender.cpp" />
-		<Unit filename="Source\CSound.cpp" />
+		<Unit filename="Source\App.cpp" />
+		<Unit filename="Source\App_Graphics.cpp" />
+		<Unit filename="Source\App_OnCleanup.cpp" />
+		<Unit filename="Source\App_OnEvent.cpp" />
+		<Unit filename="Source\App_OnInit.cpp" />
+		<Unit filename="Source\App_OnLoop.cpp" />
+		<Unit filename="Source\App_OnRender.cpp" />
+		<Unit filename="Source\GameObject.cpp" />
 		<Unit filename="Source\Headers\AdamantEngine.h" />
-		<Unit filename="Source\Headers\CApp.h" />
-		<Unit filename="Source\Headers\CSound.h" />
+		<Unit filename="Source\Headers\App.h" />
 		<Unit filename="Source\Headers\GameObject.h" />
 		<Unit filename="Source\Headers\PositionDataTypes.h" />
+		<Unit filename="Source\Headers\Sound.h" />
 		<Unit filename="Source\Headers\Sprite.h" />
 		<Unit filename="Source\Headers\Timer.h" />
 		<Unit filename="Source\Headers\version.h" />
+		<Unit filename="Source\Sound.cpp" />
 		<Unit filename="Source\Sprite.cpp" />
 		<Unit filename="Source\Timer.cpp" />
 		<Extensions>
