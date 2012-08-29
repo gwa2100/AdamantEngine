@@ -52,6 +52,7 @@
 		<Unit filename="Source\CApp_OnLoop.cpp" />
 		<Unit filename="Source\CApp_OnRender.cpp" />
 		<Unit filename="Source\CSound.cpp" />
+		<Unit filename="Source\GameObject.cpp" />
 		<Unit filename="Source\Headers\AdamantEngine.h" />
 		<Unit filename="Source\Headers\CApp.h" />
 		<Unit filename="Source\Headers\CSound.h" />

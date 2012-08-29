@@ -29,8 +29,6 @@
 #include "Timer.h"
 #include "CSound.h"
 #include <SDL/SDL_mixer.h>
-#include "GameObject.h"
-#include <Sprite.h>
 #include "PositionDataTypes.h"
 
 
@@ -38,6 +36,8 @@
 using namespace std;
 
 const unsigned int MOVE_SPD = 5;
+class GameObject;
+class Sprite;
 
 class CApp {
 private:

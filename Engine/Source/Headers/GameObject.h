@@ -23,7 +23,7 @@
 #define GAMEOBJECT_H_INCLUDED
 
 
-//#include "PositionDataTypes.h"
+#include "PositionDataTypes.h"
 #include "CApp.h"
 
 
@@ -48,9 +48,9 @@ public:
 
 
 
-    GameObject(Pos3i iPosition = CApp::Pos3iFiller(0,0,0), Pos2i iDimensions = CApp::Pos2iFiller(0,0), SDL_Rect iBoundBox = CApp::RectFiller(0,0,0,0),
-               bool iUsesCollision = false, bool iUsesUpdate = false, bool iUsesRender = false,
-               bool iUsesEvent = false, bool iUsesCleanup = false);
+    GameObject(Pos3i iPosition, Pos2i iDimensions, SDL_Rect iBoundBox,
+            bool iUsesCollision, bool iUsesUpdate, bool iUsesRender,
+            bool iUsesEvent, bool iUsesCleanup);
 
 
     //Main Functions
