@@ -34,7 +34,7 @@ void CApp::OnLoop()
     for (unsigned int x = 0; x < SpriteList.size(); x++) {
         if (SpriteList[x]->usesUpdate)
         {
-            SpriteList[x]->Update();
+            //SpriteList[x]->Update();
         }
     }
 

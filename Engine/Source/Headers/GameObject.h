@@ -23,10 +23,10 @@
 #define GAMEOBJECT_H_INCLUDED
 
 
-//#include "PositionDataTypes.h"
+#include "PositionDataTypes.h"
 #include "CApp.h"
 
-
+struct CDefault_Rect;
 class GameObject
 {
 protected:
@@ -48,7 +48,7 @@ public:
 
 
 
-    GameObject(Pos3i iPosition = CApp::Pos3iFiller(0,0,0), Pos2i iDimensions = CApp::Pos2iFiller(0,0), SDL_Rect iBoundBox = CApp::RectFiller(0,0,0,0),
+    GameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = CDefault_Rect,
                bool iUsesCollision = false, bool iUsesUpdate = false, bool iUsesRender = false,
                bool iUsesEvent = false, bool iUsesCleanup = false);
 

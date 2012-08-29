@@ -27,7 +27,7 @@ void CApp::OnRender(){
     for (unsigned int x = 0; x < SpriteList.size(); x++) {
         if (SpriteList[x]->usesRender)
         {
-            SpriteList[x]->DrawSprite(Surf_Display);
+            //SpriteList[x]->DrawSprite(Surf_Display);
         }
     }
 

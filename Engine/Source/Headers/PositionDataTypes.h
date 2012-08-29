@@ -26,21 +26,25 @@
 
 struct Pos3i
 {
+    Pos3i( int nX = 0, int nY = 0, int nZ = 0) : x(nX), y(nY), z(nZ) {}
     int x,y,z;
 };
 
 struct Pos2i
 {
+    Pos2i( int nX = 0, int nY = 0) : x(nX), y(nY) {}
     int x, y;
 };
 
 struct Pos3f
 {
+    Pos3f( float nX = 0.00, float nY = 0.00, float nZ = 0.00) : x(nX), y(nY), z(nZ) {}
     float x,y,z;
 };
 
 struct Pos2f
 {
+    Pos2f( float nX = 0.00, float nY = 0.00) : x(nX), y(nY) {}
     float x,y;
 };
 
