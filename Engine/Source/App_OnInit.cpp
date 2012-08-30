@@ -21,17 +21,16 @@
 
 #include "App.h"
 #include <SDL/SDL.h>
-
+#include <SDL/SDL_mixer.h>
 
 bool CApp::OnInit() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return false;
     }
 
-
-
-// load support for the OGG and MOD sample/music formats
-    int flags = MIX_INIT_OGG|MIX_INIT_MOD;
+    // load support for the OGG and MOD sample/music formats
+    //maybe move this into a static in CSound if we want to isolate it..
+    int flags = MIX_INIT_OGG | MIX_INIT_MOD;
     int initted = Mix_Init(flags);
     if((initted & flags) != flags) {
         printf("Mix_Init: Failed to init required ogg and mod support!\n");

@@ -100,7 +100,7 @@ public:
     //These will be run by the engine based on the bool values above.
     //Update will be where velocity effects object position and other
     //update requirements are ran.
-    virtual bool Update(float deltaTime);
+    virtual bool Update(float deltaTime = 0.0f);
     //Render time options, non-overrided function will just display the sprite.
     virtual bool Render();
     //Event handling.  This is where input and other events can be reacted to.

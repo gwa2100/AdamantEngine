@@ -21,20 +21,20 @@
 
 #ifndef CSound_h
 #define CSound_h
-#include <SDL/SDL_mixer.h>
 
+struct _Mix_Music;
+typedef struct _Mix_Music Mix_Music;
 
-
-class CSound{
-private:
-	Mix_Music* sample;
+class CSound
+{
+	Mix_Music* m_pSample;
 public:
     CSound();
     ~CSound();
 
-	bool loadSound(const char *filename);
-	void play();
-	void freeMusic();
+	bool Load(const char* pszFilename);
+	void Play();
+	void UnLoad();
 };
 
 #endif

@@ -19,37 +19,40 @@
    limitations under the License.
 */
 #include "Sound.h"
+#include <SDL/SDL_mixer.h>
 
 CSound::CSound()
+ : m_pSample(NULL)
 {
-    sample = NULL;
-}
-CSound::~CSound()
-{
-    Mix_FreeMusic(sample);
-    sample = NULL;
 }
 
-bool CSound::loadSound(const char *filename)
+CSound::~CSound()
+{
+    UnLoad();
+}
+
+bool CSound::Load(const char* pszFilename)
 {
 	// load the MP3 file "music.mp3" to play as music
-	sample = Mix_LoadMUS(filename);
-	if(!sample)
+	m_pSample = Mix_LoadMUS(pszFilename);
+	if(!m_pSample)
 	{
-    printf("Mix_LoadMUS(\"music.ogg\"): %s\n", Mix_GetError());
-	return false;
-    // this might be a critical error...
+        printf("Mix_LoadMUS(\"music.ogg\"): %s\n", Mix_GetError());
+        return false;// this might be a critical error...
 	}
+
 	return true;
 }
 
-void CSound::play()
+void CSound::Play()
 {
 	//Mix_PlayMusic(sample, -1);
     printf("Mix_LoadMUS(\"music.ogg\"): %s\n", Mix_GetError());
 }
 
-void CSound::freeMusic()
+void CSound::UnLoad()
 {
-	Mix_FreeMusic(sample);
+    if ( m_pSample == NULL ) return;
+	Mix_FreeMusic(m_pSample);
+	m_pSample = NULL;
 }

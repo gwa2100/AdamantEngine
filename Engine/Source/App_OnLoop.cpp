@@ -26,9 +26,6 @@
 void CApp::OnLoop()
 {
     //TODO: Write code for sending events to object event processor.
-
-
-
     //Run Update
     size_t uSize = m_arSpriteList.size();
     if ( uSize == 0 ) return;
@@ -38,26 +35,7 @@ void CApp::OnLoop()
     for (size_t x = 0; x < uSize; x++) {
         if (ppObjects[x]->m_bUsesUpdate)
         {
-            //SpriteList[x]->Update();
+           ppObjects[x]->Update();
         }
     }
-
-    //SpriteList UpdatePosition!
-/*
-    for (size_t x = 0; x < uSize; x++) {
-        ppObjects[x]->MoveSprite(ppObjects[x]->GetSpriteXVel(), ppObjects[x]->GetSpriteYVel());
-    }
-*/
-
-//Run Animation updates
-//NOT USED RIGHT NOW!
-/*
-    for (size_t x = 0; x < uSize; x++) {
-        if (ppObjects[x]->m_bUsesAnimation)
-        {
-            //ppObjects[x]->AnimationUpdate();
-        }
-    }
-*/
-
 }

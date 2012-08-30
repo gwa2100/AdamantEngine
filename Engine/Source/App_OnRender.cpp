@@ -27,18 +27,14 @@ void CApp::OnRender(){
     //SpriteList SpriteDrawing!
     size_t uSize = m_arSpriteList.size();
 
-    if ( uSize > 0)
-    {
+    if ( uSize > 0) {
         CGameObject** ppObjects = m_arSpriteList.data();
 
         for (size_t x = 0; x < uSize; x++) {
-            if ( ppObjects[x]->m_bUsesRender )
-            {
-                //ppObjects[x]->DrawSprite(m_pSurfDisplay);
-
+            if ( ppObjects[x]->m_bUsesRender ) {
+                ppObjects[x]->Render();
             }
         }
-
     }
 
     SDL_Flip(m_pSurfDisplay);
