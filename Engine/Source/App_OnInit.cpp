@@ -29,12 +29,26 @@ bool CApp::OnInit() {
     }
 
     // load support for the OGG and MOD sample/music formats
-    //maybe move this into a static in CSound if we want to isolate it..
-    int flags = MIX_INIT_OGG | MIX_INIT_MOD;
+    int flags = MIX_INIT_OGG | MIX_INIT_MOD | MIX_INIT_MP3;
     int initted = Mix_Init(flags);
-    if((initted & flags) != flags) {
-        printf("Mix_Init: Failed to init required ogg and mod support!\n");
+
+    if((initted & flags) != flags)
+    {
+        printf("Mix_Init: Failed to init required ogg, mod, and mp3 support!\n");
         printf("Mix_Init: %s\n", Mix_GetError());
+        // handle error
+    }
+
+    //Setting up sound system.
+    //TAC: Probably need to move settings into the CApp class so that they are held there and can be changed from there.
+    int audio_rate = 22050;
+    Uint16 audio_format = AUDIO_S16;    //This is 16bit audio format.
+    int audio_channels = 2;             //We can increase this later after initial tests of this system.
+    int audio_buffers = 4096;
+
+    if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) == -1)
+    {
+        printf("Open_Audio: Failed to init! >> %s\n", Mix.GetError());
         // handle error
     }
 
