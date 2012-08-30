@@ -2,7 +2,7 @@
 //  CSound.cpp
 //  AdamantEngine
 //
-//  Created by Timothy Carlisle on 11/05/11.
+//  Created by Timothy Carlisle on 08/30/12.
 /*
    Copyright 2011-2012 Timothy Carlisle
 
@@ -26,18 +26,6 @@ struct _Mix_Music;
 typedef struct _Mix_Music Mix_Music;
 #include <vector>
 using namespace std::vector;
-
-class CSound
-{
-protected:
-	Mix_Music* m_pSample;
-public:
-    CSound();
-    virtual ~CSound();
-
-	virtual bool Load(const char* pszFilename);
-	virtual void Play();
-};
 
 //Loads, Holds, and plays Music files.
 class Music
