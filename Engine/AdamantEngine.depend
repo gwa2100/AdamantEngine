@@ -198,8 +198,9 @@
 1346283021 c:\users\gaming\documents\github\adamantengine\engine\source\headers\timer.h
 	"SDL/SDL_stdinc.h"
 
-1346283021 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
+1346394218 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
 	"GameObject.h"
+	<string>
 
 1346125422 c:\users\gaming\documents\github\adamantengine\engine\source\headers\csound.h
 	<SDL/SDL_mixer.h>
@@ -225,7 +226,7 @@
 1345973738 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_oncleanup.cpp
 	"CApp.h"
 
-1346283021 source:c:\users\gaming\documents\github\adamantengine\engine\source\sprite.cpp
+1346394218 source:c:\users\gaming\documents\github\adamantengine\engine\source\sprite.cpp
 	"Sprite.h"
 	"PositionDataTypes.h"
 
@@ -248,10 +249,10 @@
 1346206752 source:c:\users\gaming\documents\github\adamantengine\engine\source\capp_onloop.cpp
 	"CApp.h"
 
-1346283021 source:c:\users\gaming\documents\github\adamantengine\engine\source\gameobject.cpp
+1346394218 source:c:\users\gaming\documents\github\adamantengine\engine\source\gameobject.cpp
 	"GameObject.h"
 
-1346294409 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
+1346394218 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
 	"PositionDataTypes.h"
 	<vector>
 
@@ -513,7 +514,7 @@
 	"App.h"
 	<SDL/SDL.h>
 
-1346294339 c:\users\gaming\documents\github\adamantengine\engine\source\headers\app.h
+1346384063 c:\users\gaming\documents\github\adamantengine\engine\source\headers\app.h
 	<vector>
 	<SDL/SDL_events.h>
 	"Sound.h"
@@ -521,7 +522,10 @@
 	"PositionDataTypes.h"
 	"GameObject.h"
 
-1346294409 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sound.h
+1346394221 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sound.h
+	"SDL/SDL_stdinc.h"
+	<vector>
+	<algorithm>
 
 1346283021 source:c:\users\gaming\documents\github\adamantengine\engine\source\app.cpp
 	"App.h"
@@ -535,19 +539,25 @@
 	"App.h"
 	<SDL/SDL.h>
 
-1346295624 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_oninit.cpp
+1346384063 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_oninit.cpp
 	"App.h"
 	<SDL/SDL.h>
 	<SDL/SDL_mixer.h>
 
-1346294409 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onloop.cpp
+1346394218 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onloop.cpp
 	"App.h"
 
-1346294409 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onrender.cpp
+1346394218 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onrender.cpp
 	"App.h"
 	<SDL/SDL.h>
 
-1346294655 source:c:\users\gaming\documents\github\adamantengine\engine\source\sound.cpp
+1346394221 source:c:\users\gaming\documents\github\adamantengine\engine\source\sound.cpp
 	"Sound.h"
 	<SDL/SDL_mixer.h>
+
+1346394218 source:c:\users\gaming\documents\github\adamantengine\engine\source\animatedsprite.cpp
+	"AnimatedSprite.h"
+
+1346394218 c:\users\gaming\documents\github\adamantengine\engine\source\headers\animatedsprite.h
+	"Sprite.h"
 

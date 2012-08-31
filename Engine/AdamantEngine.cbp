@@ -65,7 +65,6 @@
 		<Unit filename="Source\Sound.cpp" />
 		<Unit filename="Source\Sprite.cpp" />
 		<Unit filename="Source\Timer.cpp" />
-		<Unit filename="include\AnimatedSprite.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
