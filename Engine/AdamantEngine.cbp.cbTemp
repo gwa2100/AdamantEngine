@@ -44,7 +44,6 @@
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="Source\AnimatedSprite.cpp" />
 		<Unit filename="Source\App.cpp" />
 		<Unit filename="Source\App_Graphics.cpp" />
 		<Unit filename="Source\App_OnCleanup.cpp" />
@@ -54,7 +53,6 @@
 		<Unit filename="Source\App_OnRender.cpp" />
 		<Unit filename="Source\GameObject.cpp" />
 		<Unit filename="Source\Headers\AdamantEngine.h" />
-		<Unit filename="Source\Headers\AnimatedSprite.h" />
 		<Unit filename="Source\Headers\App.h" />
 		<Unit filename="Source\Headers\GameObject.h" />
 		<Unit filename="Source\Headers\PositionDataTypes.h" />
@@ -65,7 +63,6 @@
 		<Unit filename="Source\Sound.cpp" />
 		<Unit filename="Source\Sprite.cpp" />
 		<Unit filename="Source\Timer.cpp" />
-		<Unit filename="include\AnimatedSprite.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

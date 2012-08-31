@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+<<<<<<< HEAD
+	<File name="Source\App_OnEvent.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\App_OnInit.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1404" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="Source\App_OnLoop.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\App.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1505" topLine="44" />
+		</Cursor>
+	</File>
+	<File name="Source\App_Graphics.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\App_OnRender.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\App_OnCleanup.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\GameObject.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\Headers\AdamantEngine.h" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\Headers\App.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="696" topLine="7" />
+		</Cursor>
+	</File>
+	<File name="Source\Headers\GameObject.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\Headers\PositionDataTypes.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\Headers\Sound.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2042" topLine="69" />
+		</Cursor>
+	</File>
+	<File name="Source\Headers\Sprite.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="784" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="Source\Headers\Timer.h" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\Sound.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3765" topLine="225" />
+		</Cursor>
+	</File>
+	<File name="Source\Sprite.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Source\Timer.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+=======
+	<File name="Source\App.cpp" open="1" top="0" tabpos="9">
+		<Cursor position="1205" topLine="0" />
+	</File>
+	<File name="Source\App_Graphics.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="2188" topLine="35" />
+	</File>
+	<File name="Source\App_OnCleanup.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="791" topLine="0" />
+	</File>
+	<File name="Source\App_OnEvent.cpp" open="1" top="0" tabpos="12">
+		<Cursor position="1378" topLine="11" />
+	</File>
+	<File name="Source\App_OnInit.cpp" open="1" top="0" tabpos="13">
+		<Cursor position="1014" topLine="4" />
+	</File>
+	<File name="Source\App_OnLoop.cpp" open="1" top="0" tabpos="14">
+		<Cursor position="861" topLine="0" />
+	</File>
+	<File name="Source\App_OnRender.cpp" open="1" top="0" tabpos="15">
+		<Cursor position="1103" topLine="0" />
+	</File>
+	<File name="Source\GameObject.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="1487" topLine="0" />
+	</File>
+	<File name="Source\Headers\AdamantEngine.h" open="1" top="0" tabpos="20">
+		<Cursor position="80" topLine="0" />
+	</File>
+	<File name="Source\Headers\App.h" open="1" top="0" tabpos="19">
+		<Cursor position="1069" topLine="39" />
+	</File>
+	<File name="Source\Headers\GameObject.h" open="1" top="0" tabpos="7">
+		<Cursor position="2541" topLine="0" />
+	</File>
+	<File name="Source\Headers\PositionDataTypes.h" open="1" top="0" tabpos="4">
+		<Cursor position="1412" topLine="3" />
+	</File>
+	<File name="Source\Headers\Sound.h" open="1" top="1" tabpos="23">
+		<Cursor position="798" topLine="0" />
+	</File>
+	<File name="Source\Headers\Sprite.h" open="1" top="0" tabpos="5">
+		<Cursor position="730" topLine="0" />
+	</File>
+	<File name="Source\Headers\Timer.h" open="1" top="0" tabpos="18">
+		<Cursor position="1179" topLine="1" />
+	</File>
+	<File name="Source\Headers\version.h" open="1" top="0" tabpos="21">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="Source\Sound.cpp" open="1" top="0" tabpos="16">
+		<Cursor position="1058" topLine="1" />
+	</File>
+	<File name="Source\Sprite.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="1095" topLine="6" />
+	</File>
+	<File name="Source\Timer.cpp" open="1" top="0" tabpos="17">
+		<Cursor position="2358" topLine="8" />
+>>>>>>> ?
+	</File>
+</CodeBlocks_layout_file>
