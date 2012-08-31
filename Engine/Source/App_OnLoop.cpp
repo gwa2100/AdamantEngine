@@ -33,7 +33,7 @@ void CApp::OnLoop()
     CGameObject** ppObjects = m_arSpriteList.data();
 
     for (size_t x = 0; x < uSize; x++) {
-        if (ppObjects[x]->m_bUsesUpdate)
+        if (ppObjects[x]->GetUsesUpdate() )
         {
            ppObjects[x]->Update();
         }

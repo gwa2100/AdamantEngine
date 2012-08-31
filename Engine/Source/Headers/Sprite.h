@@ -24,31 +24,40 @@
 
 #include "GameObject.h"
 
+#include <string>
+using std::string;
+
 class SDL_Surface;
 
 //Definetly the most mixed up class! Needs a lot of cleanup!
 class CSprite : public CGameObject
 {
-protected:
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Variables<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-    //Our surface pointers for holding the surface!
-    //Surf will hold the sprite image.
-    SDL_Surface* m_pSurf;
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Functions<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 public:
+    CSprite();
+    ~CSprite();
+
     //Update Function
-    virtual bool Update() { return false;}
+    virtual bool Update(float deltaTime = 0.0f) { return false;}
 
     //On Collision Function
     virtual bool OnCollision();
 
     //Draw the sprite!
-    bool DrawSprite(SDL_Surface* pDestSurf);
+    virtual bool Render(SDL_Surface* pDestSurf);
 
-    CSprite();
-    ~CSprite();
+    virtual bool CreateFromFile( const string& sFilename );
+
+protected:
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Variables<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //Our surface pointers for holding the surface!
+    //Surf will hold the sprite image.
+    SDL_Surface* m_pSurf;
+
+
+private:
+
 };
 
 

@@ -244,7 +244,7 @@ bool CGameObject::Update(float deltaTime)
     }
 }
 //Render time options, non-overrided function will just display the sprite.
-bool CGameObject::Render()
+bool CGameObject::Render(SDL_Surface* pDestSurf)
 {
     return true;
 }

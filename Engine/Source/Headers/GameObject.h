@@ -35,23 +35,24 @@ protected:
     SDL_Rect boundBox;
     //Velocity of object for use in update movement.
     Pos3i velocity;
+    //The timer
+    Uint32 m_uOldTick;
+    Uint32 m_uCurrentTick;
 
-public:
-    //KMS: maybe make these private and have a const getter..
     bool m_bUsesCollision;
     bool m_bUsesUpdate;
     bool m_bUsesRender;
     bool m_bUsesEvent;
     bool m_bUsesCleanup;
+    bool m_bUsesTime;
 
+public:
+    //KMS: maybe make these private and have a const getter..
 
-
-    CGameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = (SDL_Rect)CDefault_Rect(),
+    CGameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = CDefault_Rect(),
                bool bUsesCollision = false, bool bUsesUpdate = false, bool bUsesRender = false,
                bool bUsesEvent = false, bool bUsesCleanup = false);
 
-
-    //Main Functions
 
     //Move Object Directly
     bool Move(const Pos3i& pos);
@@ -96,13 +97,20 @@ public:
     bool EnableEvent(bool bEnable);
     bool EnableCleanup(bool bEnable);
 
+    bool GetUsesCollision() const { return m_bUsesCollision; }
+    bool GetUsesUpdate() const { return m_bUsesUpdate; }
+    bool GetUsesRender() const { return m_bUsesRender; }
+    bool GetUsesEvent() const { return m_bUsesEvent; }
+    bool GetUsesCleanup() const { return m_bUsesCleanup; }
+    bool GetUsesTime() const { return m_bUsesTime; }
+
     //Overidable Virtual Function for creating object functionality.
     //These will be run by the engine based on the bool values above.
     //Update will be where velocity effects object position and other
     //update requirements are ran.
     virtual bool Update(float deltaTime = 0.0f);
     //Render time options, non-overrided function will just display the sprite.
-    virtual bool Render();
+    virtual bool Render(SDL_Surface* pDestSurf);
     //Event handling.  This is where input and other events can be reacted to.
     //Note: Need to add event handling parameters.
     virtual bool Event();

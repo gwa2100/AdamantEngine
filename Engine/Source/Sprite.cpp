@@ -22,7 +22,7 @@
 #include "Sprite.h"
 #include "PositionDataTypes.h"
 
-bool CSprite::DrawSprite(SDL_Surface *pDestSurf)
+bool CSprite::Render(SDL_Surface* pDestSurf)
 {
     Pos3i pos = GetPosition3i();
     Pos2i dim = GetDimensions2i();
@@ -36,7 +36,6 @@ bool CSprite::DrawSprite(SDL_Surface *pDestSurf)
     {
         return true;
     }
-
 }
 
 
@@ -60,4 +59,17 @@ CSprite::~CSprite()
     }
 }
 
+bool CSprite::CreateFromFile( const string& sFilename )
+{
+    SDL_Surface* pTemp = SDL_LoadBMP(sFilename.c_str());
+    if ( pTemp == NULL) return false;
+
+    m_pSurf = SDL_DisplayFormat(pTemp);
+
+    bool bValid = m_pSurf != NULL;
+
+    SDL_FreeSurface(pTemp);
+
+    return bValid;
+}
 

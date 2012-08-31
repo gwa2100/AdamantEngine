@@ -31,8 +31,8 @@ void CApp::OnRender(){
         CGameObject** ppObjects = m_arSpriteList.data();
 
         for (size_t x = 0; x < uSize; x++) {
-            if ( ppObjects[x]->m_bUsesRender ) {
-                ppObjects[x]->Render();
+            if ( ppObjects[x]->GetUsesRender() ) {
+                ppObjects[x]->Render(m_pSurfDisplay);
             }
         }
     }
