@@ -22,6 +22,7 @@
 #include "Sound.h"
 #include <SDL/SDL_mixer.h>
 
+using std::vector;
 
 
 //Music Implementation
@@ -164,89 +165,81 @@ AudioManager::~AudioManager()
 //Music Functions
 bool AudioManager::LoadMusic(const char* pszFilename, const char* pszIndexName)
 {
-    return false;
-}
-bool AudioManager::PlayMusic(int nIndex)
-{
+    Music* temp = new Music();
+    temp->Load(pszFilename);
+    temp->m_pszIndexName = pszIndexName;
+    temp->m_nIndex = m_arMusic.size() + 1;
+    m_arMusic.push_back(temp);
+    //May look into moving to call this right after init of engine.
+    m_arMusic.SortByName();
+    m_nIndexedFiles++;
     return false;
 }
 bool AudioManager::PlayMusic(const char* pszIndexName)
 {
-    return false;
-}
-bool AudioManager::StopMusic(int nIndex)
-{
+    m_arMusic.FindByName(pszIndexName)->Play();
     return false;
 }
 bool AudioManager::StopMusic(const char* pszIndexName)
 {
-    return false;
-}
-bool AudioManager::PauseMusic(int nIndex)
-{
+    m_arMusic.FindByName(pszIndexName)->Stop();
     return false;
 }
 bool AudioManager::PauseMusic(const char* pszIndexName)
 {
-    return false;
-}
-bool AudioManager::ResumeMusic(int nIndex)
-{
+    m_arMusic.FindByName(pszIndexName)->Pause();
     return false;
 }
 bool AudioManager::ResumeMusic(const char* pszIndexName)
 {
+    m_arMusic.FindByName(pszIndexName)->Resume();
     return false;
 }
+//TAC: Probably Deprecated from the start, as I removed the calls for Index#s
 int  AudioManager::GetIndexMusic(const char* pszIndexName)
 {
-    return -1;
+    return m_arMusic.FindByName(pszIndexName)->m_nIndex;
 }
 const char* AudioManager::GetIndexNameMusic(int nIndex)
 {
-    return NULL;
+    return m_arMusic[nIndex]->m_pszIndexName;
 }
 
 
 //SFX Functions
 bool AudioManager::LoadSFX(const char* pszFilename, const char* pszIndexName)
 {
-    return false;
-}
-bool AudioManager::PlaySFX(int nIndex)
-{
+    SoundFX* temp = new SoundFX();
+    temp->Load(pszFilename);
+    temp->m_pszIndexName = pszIndexName;
+    temp->m_nIndex = m_arSoundFX.size() + 1;
+    m_arSoundFX.push_back(temp);
+    //May look into moving to call this right after init of engine.
+    m_arSoundFX.SortByName();
+    m_nIndexedFiles++;
     return false;
 }
 bool AudioManager::PlaySFX(const char* pszIndexName)
 {
+    m_arSoundFX.FindByName(pszIndexName)->Play();
     return false;
-
-}
-bool AudioManager::PlaySFXTimed(int nIndex, int nTimeLength)
-{
-    return false;
-
 }
 bool AudioManager::PlaySFXTimed(const char* pszIndexName, int nTimeLength)
 {
+    m_arSoundFX.FindByName(pszIndexName)->PlayTimed(nTimeLength);
     return false;
-
-}
-bool AudioManager::StopSFX(int nIndex)
-{
-    return false;
-
 }
 bool AudioManager::StopSFX(const char* pszIndexName)
 {
+    m_arSoundFX.FindByName(pszIndexName)->Stop();
     return false;
-
 }
+//TAC: Probably Deprecated from the start, as I removed the calls for Index#s
 int  AudioManager::GetIndexSFX(const char* pszIndexName)
 {
-    return -1;
+    return m_arSoundFX.FindByName(pszIndexName)->m_nIndex;
 }
 const char* AudioManager::GetIndexNameSFX(int nIndex)
 {
-    return NULL;
+    return m_arSoundFX[nIndex]->m_pszIndexName;
 }
