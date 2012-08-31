@@ -84,7 +84,7 @@ public:
     CGameObjectPtrVector m_arSpriteList;
     void BindSprite(CGameObject* pBindMe);
 
-    CSound m_TestSound;
+    //CSound m_TestSound;
 
     //Screen Resolution
     const static unsigned int m_ciScreenResoultionX = 1920;

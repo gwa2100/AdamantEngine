@@ -75,27 +75,18 @@ void Music::Pause()
     if (Mix_PausedMusic())
     {
         //ALREADY PAUSED, UNPAUSE MUSIC
-        if (!Mix_ResumeMusic())
-        {
-            printf("Mix_ResumeMusic fail: in Sound : %s\n", Mix_GetError());
-        }
+        Mix_ResumeMusic();
     }
     else
     {
-        if (!Mix_PauseMusic())
-        {
-            printf("Mix_PauseMusic fail: in Sound : %s\n", Mix_GetError());
-        }
+        Mix_PauseMusic();
     }
 }
 
 //Can be used to even resume halted music.
 void Music::Resume()
 {
-    if (!Mix_ResumeMusic())
-    {
-        printf("Mix_ResumeMusic fail: in Sound : %s\n", Mix_GetError());
-    }
+    Mix_ResumeMusic();
 }
 
 
@@ -173,84 +164,89 @@ AudioManager::~AudioManager()
 //Music Functions
 bool AudioManager::LoadMusic(const char* pszFilename, const char* pszIndexName)
 {
-
+    return false;
 }
 bool AudioManager::PlayMusic(int nIndex)
 {
-
+    return false;
 }
 bool AudioManager::PlayMusic(const char* pszIndexName)
 {
-
+    return false;
 }
 bool AudioManager::StopMusic(int nIndex)
 {
-
+    return false;
 }
 bool AudioManager::StopMusic(const char* pszIndexName)
 {
-
+    return false;
 }
 bool AudioManager::PauseMusic(int nIndex)
 {
-
+    return false;
 }
 bool AudioManager::PauseMusic(const char* pszIndexName)
 {
-
+    return false;
 }
 bool AudioManager::ResumeMusic(int nIndex)
 {
-
+    return false;
 }
 bool AudioManager::ResumeMusic(const char* pszIndexName)
 {
-
+    return false;
 }
 int  AudioManager::GetIndexMusic(const char* pszIndexName)
 {
-
+    return -1;
 }
 const char* AudioManager::GetIndexNameMusic(int nIndex)
 {
-
+    return NULL;
 }
 
 
 //SFX Functions
 bool AudioManager::LoadSFX(const char* pszFilename, const char* pszIndexName)
 {
-
+    return false;
 }
 bool AudioManager::PlaySFX(int nIndex)
 {
-
+    return false;
 }
 bool AudioManager::PlaySFX(const char* pszIndexName)
 {
+    return false;
 
 }
 bool AudioManager::PlaySFXTimed(int nIndex, int nTimeLength)
 {
+    return false;
 
 }
 bool AudioManager::PlaySFXTimed(const char* pszIndexName, int nTimeLength)
 {
+    return false;
 
 }
 bool AudioManager::StopSFX(int nIndex)
 {
+    return false;
 
 }
 bool AudioManager::StopSFX(const char* pszIndexName)
 {
+    return false;
 
 }
 int  AudioManager::GetIndexSFX(const char* pszIndexName)
 {
-
+    return -1;
 }
 const char* AudioManager::GetIndexNameSFX(int nIndex)
 {
-
+    return NULL;
 }

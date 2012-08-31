@@ -24,8 +24,11 @@
 
 struct _Mix_Music;
 typedef struct _Mix_Music Mix_Music;
+
+#include "SDL/SDL_stdinc.h"
+
 #include <vector>
-using namespace std::vector;
+using std::vector;
 
 //Loads, Holds, and plays Music files.
 class Music
@@ -46,6 +49,8 @@ public:
     void Pause();
     void Resume();
 };
+
+struct Mix_Chunk;
 
 //Loads, Holds, and plays SoundFX.
 class SoundFX

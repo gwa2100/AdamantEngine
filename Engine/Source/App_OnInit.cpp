@@ -48,7 +48,7 @@ bool CApp::OnInit() {
 
     if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) == -1)
     {
-        printf("Open_Audio: Failed to init! >> %s\n", Mix.GetError());
+        printf("Open_Audio: Failed to init! >> %s\n", Mix_GetError());
         // handle error
     }
 
