@@ -26,43 +26,57 @@ void CApp::OnEvent(SDL_Event* pEvent) {
     if (pEvent->type == SDL_QUIT) {
         m_bRunning = false;
     }
-    if (pEvent->type == SDL_KEYDOWN) {
-        switch (pEvent->key.keysym.sym){
-            case SDLK_LEFT:
-                m_inputVelocity.x = -1;
-                break;
-            case SDLK_RIGHT:
-                m_inputVelocity.x = 1;
-                break;
-            case SDLK_UP:
-                m_inputVelocity.y = -1;
-                break;
-            case SDLK_DOWN:
-                m_inputVelocity.y = 1;
-                break;
-            case SDLK_ESCAPE:
-                m_bRunning = false;
-            default:
-                break;
+
+    size_t uSize = m_arObjectList.size();
+    if ( uSize == 0 ) return;
+
+    CGameObject** ppObjects = m_arObjectList.data();
+
+    for (size_t x = 0; x < uSize; x++) {
+        if (ppObjects[x]->GetUsesEvent() )
+        {
+           ppObjects[x]->Event(pEvent);
         }
     }
-    if (pEvent->type == SDL_KEYUP) {
-        switch (pEvent->key.keysym.sym){
-            case SDLK_LEFT:
-                m_inputVelocity.x = 0;
-                break;
-            case SDLK_RIGHT:
-                m_inputVelocity.x = 0;
-                break;
-            case SDLK_UP:
-                m_inputVelocity.y = 0;
-                break;
-            case SDLK_DOWN:
-                m_inputVelocity.y = 0;
-                break;
-            default:
-                break;
-        }
-    }
+
+//Deprecated, will send all events to the virtual function of the object.
+//    if (pEvent->type == SDL_KEYDOWN) {
+//        switch (pEvent->key.keysym.sym){
+//            case SDLK_LEFT:
+//                m_inputVelocity.x = -1;
+//                break;
+//            case SDLK_RIGHT:
+//                m_inputVelocity.x = 1;
+//                break;
+//            case SDLK_UP:
+//                m_inputVelocity.y = -1;
+//                break;
+//            case SDLK_DOWN:
+//                m_inputVelocity.y = 1;
+//                break;
+//            case SDLK_ESCAPE:
+//                m_bRunning = false;
+//            default:
+//                break;
+//        }
+//    }
+//    if (pEvent->type == SDL_KEYUP) {
+//        switch (pEvent->key.keysym.sym){
+//            case SDLK_LEFT:
+//                m_inputVelocity.x = 0;
+//                break;
+//            case SDLK_RIGHT:
+//                m_inputVelocity.x = 0;
+//                break;
+//            case SDLK_UP:
+//                m_inputVelocity.y = 0;
+//                break;
+//            case SDLK_DOWN:
+//                m_inputVelocity.y = 0;
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 }
 

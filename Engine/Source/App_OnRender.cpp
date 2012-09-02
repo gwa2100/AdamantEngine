@@ -25,10 +25,10 @@
 
 void CApp::OnRender(){
     //SpriteList SpriteDrawing!
-    size_t uSize = m_arSpriteList.size();
+    size_t uSize = m_arObjectList.size();
 
     if ( uSize > 0) {
-        CGameObject** ppObjects = m_arSpriteList.data();
+        CGameObject** ppObjects = m_arObjectList.data();
 
         for (size_t x = 0; x < uSize; x++) {
             if ( ppObjects[x]->GetUsesRender() ) {

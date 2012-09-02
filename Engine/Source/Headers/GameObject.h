@@ -113,7 +113,7 @@ public:
     virtual bool Render(SDL_Surface* pDestSurf);
     //Event handling.  This is where input and other events can be reacted to.
     //Note: Need to add event handling parameters.
-    virtual bool Event();
+    virtual bool Event(SDL_Event*);
     //Cleanup is to be called at end of the engine.  This is where you can do things
     //right before shutdown.
     virtual bool Cleanup();

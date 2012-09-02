@@ -29,7 +29,6 @@ using std::string;
 
 class SDL_Surface;
 
-//Definetly the most mixed up class! Needs a lot of cleanup!
 class CSprite : public CGameObject
 {
 

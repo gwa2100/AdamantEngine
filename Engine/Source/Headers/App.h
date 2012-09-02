@@ -81,7 +81,7 @@ public:
 
     //Used for the Sprite Pointer Vector for automated rendering and updating, etc.
     //You will pretty much always bind a new Sprite to this system. Just use BindSprite, passing it the pointer to the sprite object.
-    CGameObjectPtrVector m_arSpriteList;
+    CGameObjectPtrVector m_arObjectList;
     void BindSprite(CGameObject* pBindMe);
 
     //CSound m_TestSound;

@@ -34,6 +34,16 @@ bool operator < (const CGameObject& left, const CGameObject& right)
 CApp::CApp()
  : m_bRunning( true )
  , m_pSurfDisplay(NULL)
+ , m_uPrevTime(0)
+ , m_uCurrTime(0)
+ , m_uAccTime(0)
+ , m_nGravRate(0)
+ , m_nGravFrame(0)
+ , m_bJump(false)
+ , m_bAlreadyJump(false)
+ , m_nJumpTime(0)
+ , m_nJumpPower(0)
+
 {
 }
 
@@ -79,6 +89,6 @@ int CApp::OnExecute() {
 void CApp::BindSprite(CGameObject* pBindMe)
 {
     //lets let vector do the memory management of the internal buffers...
-    m_arSpriteList.push_back( pBindMe );
+    m_arObjectList.push_back( pBindMe );
 }
 

@@ -27,10 +27,10 @@ void CApp::OnLoop()
 {
     //TODO: Write code for sending events to object event processor.
     //Run Update
-    size_t uSize = m_arSpriteList.size();
+    size_t uSize = m_arObjectList.size();
     if ( uSize == 0 ) return;
 
-    CGameObject** ppObjects = m_arSpriteList.data();
+    CGameObject** ppObjects = m_arObjectList.data();
 
     for (size_t x = 0; x < uSize; x++) {
         if (ppObjects[x]->GetUsesUpdate() )

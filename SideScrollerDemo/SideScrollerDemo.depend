@@ -37,12 +37,12 @@
 
 1346026224 c:\users\gaming\desktop\adamantengine\source\headers\positiondatatypes.h
 
-1346020691 source:c:\users\gaming\documents\github\adamantengine\sidescrollerdemo\source\main.cpp
-	<iostream>
+1346570307 source:c:\users\gaming\documents\github\adamantengine\sidescrollerdemo\source\main.cpp
+	"Sprite.h"
 	"AdamantEngine.h"
 
-1346020267 c:\users\gaming\documents\github\adamantengine\engine\source\headers\adamantengine.h
-	"CApp.h"
+1346283021 c:\users\gaming\documents\github\adamantengine\engine\source\headers\adamantengine.h
+	"App.h"
 
 1346125327 c:\users\gaming\documents\github\adamantengine\engine\source\headers\capp.h
 	<SDL/SDL.h>
@@ -55,22 +55,18 @@
 	<Sprite.h>
 	"PositionDataTypes.h"
 
-1346125241 c:\users\gaming\documents\github\adamantengine\engine\source\headers\timer.h
-	<vector>
-	<algorithm>
-	"Sprite.h"
-	"CApp.h"
+1346283021 c:\users\gaming\documents\github\adamantengine\engine\source\headers\timer.h
+	"SDL/SDL_stdinc.h"
 
-1346125269 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
-	"CApp.h"
-	"CSound.h"
-	<vector>
-	<algorithm>
+1346560247 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sprite.h
+	"GameObject.h"
+	<string>
 
 1346125422 c:\users\gaming\documents\github\adamantengine\engine\source\headers\csound.h
 	<SDL/SDL_mixer.h>
 
-1346026224 c:\users\gaming\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
+1346283021 c:\users\gaming\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
+	<SDL/SDL.h>
 
 1255800449 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl.h
 	"SDL_main.h"
@@ -263,4 +259,21 @@
 
 1255800450 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_types.h
 	"SDL_stdinc.h"
+
+1346556339 c:\users\gaming\documents\github\adamantengine\engine\source\headers\app.h
+	<vector>
+	<SDL/SDL_events.h>
+	"Sound.h"
+	"Timer.h"
+	"PositionDataTypes.h"
+	"GameObject.h"
+
+1346394221 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sound.h
+	"SDL/SDL_stdinc.h"
+	<vector>
+	<algorithm>
+
+1346557683 c:\users\gaming\documents\github\adamantengine\engine\source\headers\gameobject.h
+	"PositionDataTypes.h"
+	<vector>
 

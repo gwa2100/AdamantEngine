@@ -19,12 +19,74 @@
    limitations under the License.
 */
 
+#include "Sprite.h"
 #include "AdamantEngine.h"
 
 using namespace std;
 
+
+
+class PlayerSprite: public CSprite
+{
+    virtual bool Event(SDL_Event*);
+};
+
+bool PlayerSprite::Event(SDL_Event* pEvent)
+{
+    if (pEvent->type == SDL_KEYDOWN) {
+        switch (pEvent->key.keysym.sym){
+            case SDLK_LEFT:
+                velocity.x = -1;
+                break;
+            case SDLK_RIGHT:
+                velocity.x = 1;
+                break;
+            case SDLK_UP:
+                velocity.y = -1;
+                break;
+            case SDLK_DOWN:
+                velocity.y = 1;
+                break;
+            default:
+                break;
+        }
+    }
+    if (pEvent->type == SDL_KEYUP) {
+        switch (pEvent->key.keysym.sym){
+            case SDLK_LEFT:
+                velocity.x = 0;
+                break;
+            case SDLK_RIGHT:
+                velocity.x = 0;
+                break;
+            case SDLK_UP:
+                velocity.y = 0;
+                break;
+            case SDLK_DOWN:
+                velocity.y = 0;
+                break;
+            default:
+                break;
+        }
+    }
+    return true;
+}
+
+
 int main(int argc, char* argv[])
 {
-    CApp theApp;
-    return theApp.OnExecute();
+    CApp* theApp = new CApp();
+    PlayerSprite* player1 = new PlayerSprite();
+    player1->CreateFromFile("C:/Users/Gaming/Documents/GitHub/AdamantEngine/bin/Debug/Images/toon.bmp");
+    player1->SetPosition(Pos2i(50,50));
+    player1->EnableEvent(false);
+    player1->EnableCleanup(true);
+    player1->EnableRender(true);
+    player1->EnableUpdate(false);
+    theApp->BindSprite(player1);
+    SDL_Surface* Test;
+    Test = SDL_LoadBMP("Images/toon.bmp");
+    SDL_BlitSurface( Test, NULL, m_pSurfaceDisplay, NULL );
+
+    return theApp->OnExecute();
 }

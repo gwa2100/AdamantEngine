@@ -35,10 +35,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Source\Ball.cpp" />
-		<Unit filename="Source\Bricks.cpp" />
-		<Unit filename="Source\Headers\Ball.h" />
-		<Unit filename="Source\Headers\Bricks.h" />
 		<Unit filename="Source\Headers\main.h" />
 		<Unit filename="Source\main.cpp" />
 		<Extensions>

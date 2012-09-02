@@ -62,10 +62,11 @@ CSprite::~CSprite()
 bool CSprite::CreateFromFile( const string& sFilename )
 {
     SDL_Surface* pTemp = SDL_LoadBMP(sFilename.c_str());
-    if ( pTemp == NULL) return false;
+    if ( pTemp == NULL || pTemp == 0x0) return false;
 
-    m_pSurf = SDL_DisplayFormat(pTemp);
-
+    //m_pSurf = SDL_DisplayFormat(pTemp);
+    //Testing
+    m_pSurf = pTemp;
     bool bValid = m_pSurf != NULL;
 
     SDL_FreeSurface(pTemp);

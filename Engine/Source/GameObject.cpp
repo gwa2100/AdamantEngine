@@ -250,7 +250,7 @@ bool CGameObject::Render(SDL_Surface* pDestSurf)
 }
 //Event handling.  This is where input and other events can be reacted to.
 //Note: Need to add event handling parameters.
-bool CGameObject::Event()
+bool CGameObject::Event(SDL_Event* pEvent)
 {
     return true;
 }
