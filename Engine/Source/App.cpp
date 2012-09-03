@@ -225,10 +225,10 @@ void CApp::OnEvent(SDL_Event* pEvent) {
 
     if ( bSendEvent )
     {
-        size_t uSize = m_arSpriteList.size();
+        size_t uSize = m_arObjectList.size();
 
         if ( uSize > 0) {
-            CGameObject** ppObjects = m_arSpriteList.data();
+            CGameObject** ppObjects = m_arObjectList.data();
 
             for (size_t x = 0; x < uSize; x++) {
                 if ( ppObjects[x]->GetUsesEvent())
@@ -294,10 +294,10 @@ bool CApp::OnInit()
     m_nJumpTime = 0;
     m_nJumpPower = 7;
 
-    size_t uSize = m_arSpriteList.size();
+    size_t uSize = m_arObjectList.size();
 
     if ( uSize > 0) {
-        CGameObject** ppObjects = m_arSpriteList.data();
+        CGameObject** ppObjects = m_arObjectList.data();
 
         for (size_t x = 0; x < uSize; x++) {
             ppObjects[x]->OnInit();
@@ -335,13 +335,13 @@ void CApp::OnLoop()
 {
     //TODO: Write code for sending events to object event processor.
     //Run Update
-    size_t uSize = m_arSpriteList.size();
+    size_t uSize = m_arObjectList.size();
     if ( uSize == 0 ) return;
 
     CCollisionItemVector arXCollide;
     arXCollide.reserve( uSize );
 
-    CGameObject** ppObjects = m_arSpriteList.data();
+    CGameObject** ppObjects = m_arObjectList.data();
 
     for (size_t x = 0; x < uSize; x++) {
         if (ppObjects[x]->GetUsesUpdate() )
@@ -475,10 +475,10 @@ void CApp::OnRender(){
     //SpriteList SpriteDrawin !
     SDL_FillRect( m_pSurfDisplay, NULL, 0 );
 
-    size_t uSize = m_arSpriteList.size();
+    size_t uSize = m_arObjectList.size();
 
     if ( uSize > 0) {
-        CGameObject** ppObjects = m_arSpriteList.data();
+        CGameObject** ppObjects = m_arObjectList.data();
 
         for (size_t x = 0; x < uSize; x++) {
             if ( ppObjects[x]->GetUsesRender() ) {

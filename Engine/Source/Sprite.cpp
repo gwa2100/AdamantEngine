@@ -54,14 +54,6 @@ CSprite::~CSprite()
 
 bool CSprite::CreateFromFile()
 {
-<<<<<<< HEAD
-    SDL_Surface* pTemp = SDL_LoadBMP(sFilename.c_str());
-    if ( pTemp == NULL || pTemp == 0x0) return false;
-
-    //m_pSurf = SDL_DisplayFormat(pTemp);
-    //Testing
-    m_pSurf = pTemp;
-=======
     SDL_Surface* pTemp = SDL_LoadBMP(m_sFileName.c_str());
     if ( pTemp == NULL) return false;
 
@@ -70,7 +62,6 @@ bool CSprite::CreateFromFile()
     dimensions.x = m_pSurf->w;
     dimensions.y = m_pSurf->h;
 
->>>>>>> Changes to breakout and collision
     bool bValid = m_pSurf != NULL;
 
     SDL_FreeSurface(pTemp);
