@@ -67,7 +67,20 @@
 	"PositionDataTypes.h"
 	<vector>
 
+<<<<<<< HEAD
 1346283021 c:\users\gaming\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
+=======
+1346214616 source:c:\users\kevin\documents\github\adamantengine\engine\source\capp.cpp
+	"GameObject.h"
+	"PositionDataTypes.h"
+	"CApp.h"
+
+1346642374 c:\users\kevin\documents\github\adamantengine\engine\source\headers\gameobject.h
+	"PositionDataTypes.h"
+	<vector>
+
+1346620891 c:\users\kevin\documents\github\adamantengine\engine\source\headers\positiondatatypes.h
+>>>>>>> Changes to breakout and collision
 	<SDL/SDL.h>
 
 1255800449 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl.h
@@ -215,6 +228,7 @@
 	"PositionDataTypes.h"
 	"GameObject.h"
 
+<<<<<<< HEAD
 1346394221 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sound.h
 	"SDL/SDL_stdinc.h"
 	<vector>
@@ -223,6 +237,14 @@
 1346283021 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_oncleanup.cpp
 	"App.h"
 	<SDL/SDL.h>
+=======
+1346216237 c:\users\kevin\documents\github\adamantengine\engine\source\headers\timer.h
+	"SDL/SDL_stdinc.h"
+
+1346642437 c:\users\kevin\documents\github\adamantengine\engine\source\headers\sprite.h
+	"GameObject.h"
+	<string>
+>>>>>>> Changes to breakout and collision
 
 1346557597 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onevent.cpp
 	"App.h"
@@ -245,7 +267,58 @@
 1255800450 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sdl\sdl_types.h
 	"SDL_stdinc.h"
 
+<<<<<<< HEAD
 1346556339 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onloop.cpp
+=======
+1346213310 source:c:\users\kevin\documents\github\adamantengine\engine\source\capp_graphics.cpp
+	"CApp.h"
+
+1346213310 source:c:\users\kevin\documents\github\adamantengine\engine\source\capp_oncleanup.cpp
+	"CApp.h"
+
+1346213310 source:c:\users\kevin\documents\github\adamantengine\engine\source\capp_onevent.cpp
+	"CApp.h"
+
+1346213310 source:c:\users\kevin\documents\github\adamantengine\engine\source\capp_oninit.cpp
+	"CApp.h"
+
+1346213310 source:c:\users\kevin\documents\github\adamantengine\engine\source\capp_onloop.cpp
+	"CApp.h"
+
+1346213310 source:c:\users\kevin\documents\github\adamantengine\engine\source\capp_onrender.cpp
+	"CApp.h"
+
+1346213310 source:c:\users\kevin\documents\github\adamantengine\engine\source\csound.cpp
+	"CApp.h"
+
+1346642922 source:c:\users\kevin\documents\github\adamantengine\engine\source\sprite.cpp
+	"Sprite.h"
+	"PositionDataTypes.h"
+
+1346219086 source:c:\users\kevin\documents\github\adamantengine\engine\source\timer.cpp
+	"Timer.h"
+	<SDL/SDL_timer.h>
+
+1346283021 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onevent.cpp
+	"App.h"
+	<SDL/SDL.h>
+
+1346294339 c:\users\gaming\documents\github\adamantengine\engine\source\headers\app.h
+	<vector>
+	<SDL/SDL_events.h>
+	"Sound.h"
+	"Timer.h"
+	"PositionDataTypes.h"
+	"GameObject.h"
+
+1346294409 c:\users\gaming\documents\github\adamantengine\engine\source\headers\sound.h
+
+1346283021 source:c:\users\gaming\documents\github\adamantengine\engine\source\app.cpp
+	"App.h"
+	<SDL/SDL.h>
+
+1346283021 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_graphics.cpp
+>>>>>>> Changes to breakout and collision
 	"App.h"
 
 1346556339 source:c:\users\gaming\documents\github\adamantengine\engine\source\app_onrender.cpp
@@ -259,7 +332,54 @@
 	"Sound.h"
 	<SDL/SDL_mixer.h>
 
+<<<<<<< HEAD
 1346560167 source:c:\users\gaming\documents\github\adamantengine\engine\source\sprite.cpp
 	"Sprite.h"
 	"PositionDataTypes.h"
+=======
+1346565819 source:c:\users\kevin\documents\github\adamantengine\engine\source\animatedsprite.cpp
+	"AnimatedSprite.h"
+
+1346389658 c:\users\kevin\documents\github\adamantengine\engine\source\headers\animatedsprite.h
+	"Sprite.h"
+
+1346652880 source:c:\users\kevin\documents\github\adamantengine\engine\source\app.cpp
+	"App.h"
+	<SDL/SDL.h>
+	<SDL/SDL_mixer.h>
+	<vector>
+	<algorithm>
+
+1346638439 c:\users\kevin\documents\github\adamantengine\engine\source\headers\app.h
+	<vector>
+	<SDL/SDL_events.h>
+	"Sound.h"
+	"Timer.h"
+	"PositionDataTypes.h"
+	"GameObject.h"
+
+1346382938 c:\users\kevin\documents\github\adamantengine\engine\source\headers\sound.h
+	"SDL/SDL_stdinc.h"
+	<vector>
+
+1346567251 source:c:\users\kevin\documents\github\adamantengine\engine\source\app_graphics.cpp
+
+1346567251 source:c:\users\kevin\documents\github\adamantengine\engine\source\app_oncleanup.cpp
+
+1346567251 source:c:\users\kevin\documents\github\adamantengine\engine\source\app_onevent.cpp
+
+1346567223 source:c:\users\kevin\documents\github\adamantengine\engine\source\app_oninit.cpp
+
+1346567223 source:c:\users\kevin\documents\github\adamantengine\engine\source\app_onloop.cpp
+
+1346567251 source:c:\users\kevin\documents\github\adamantengine\engine\source\app_onrender.cpp
+
+1346620295 source:c:\users\kevin\documents\github\adamantengine\engine\source\gameobject.cpp
+	"GameObject.h"
+	"App.h"
+
+1346383089 source:c:\users\kevin\documents\github\adamantengine\engine\source\sound.cpp
+	"Sound.h"
+	<SDL/SDL_mixer.h>
+>>>>>>> Changes to breakout and collision
 

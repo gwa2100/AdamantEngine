@@ -24,6 +24,8 @@
 
 #include "PositionDataTypes.h"
 
+enum ECollision;
+
 class CGameObject
 {
 protected:
@@ -113,10 +115,21 @@ public:
     virtual bool Render(SDL_Surface* pDestSurf);
     //Event handling.  This is where input and other events can be reacted to.
     //Note: Need to add event handling parameters.
+<<<<<<< HEAD
     virtual bool Event(SDL_Event*);
+=======
+    virtual bool Event(const Pos2i& inputVelocity)
+    {
+        SetVelocity( Pos2i(inputVelocity.x, inputVelocity.y) );
+        return true;
+    }
+>>>>>>> Changes to breakout and collision
     //Cleanup is to be called at end of the engine.  This is where you can do things
     //right before shutdown.
     virtual bool Cleanup();
+
+    virtual bool OnInit() { return true; }
+    virtual bool OnCollision( ECollision eCollision) { return true; }
 
     virtual ~CGameObject();
 };

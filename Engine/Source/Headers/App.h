@@ -36,6 +36,48 @@ const unsigned int MOVE_SPD = 5;
 
 struct SDL_Surface;
 
+
+
+struct CRect
+{
+    CRect( const Pos3i& position, const Pos2i& dimension )
+        : top( position.y )
+        , left( position.x )
+        , bottom( top + dimension.y)
+        , right( left + dimension.x )
+    {
+
+    }
+
+    CRect( const CRect& rect)
+        : top( rect.top)
+        , left( rect.left)
+        , bottom( rect.bottom)
+        , right( rect.right )
+    {
+
+
+    }
+
+    long top;
+    long left;
+    long bottom;
+    long right;
+};
+
+struct CCollisionItem
+{
+    CCollisionItem( const CRect& rect, size_t uIndex)
+        : m_rcBoundingBox( rect )
+        , m_uIndex( uIndex )
+    {
+    }
+
+    CRect m_rcBoundingBox;
+    size_t m_uIndex;
+};
+
+
 class CApp
 {
     bool m_bRunning;
@@ -56,7 +98,7 @@ public:
 
 
     //Some nice helper functions for graphics!
-    SDL_Surface* LoadSprite(const char* pszFileName);
+    SDL_Surface* LoadSprite(const char* pszFileName) const;
     bool DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst);
     bool DrawSurface(SDL_Surface* pSrc, Sint16 nSrcX, Sint16 nSrcY, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY);
     bool DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY);

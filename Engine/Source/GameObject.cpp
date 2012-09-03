@@ -19,6 +19,7 @@
    limitations under the License.
 */
 #include "GameObject.h"
+#include "App.h"
 
 CGameObject::CGameObject(Pos3i iPosition, Pos2i iDimensions, SDL_Rect iBoundBox,
             bool bUsesCollision, bool bUsesUpdate, bool bUsesRender,
@@ -250,10 +251,14 @@ bool CGameObject::Render(SDL_Surface* pDestSurf)
 }
 //Event handling.  This is where input and other events can be reacted to.
 //Note: Need to add event handling parameters.
+<<<<<<< HEAD
 bool CGameObject::Event(SDL_Event* pEvent)
+=======
+/*bool CGameObject::Event()
+>>>>>>> Changes to breakout and collision
 {
     return true;
-}
+}*/
 //Cleanup is to be called at end of the engine.  This is where you can do things
 //right before shutdown.
 bool CGameObject::Cleanup()

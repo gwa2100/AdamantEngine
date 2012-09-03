@@ -26,6 +26,7 @@
 #include "AdamantEngine.h"
 #include "Ball.h"
 #include "Bricks.h"
+#include "Sprite.h"
 
 
 #endif // MAIN_H_INCLUDED

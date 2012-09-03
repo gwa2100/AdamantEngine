@@ -18,6 +18,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+<<<<<<< HEAD
 
 #include "App.h"
 #include <SDL/SDL.h>
@@ -39,3 +40,5 @@ void CApp::OnRender(){
 
     SDL_Flip(m_pSurfDisplay);
 }
+=======
+>>>>>>> Changes to breakout and collision

@@ -23,13 +23,13 @@
 #define BALL_H
 
 #include "main.h"
+#include "Sprite.h"
 
-
-class Ball : public Sprite
+class Ball : public CSprite
 {
     public:
-        virtual bool OnCollision(int side);
-        virtual bool Update();
+        virtual bool OnCollision( ECollision eCollision);
+        virtual bool Update(float deltaTime = 0.0f);
         int direction; //1 NW 2 NE 3 SW 4 SE 0 STILL
         /** Default constructor */
         Ball();

@@ -18,6 +18,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+<<<<<<< HEAD
 
 #include "App.h"
 #include <SDL/SDL.h>
@@ -80,3 +81,5 @@ void CApp::OnEvent(SDL_Event* pEvent) {
 //    }
 }
 
+=======
+>>>>>>> Changes to breakout and collision

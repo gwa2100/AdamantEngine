@@ -69,7 +69,8 @@ void CAnimatedSprite::StartAnimation()
 
 bool CAnimatedSprite::CreateFromFile( const string& sFilename, unsigned int nFrames, Uint32 uDelayInMS )
 {
-    bool bValid = CSprite::CreateFromFile( sFilename );
+    m_sFileName = sFilename;
+    bool bValid = CSprite::CreateFromFile();
     if ( !bValid ) return bValid;
 
     dimensions.x = m_pSurf->w / nFrames;

@@ -21,37 +21,43 @@
 
 #include "Headers/main.h"
 
-bool Ball::OnCollision(int side)
+bool Ball::OnCollision( ECollision eCollision)
 {
+    //i dont get this logic..but okay
     //Act on collision
-    if (side == 1)
+    if (eCollision & (eCOLLISION_BOTTOM | eCOLLISION_TOP) )
     {
         //flip y
-        Ball::SetSpriteVel(GetSpriteXVel(),GetSpriteYVel() * -1);
+        velocity.y *= -1;
+        //SetSpriteVel(GetSpriteXVel(),GetSpriteYVel() * -1);
     }
-    if (side == 2)
+    if (eCollision & (eCOLLISION_LEFT_SIDE | eCOLLISION_RIGHT_SIDE))
     {
         //flip x
-        Ball::SetSpriteVel(GetSpriteXVel() * - 1,GetSpriteYVel());
+        velocity.x *= -1;
+        //SetSpriteVel(GetSpriteXVel() * - 1,GetSpriteYVel());
     }
-    if (side == 3)
+    /*if (eCollision & )
     {
         //flip x and y
-        Ball::SetSpriteVel(GetSpriteXVel() * - 1,GetSpriteYVel() * - 1);
-    }
+        velocity.x *= -1;
+        velocity.y *= -1;
+        //SetSpriteVel(GetSpriteXVel() * - 1,GetSpriteYVel() * - 1);
+    }*/
 
     return true;
 }
 
-bool Ball::Update()
+bool Ball::Update(float deltaTime /*= 0.0f*/)
 {
-    Ball::MoveSprite(GetSpriteXVel(),GetSpriteYVel());
+    Move( Pos2i(velocity.x , velocity.y) );
     return true;
 }
 
 Ball::Ball()
 {
-    Ball::direction = 0;
+    direction = 0;
+
 }
 
 Ball::~Ball()

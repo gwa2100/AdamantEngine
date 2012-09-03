@@ -20,9 +20,9 @@
 */
 #include "Headers/main.h"
 
-bool Bricks::OnCollision()
+bool Bricks::OnCollision(ECollision)
 {
-    Bricks::Impact();
+    Impact();
     return true;
 }
 
@@ -30,8 +30,8 @@ bool Bricks::Impact()
 {
     //Destroy on impact!
     //We will just make it uncollidable.
-    Bricks::usesCollision = false;
-    Bricks::usesRender = false;
+    EnableCollision( false );
+    EnableRender( false );
     return true;
 }
 
@@ -43,8 +43,7 @@ bool Bricks::Update()
 
 Bricks::Bricks()
 {
-    //ctor
-    Surf = NULL;
+
 }
 
 Bricks::~Bricks()

@@ -37,25 +37,25 @@ public:
     CSprite();
     ~CSprite();
 
+    virtual bool OnInit();
+
     //Update Function
     virtual bool Update(float deltaTime = 0.0f) { return false;}
-
-    //On Collision Function
-    virtual bool OnCollision();
 
     //Draw the sprite!
     virtual bool Render(SDL_Surface* pDestSurf);
 
-    virtual bool CreateFromFile( const string& sFilename );
+    void SetFileName( const string& sFileName) { m_sFileName = sFileName; }
+
+    void SetSurface( SDL_Surface* pSurface ) { m_pSurf = pSurface; }
 
 protected:
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Variables<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //Our surface pointers for holding the surface!
     //Surf will hold the sprite image.
     SDL_Surface* m_pSurf;
-
-
-private:
+    bool CreateFromFile();
+    string m_sFileName;
 
 };
 

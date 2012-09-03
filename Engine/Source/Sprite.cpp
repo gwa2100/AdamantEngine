@@ -11,7 +11,7 @@
    You may obtain a copy of the License at
 
        http://www.apache.org/licenses/LICENSE-2.0
-
+s
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -38,13 +38,6 @@ bool CSprite::Render(SDL_Surface* pDestSurf)
     }
 }
 
-
-bool CSprite::OnCollision()
-{
-    //Anything for when collision is thrown, typical action is played out by Check Collision, should really be changed to work inside here!
-    return true;
-}
-
 CSprite::CSprite()
 : m_pSurf(NULL)
 {
@@ -59,14 +52,25 @@ CSprite::~CSprite()
     }
 }
 
-bool CSprite::CreateFromFile( const string& sFilename )
+bool CSprite::CreateFromFile()
 {
+<<<<<<< HEAD
     SDL_Surface* pTemp = SDL_LoadBMP(sFilename.c_str());
     if ( pTemp == NULL || pTemp == 0x0) return false;
 
     //m_pSurf = SDL_DisplayFormat(pTemp);
     //Testing
     m_pSurf = pTemp;
+=======
+    SDL_Surface* pTemp = SDL_LoadBMP(m_sFileName.c_str());
+    if ( pTemp == NULL) return false;
+
+    m_pSurf = SDL_DisplayFormat(pTemp);
+
+    dimensions.x = m_pSurf->w;
+    dimensions.y = m_pSurf->h;
+
+>>>>>>> Changes to breakout and collision
     bool bValid = m_pSurf != NULL;
 
     SDL_FreeSurface(pTemp);
@@ -74,3 +78,7 @@ bool CSprite::CreateFromFile( const string& sFilename )
     return bValid;
 }
 
+bool CSprite::OnInit()
+{
+    return CreateFromFile();
+}

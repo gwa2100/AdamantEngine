@@ -25,10 +25,10 @@
 #include "main.h"
 
 
-class Bricks : public Sprite
+class Bricks : public CSprite
 {
     public:
-        virtual bool OnCollision();
+        virtual bool OnCollision( ECollision eCollision );
         virtual bool Update();
         /** Default constructor */
         Bricks();

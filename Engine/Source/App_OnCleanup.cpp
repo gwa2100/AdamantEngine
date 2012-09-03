@@ -19,9 +19,3 @@
    limitations under the License.
 */
 
-#include "App.h"
-#include <SDL/SDL.h>
-
-void CApp::OnCleanup(){
-    SDL_Quit();
-}
