@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adamantengine", "adamantengine/adamantengine.vcxproj", "{81813CF3-D540-4382-90B7-43C562AA97DE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adamantengine", "adamantengine\adamantengine.vcxproj", "{81813CF3-D540-4382-90B7-43C562AA97DE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bustout", "..\..\..\bustout-0.0.1\builds\msvc\bustout\bustout.vcxproj", "{155AACF6-15AA-43E6-98A8-B10C85B6EE59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{81813CF3-D540-4382-90B7-43C562AA97DE}.Debug|Win32.Build.0 = Debug|Win32
 		{81813CF3-D540-4382-90B7-43C562AA97DE}.Release|Win32.ActiveCfg = Release|Win32
 		{81813CF3-D540-4382-90B7-43C562AA97DE}.Release|Win32.Build.0 = Release|Win32
+		{155AACF6-15AA-43E6-98A8-B10C85B6EE59}.Debug|Win32.ActiveCfg = Debug|Win32
+		{155AACF6-15AA-43E6-98A8-B10C85B6EE59}.Debug|Win32.Build.0 = Debug|Win32
+		{155AACF6-15AA-43E6-98A8-B10C85B6EE59}.Release|Win32.ActiveCfg = Release|Win32
+		{155AACF6-15AA-43E6-98A8-B10C85B6EE59}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

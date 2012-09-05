@@ -29,6 +29,13 @@ enum ECollision
     eCOLLISION_Y_CENTER_RIGHT   = 0x28  //Combination of eCOLLISION_Y_CENTER | eCOLLISION_RIGHT
 };
 
+#include <SDL_video.h>
+
+class CDefault_Rect : public SDL_Rect
+{
+public:
+    CDefault_Rect( Sint16 nX = 0, Sint16 nY = 0, Uint16 uW = 0, Uint16 uH = 0) { x = nX; y = nY; w = uW; h = uH;};
+};
 
 
 #endif

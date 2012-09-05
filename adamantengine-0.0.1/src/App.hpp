@@ -16,11 +16,11 @@ namespace adamantengine {
 
 		struct CRect
 		{
-			inline CRect( const pos3i_t& position, const pos2i_t& dimension )
-				: top( position.y )
-				, left( position.x )
-				, bottom( top + dimension.y)
-				, right( left + dimension.x )
+			inline CRect( const pos3f_t& position, const pos2f_t& dimension )
+				: top( (long)position.y )
+				, left( (long)position.x )
+				, bottom( top + (long)dimension.y)
+				, right( left + (long)dimension.x )
 			{
 
 			}

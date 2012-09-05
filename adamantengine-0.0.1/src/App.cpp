@@ -4,7 +4,7 @@
 #include "../include/amtengine.h"
 
 adamantengine::app_t::app_t()
-	: m_bRunning(false)
+	: m_bRunning(true)
 {
 }
 
@@ -80,7 +80,7 @@ bool adamantengine::app_t::Intialize()
 void adamantengine::app_t::OnEvent(SDL_Event& anevent)
 {
 	bool bMovement = false;
-	pos2i_t inputVelocity = {0};
+	pos2f_t inputVelocity = {0};
 
 	if (anevent.type == SDL_QUIT) 
 	{
@@ -93,19 +93,19 @@ void adamantengine::app_t::OnEvent(SDL_Event& anevent)
         switch ( anevent.key.keysym.sym )
 		{
             case SDLK_LEFT:
-                inputVelocity.x = -1;
+                inputVelocity.x = -1.0f;
                 bMovement = true;
                 break;
             case SDLK_RIGHT:
-                inputVelocity.x = 1;
+                inputVelocity.x = 1.0f;
                 bMovement = true;
                 break;
             case SDLK_UP:
-                inputVelocity.y = -1;
+                inputVelocity.y = -1.0f;
                 bMovement = true;
                 break;
             case SDLK_DOWN:
-                inputVelocity.y = 1;
+                inputVelocity.y = 1.0f;
                 bMovement = true;
                 break;
             case SDLK_ESCAPE:
@@ -121,19 +121,19 @@ void adamantengine::app_t::OnEvent(SDL_Event& anevent)
         switch ( anevent.key.keysym.sym )
 		{
             case SDLK_LEFT:
-                inputVelocity.x = 0;
+                inputVelocity.x = 0.0f;
                 bMovement = true;
                 break;
             case SDLK_RIGHT:
-                inputVelocity.x = 0;
+                inputVelocity.x = 0.0f;
                 bMovement = true;
                 break;
             case SDLK_UP:
-                inputVelocity.y = 0;
+                inputVelocity.y = 0.0f;
                 bMovement = true;
                 break;
             case SDLK_DOWN:
-                inputVelocity.y = 0;
+                inputVelocity.y = 0.0f;
                 bMovement = true;
                 break;
             default:
@@ -179,6 +179,36 @@ void adamantengine::app_t::OnUpdate()
 		arItems.push_back( item );
 	}
 
+	/* setup the bottom as a collision point, if they hit here then they are dead!*/
+	pos3f_t pos = {0};
+	pos.y = m_pSurfDisplay->h - 1.0f;
+	pos2f_t dim = {0};
+	dim.x = (float)m_pSurfDisplay->w;
+	dim.y = 10000;
+
+	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+
+	pos.x = -5000.0f;
+	pos.y = 0.0f;
+	dim.x = 5000.0f;
+	dim.y = (float)m_pSurfDisplay->h;
+
+	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+
+	pos.x = 0.0f;
+	pos.y = -5000.0f;
+	dim.x = (float)m_pSurfDisplay->w;
+	dim.y = 5000.0f;
+
+	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+
+	pos.x = m_pSurfDisplay->w + 5000.0f;
+	pos.y = 0.0f;
+	dim.x = 5000.0f;
+	dim.y = (float)m_pSurfDisplay->h;
+
+	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+
 	arItems.Sort();
 	//collision detection
 	CollisionDetection(arItems);
@@ -203,14 +233,20 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
         collision::CCollisionItem& xItemN = arItems[n];
         collision::CCollisionItem& xItemN1 = arItems[n + 1];
 
-        bool bXLeftHit = (xItemN.m_rcBoundingBox.left >= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.left <= xItemN1.m_rcBoundingBox.right);
-        bool bXRightHit = (xItemN.m_rcBoundingBox.right >= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.right <= xItemN1.m_rcBoundingBox.right);
+		//is my left < his left and my left < his right
+		//and is my right > his left and my right > his right
+		// == hit my bounding box
+
+        bool bXLeftHit = (xItemN.m_rcBoundingBox.left <= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.left <= xItemN1.m_rcBoundingBox.right);
+        bool bXRightHit = (xItemN.m_rcBoundingBox.right >= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.right >= xItemN1.m_rcBoundingBox.right);
 
         long lXN1Middle = (xItemN1.m_rcBoundingBox.left + xItemN1.m_rcBoundingBox.right) / 2;
         long lCompare = 0;
 
         int eCollision = eCOLLISION_NONE;
         int eCollisionN1 = eCOLLISION_NONE;
+		float fXAmt = 0.0f;
+		float fYAmt = 0.0f;
 
         if ( bXLeftHit && bXRightHit)
         {
@@ -230,6 +266,7 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 
         if ( bHitX )
         {
+			fXAmt = (1.0f * abs(lCompare)) / lXN1Middle;
             if ( lCompare < 0 )
             {
                 eCollision = eCollision | eCOLLISION_LEFT;
@@ -271,6 +308,7 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 
         if ( bHitY )
         {
+			fYAmt = (1.0f * abs(lCompare)) / lXN1Middle;
             //Could be missing a point called "eCOLLISION_Y_CENTER
             if ( lCompare > 0 )
             {
@@ -292,14 +330,14 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 
         if ( bHitX && bHitY )
         {
-            if ( ppObjects[xItemN.m_uIndex]->UseCollision())
+            if ( xItemN.m_uIndex != -1 && ppObjects[xItemN.m_uIndex]->UseCollision())
             {
-                ppObjects[xItemN.m_uIndex]->OnCollision((ECollision)eCollision);
+                ppObjects[xItemN.m_uIndex]->OnCollision((ECollision)eCollision, fXAmt, fYAmt);
             }
 
-            if ( ppObjects[xItemN1.m_uIndex]->UseCollision())
+            if ( xItemN1.m_uIndex != -1 && ppObjects[xItemN1.m_uIndex]->UseCollision())
             {
-                ppObjects[xItemN1.m_uIndex]->OnCollision((ECollision)eCollisionN1);
+                ppObjects[xItemN1.m_uIndex]->OnCollision((ECollision)eCollisionN1, fXAmt, fYAmt);
             }
         }
     }
@@ -307,18 +345,22 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 
 void adamantengine::app_t::OnRender()
 {
+	SDL_FillRect( m_pSurfDisplay, NULL, 0 );
 	//call render on all gameobjects
 	size_t nSize = m_arObjects.size();
-	if ( nSize == 0 ) return;
-
-	gameobject_t** ppObjects = m_arObjects.data();
-	for( size_t n = 0; n < nSize; n++ )
+	if ( nSize > 0 )
 	{
-		if ( ppObjects[n]->UseRender() )
+		gameobject_t** ppObjects = m_arObjects.data();
+		for( size_t n = 0; n < nSize; n++ )
 		{
-			ppObjects[n]->Render();
+			if ( ppObjects[n]->UseRender() )
+			{
+				ppObjects[n]->Render( m_pSurfDisplay );
+			}
 		}
 	}
+
+	SDL_Flip(m_pSurfDisplay);
 }
 
 void adamantengine::app_t::OnCleanup()
