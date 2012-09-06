@@ -41,6 +41,11 @@ void amt_app_object_bind(HAPP app, HGAMEOBJECT object)
 	pApp->BindObject( (adamantengine::gameobject_t*)object );
 }
 
+void amt_app_set_offscreen_col(HAPP app, int flags )
+{
+	((app_t*)app)->SetDetectOffscreenCollision( flags == 1 );
+}
+
 HGAMEOBJECT amt_gobj_init( pos3f_t* position, pos2f_t* dimension, rect_t* box )
 {
 	return (HGAMEOBJECT)new adamantengine::gameobject_t( position, dimension, box );

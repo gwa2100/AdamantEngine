@@ -4,7 +4,9 @@
 #include "../include/amtengine.h"
 
 adamantengine::app_t::app_t()
-	: m_bRunning(true)
+	: m_bDetectOffscreenCollision( false )
+	, m_bRunning(true)
+	 
 {
 }
 
@@ -66,11 +68,13 @@ bool adamantengine::app_t::Intialize()
         // handle error
     }
 
-    if ((m_pSurfDisplay = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
+	if ((m_pSurfDisplay = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN)) == NULL)
     {
         return false;
     }
 
+	SDL_SetAlpha( m_pSurfDisplay, SDL_SRCALPHA, 0 );
+	SDL_SetColorKey( m_pSurfDisplay, SDL_SRCCOLORKEY, 0x00FF00);
     //Set the window caption
     SDL_WM_SetCaption( "Adamant Engine by: Timothy Carlisle. Copyright All Rights Reserved 2011-2012", NULL);
 
@@ -179,168 +183,170 @@ void adamantengine::app_t::OnUpdate()
 		arItems.push_back( item );
 	}
 
-	/* setup the bottom as a collision point, if they hit here then they are dead!*/
-	pos3f_t pos = {0};
-	pos.y = m_pSurfDisplay->h - 1.0f;
-	pos2f_t dim = {0};
-	dim.x = (float)m_pSurfDisplay->w;
-	dim.y = 10000;
+	if ( m_bDetectOffscreenCollision )
+	{
+		pos3f_t pos = {0};
+		pos.x = 0.0f;
+		pos.y = (float)m_pSurfDisplay->h;
+		pos2f_t dim = {0};
+		dim.x = (float)m_pSurfDisplay->w;
+		dim.y = 5000.0f;
 
-	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+		arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
 
-	pos.x = -5000.0f;
-	pos.y = 0.0f;
-	dim.x = 5000.0f;
-	dim.y = (float)m_pSurfDisplay->h;
+		pos.x = -5000.0f;
+		pos.y = 0.0f;
+		dim.x = 5000.0f;
+		dim.y = (float)m_pSurfDisplay->h;
 
-	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+		arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
 
-	pos.x = 0.0f;
-	pos.y = -5000.0f;
-	dim.x = (float)m_pSurfDisplay->w;
-	dim.y = 5000.0f;
+		pos.x = 0.0f;
+		pos.y = -5000.0f;
+		dim.x = (float)m_pSurfDisplay->w;
+		dim.y = 5000.0f;
 
-	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+		arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
 
-	pos.x = m_pSurfDisplay->w + 5000.0f;
-	pos.y = 0.0f;
-	dim.x = 5000.0f;
-	dim.y = (float)m_pSurfDisplay->h;
+		pos.x = (float)m_pSurfDisplay->w;
+		pos.y = 0.0f;
+		dim.x = 5000.0f;
+		dim.y = (float)m_pSurfDisplay->h;
 
-	arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
-
-	arItems.Sort();
+		arItems.push_back( collision::CCollisionItem(collision::CRect( pos, dim ), -1) );
+	}
+	//arItems.Sort();
 	//collision detection
 	CollisionDetection(arItems);
 
 	//process animation?
 }
 
+
+class CFindHit
+{
+public:
+	CFindHit(adamantengine::collision::CRect& rect)
+		: toFind( rect )
+	{
+		lXMiddle = (toFind.left + toFind.right) / 2;
+		lYMiddle = (toFind.top + toFind.bottom ) / 2;
+	}
+
+	bool operator()(const adamantengine::collision::CCollisionItem& item )
+	{
+		if ( item.m_uIndex == nIndex ) return false;
+
+		bool bFirst = toFind.left < item.m_rcBoundingBox.left && toFind.right >= item.m_rcBoundingBox.left;
+		bool bSecond = toFind.left == item.m_rcBoundingBox.left;
+		bool bThird = toFind.left > item.m_rcBoundingBox.left && toFind.left <= item.m_rcBoundingBox.right;
+		if ( !(bFirst || bSecond || bThird) ) return false;
+	
+
+		bFirst = toFind.top < item.m_rcBoundingBox.top && toFind.bottom >= item.m_rcBoundingBox.top;
+		bSecond = toFind.top == item.m_rcBoundingBox.top;
+		bThird = toFind.top > item.m_rcBoundingBox.top && toFind.top <= item.m_rcBoundingBox.bottom;
+
+		if ( !(bFirst || bSecond || bThird) ) return false;
+
+		return true;
+	}
+
+	size_t nIndex;
+
+	long lXMiddle;
+	long lYMiddle;
+
+	adamantengine::collision::CRect& toFind;
+};
+
 void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& arItems)
 {
-	size_t uSize = arItems.size();
+	size_t uSize = m_arObjects.size();
 	if ( uSize == 0 ) return;
 
 	gameobject_t** ppObjects = m_arObjects.data();
 
 	for( size_t n = 0; n < uSize; n++)
     {
-        if ( (n + 1) >= uSize ) continue;
+		gameobject_t* pObject = ppObjects[n];
 
-        bool xhit = false;
-        bool yhit = false;
+		if ( pObject->UseCollision() == false ) continue;
 
-        collision::CCollisionItem& xItemN = arItems[n];
-        collision::CCollisionItem& xItemN1 = arItems[n + 1];
+		auto i = arItems.begin();
 
-		//is my left < his left and my left < his right
-		//and is my right > his left and my right > his right
-		// == hit my bounding box
+		while( i != arItems.end() )
+		{
+			CFindHit hit(collision::CRect( pObject->Position(), pObject->Dimension()));
+			hit.nIndex = n;
+			i = std::find_if( i, arItems.end(), hit );
+			if ( i != arItems.end() )
+			{
+				long rXMiddle = ((*i).m_rcBoundingBox.left + (*i).m_rcBoundingBox.right) / 2;
+				long rYMiddle = ((*i).m_rcBoundingBox.top + (*i).m_rcBoundingBox.bottom ) / 2;
 
-        bool bXLeftHit = (xItemN.m_rcBoundingBox.left <= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.left <= xItemN1.m_rcBoundingBox.right);
-        bool bXRightHit = (xItemN.m_rcBoundingBox.right >= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.right >= xItemN1.m_rcBoundingBox.right);
+				int iCollision2 = eCOLLISION_NONE;
+				
+				if ( hit.toFind.bottom == (*i).m_rcBoundingBox.top)
+				{
+					iCollision2 = eCOLLISION_BOTTOM;
+				}
+				
+				if ( hit.toFind.right == (*i).m_rcBoundingBox.left )
+				{
+					iCollision2 |= eCOLLISION_RIGHT;
+				}
 
-        long lXN1Middle = (xItemN1.m_rcBoundingBox.left + xItemN1.m_rcBoundingBox.right) / 2;
-        long lCompare = 0;
+				if ( hit.toFind.top == (*i).m_rcBoundingBox.bottom )
+				{
+					iCollision2 |= eCOLLISION_TOP;
+				}
 
-        int eCollision = eCOLLISION_NONE;
-        int eCollisionN1 = eCOLLISION_NONE;
-		float fXAmt = 0.0f;
-		float fYAmt = 0.0f;
+				if (hit.toFind.left == (*i).m_rcBoundingBox.right )
+				{
+					iCollision2 |= eCOLLISION_LEFT;
+				}
 
-        if ( bXLeftHit && bXRightHit)
-        {
-            long lXNMiddle = (xItemN.m_rcBoundingBox.left + xItemN.m_rcBoundingBox.right) / 2;
-            lCompare = lXNMiddle - lXN1Middle;
-        }
-        else if ( bXLeftHit)
-        {
-            lCompare = xItemN.m_rcBoundingBox.left - lXN1Middle;
-        }
-        else if ( bXRightHit)
-        {
-            lCompare = xItemN.m_rcBoundingBox.right - lXN1Middle;
-        }
+				/*long rXMiddle = ((*i).m_rcBoundingBox.left + (*i).m_rcBoundingBox.right) / 2;
+				long rYMiddle = ((*i).m_rcBoundingBox.top + (*i).m_rcBoundingBox.bottom ) / 2;
 
-        bool bHitX = bXLeftHit || bXRightHit;
+				long XDiff = hit.lXMiddle - rXMiddle;
+				long YDiff = hit.lYMiddle - rYMiddle;
 
-        if ( bHitX )
-        {
-			fXAmt = (1.0f * abs(lCompare)) / lXN1Middle;
-            if ( lCompare < 0 )
-            {
-                eCollision = eCollision | eCOLLISION_LEFT;
-                eCollisionN1 |= eCOLLISION_RIGHT;
-            }
-            else if ( lCompare > 0)
-            {
-                eCollision |= eCOLLISION_RIGHT;
-                eCollisionN1 |= eCOLLISION_LEFT;
-            }
-            else
-            {
-                eCollision |= eCOLLISION_X_CENTER;
-                eCollisionN1 |= eCOLLISION_X_CENTER;
-            }
-        }
+				
 
+				if ( XDiff == 0 )
+				{
+					iCollision |= eCOLLISION_X_CENTER;
+				}
+				else if( XDiff < 0 )
+				{
+					iCollision |= eCOLLISION_RIGHT;
+				}
+				else
+				{
+					iCollision |= eCOLLISION_LEFT;
+				}
 
-        bool bYBottomHit = bHitX && (xItemN.m_rcBoundingBox.bottom <= xItemN1.m_rcBoundingBox.bottom && xItemN.m_rcBoundingBox.bottom >= xItemN1.m_rcBoundingBox.top);
-        bool bYTopHit = bHitX && (xItemN.m_rcBoundingBox.top <= xItemN1.m_rcBoundingBox.bottom && xItemN.m_rcBoundingBox.top >= xItemN1.m_rcBoundingBox.top);
+				if ( YDiff == 0 )
+				{
+					iCollision |= eCOLLISION_Y_CENTER;
+				}
+				else if ( YDiff > 0 )
+				{
+					iCollision |= eCOLLISION_TOP;
+				}
+				else
+				{
+					iCollision |= eCOLLISION_BOTTOM;
+				}*/
 
-        lXN1Middle = (xItemN1.m_rcBoundingBox.top + xItemN1.m_rcBoundingBox.bottom) / 2;
-
-        if ( bYTopHit && bYBottomHit)
-        {
-            long lXNMiddle = (xItemN.m_rcBoundingBox.top + xItemN.m_rcBoundingBox.bottom) / 2;
-            lCompare = lXNMiddle - lXN1Middle;
-        }
-        else if ( bYTopHit )
-        {
-            lCompare = xItemN.m_rcBoundingBox.top - lXN1Middle;
-        }
-        else if ( bYBottomHit )
-        {
-            lCompare = xItemN.m_rcBoundingBox.bottom - lXN1Middle;
-        }
-
-        bool bHitY = bYTopHit || bYBottomHit;
-
-        if ( bHitY )
-        {
-			fYAmt = (1.0f * abs(lCompare)) / lXN1Middle;
-            //Could be missing a point called "eCOLLISION_Y_CENTER
-            if ( lCompare > 0 )
-            {
-                eCollision |= eCOLLISION_TOP;
-                eCollisionN1 |= eCOLLISION_BOTTOM;
-            }
-            else if ( lCompare < 0)
-            {
-                eCollision |= eCOLLISION_BOTTOM;
-                eCollisionN1 |= eCOLLISION_TOP;
-            }
-            else
-            {
-                eCollision |= eCOLLISION_Y_CENTER;
-                eCollisionN1 |= eCOLLISION_Y_CENTER;
-            }
-        }
-
-
-        if ( bHitX && bHitY )
-        {
-            if ( xItemN.m_uIndex != -1 && ppObjects[xItemN.m_uIndex]->UseCollision())
-            {
-                ppObjects[xItemN.m_uIndex]->OnCollision((ECollision)eCollision, fXAmt, fYAmt);
-            }
-
-            if ( xItemN1.m_uIndex != -1 && ppObjects[xItemN1.m_uIndex]->UseCollision())
-            {
-                ppObjects[xItemN1.m_uIndex]->OnCollision((ECollision)eCollisionN1, fXAmt, fYAmt);
-            }
-        }
+				pObject->OnCollision( (ECollision)iCollision2, 1.0f, 1.0f );
+				i++;
+			}
+		}
     }
+
 }
 
 void adamantengine::app_t::OnRender()
@@ -360,6 +366,7 @@ void adamantengine::app_t::OnRender()
 		}
 	}
 
+	//SDL_UpdateRect( m_pSurfDisplay, 0,0,0,0);
 	SDL_Flip(m_pSurfDisplay);
 }
 

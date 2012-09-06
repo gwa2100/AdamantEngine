@@ -32,6 +32,7 @@ AMT_EXPORT HAPP amt_app_init(void);
 AMT_EXPORT int amt_app_execute(HAPP app);
 AMT_EXPORT void amt_app_destroy(HAPP app);
 AMT_EXPORT void amt_app_object_bind(HAPP app, HGAMEOBJECT object);
+AMT_EXPORT void amt_app_set_offscreen_col(HAPP app, int flags );
 
 typedef struct {
 	float x;

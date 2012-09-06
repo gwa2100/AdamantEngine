@@ -22,8 +22,11 @@ void adamantengine::sprite_t::Create()
 
     m_pSurf = SDL_DisplayFormat(pTemp);
 
-    m_dimension.x = m_pSurf->w;
-    m_dimension.y = m_pSurf->h;
+	SDL_SetAlpha( m_pSurf, SDL_SRCALPHA, 128 );
+	SDL_SetColorKey( m_pSurf, SDL_SRCCOLORKEY, 0x00FF00);
+
+    m_dimension.x = (float)m_pSurf->w;
+    m_dimension.y = (float)m_pSurf->h;
 
 	SDL_FreeSurface(pTemp);
 }
@@ -36,6 +39,6 @@ void adamantengine::sprite_t::Render( SDL_Surface* pDisplaySurface )
 		return;
 	}
 
-    SDL_Rect rect = CDefault_Rect(m_position.x, m_position.y, m_dimension.x, m_dimension.y);
+    SDL_Rect rect = CDefault_Rect((Sint16)m_position.x, (Sint16)m_position.y, (Uint16)m_dimension.x, (Uint16)m_dimension.y);
     SDL_BlitSurface(m_pSurf, NULL, pDisplaySurface, &rect);
 }

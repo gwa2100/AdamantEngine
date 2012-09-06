@@ -35,6 +35,16 @@ namespace adamantengine {
 
 			}
 
+			long Width()
+			{
+				return right - left;
+			}
+
+			long Height()
+			{
+				return bottom - top;
+			}
+
 			long top;
 			long left;
 			long bottom;
@@ -57,7 +67,10 @@ namespace adamantengine {
 		{
 			bool operator()(const CCollisionItem& left, const CCollisionItem& right)
 			{
-				return left.m_rcBoundingBox.left < right.m_rcBoundingBox.left;
+				long lMid = (left.m_rcBoundingBox.left + left.m_rcBoundingBox.right) / 2;
+				long rMId = (right.m_rcBoundingBox.left + right.m_rcBoundingBox.right) / 2;
+
+				return lMid < rMId;
 			}
 		};
 
@@ -76,6 +89,8 @@ namespace adamantengine {
 
 class app_t
 {
+	DEFPROPERTY( DetectOffscreenCollision, bool, m_bDetectOffscreenCollision )
+
 public:
 	app_t();
 	~app_t();

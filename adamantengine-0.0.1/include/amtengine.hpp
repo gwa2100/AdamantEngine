@@ -225,6 +225,11 @@ public:
 	{
 		amt_app_object_bind( m_app, object.m_hObject );
 	}
+	
+	inline void SetDetectOffscreenCollision( bool bValue)
+	{
+		amt_app_set_offscreen_col( m_app, bValue ? 1 : 0 );
+	}
 
 private:
 

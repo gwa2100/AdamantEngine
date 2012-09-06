@@ -87,7 +87,27 @@ void adamantengine::gameobject_t::OnCollision( ECollision eCollision, float fXAm
 		m_OnCollison( this, eCollision, fXAmt, fYAmt, m_pUserData );
 	}
 
-	if ( eCollision == eCOLLISION_TOP_RIGHT )
+	if ( eCollision & eCOLLISION_BOTTOM)
+	{
+		m_velocity.y *= -1.0f;
+	}
+	
+	if ( eCollision & eCOLLISION_RIGHT)
+	{
+		m_velocity.x *= -1.0f;
+	}
+	
+	if ( eCollision & eCOLLISION_LEFT )
+	{
+		m_velocity.x *= -1.0f;
+	}
+	
+	if ( eCollision & eCOLLISION_TOP )
+	{
+		m_velocity.y *= -1.0f;
+	}
+	
+	/*if ( eCollision == eCOLLISION_TOP_RIGHT )
 	{
 		m_velocity.y = 1.0f;
 		m_velocity.x = 0.3f;
@@ -97,7 +117,7 @@ void adamantengine::gameobject_t::OnCollision( ECollision eCollision, float fXAm
 		m_velocity.y *= (-1.0f * fYAmt);
 		m_velocity.x *= 0.3f;
 
-	}
+	}*/
 }
 
 void adamantengine::gameobject_t::MovePosition( const pos3f_t& position )

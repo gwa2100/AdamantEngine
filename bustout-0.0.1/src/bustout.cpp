@@ -14,8 +14,9 @@ int main( int argc, char* argv[] )
 	adamantengine::CApp app;
 	adamantengine::CSprite Ball( "test_ball.bmp" );
 	app.Bind( Ball );
+	app.SetDetectOffscreenCollision( true );
 	Ball.SetPosition( adamantengine::CPosition( 50.0f, 50.0f) );
-	Ball.SetVelocity( adamantengine::CVelocity(0.5f, 0.5f) );
+	Ball.SetVelocity( adamantengine::CVelocity(0.7f, 0.7f) );
 	Ball.SetUseUpdate( true );
 	Ball.SetUseCollision( true );
 	return app.Execute();
