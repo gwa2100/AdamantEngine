@@ -16,7 +16,7 @@ int main( int argc, char* argv[] )
 	app.Bind( Ball );
 	app.SetDetectOffscreenCollision( true );
 	Ball.SetPosition( adamantengine::CPosition( 50.0f, 50.0f) );
-	Ball.SetVelocity( adamantengine::CVelocity(0.7f, 0.7f) );
+	Ball.SetVelocity( adamantengine::CVelocity( 0.7f, 0.7f) );
 	Ball.SetUseUpdate( true );
 	Ball.SetUseCollision( true );
 	return app.Execute();

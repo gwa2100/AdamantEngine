@@ -73,8 +73,6 @@ bool adamantengine::app_t::Intialize()
         return false;
     }
 
-	SDL_SetAlpha( m_pSurfDisplay, SDL_SRCALPHA, 0 );
-	SDL_SetColorKey( m_pSurfDisplay, SDL_SRCCOLORKEY, 0x00FF00);
     //Set the window caption
     SDL_WM_SetCaption( "Adamant Engine by: Timothy Carlisle. Copyright All Rights Reserved 2011-2012", NULL);
 
@@ -226,8 +224,9 @@ void adamantengine::app_t::OnUpdate()
 class CFindHit
 {
 public:
-	CFindHit(adamantengine::collision::CRect& rect)
+	CFindHit(adamantengine::collision::CRect& rect, size_t n)
 		: toFind( rect )
+		, nIndex(n)
 	{
 		lXMiddle = (toFind.left + toFind.right) / 2;
 		lYMiddle = (toFind.top + toFind.bottom ) / 2;
@@ -277,32 +276,28 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 
 		while( i != arItems.end() )
 		{
-			CFindHit hit(collision::CRect( pObject->Position(), pObject->Dimension()));
-			hit.nIndex = n;
-			i = std::find_if( i, arItems.end(), hit );
+			collision::CRect test( pObject->Position(), pObject->Dimension());
+			i = std::find_if( i, arItems.end(), CFindHit(test, n) );
 			if ( i != arItems.end() )
 			{
-				long rXMiddle = ((*i).m_rcBoundingBox.left + (*i).m_rcBoundingBox.right) / 2;
-				long rYMiddle = ((*i).m_rcBoundingBox.top + (*i).m_rcBoundingBox.bottom ) / 2;
-
 				int iCollision2 = eCOLLISION_NONE;
 				
-				if ( hit.toFind.bottom == (*i).m_rcBoundingBox.top)
+				if ( test.bottom == (*i).m_rcBoundingBox.top)
 				{
 					iCollision2 = eCOLLISION_BOTTOM;
 				}
 				
-				if ( hit.toFind.right == (*i).m_rcBoundingBox.left )
+				if ( test.right == (*i).m_rcBoundingBox.left )
 				{
 					iCollision2 |= eCOLLISION_RIGHT;
 				}
 
-				if ( hit.toFind.top == (*i).m_rcBoundingBox.bottom )
+				if ( test.top == (*i).m_rcBoundingBox.bottom )
 				{
 					iCollision2 |= eCOLLISION_TOP;
 				}
 
-				if (hit.toFind.left == (*i).m_rcBoundingBox.right )
+				if ( test.left == (*i).m_rcBoundingBox.right )
 				{
 					iCollision2 |= eCOLLISION_LEFT;
 				}
@@ -366,7 +361,6 @@ void adamantengine::app_t::OnRender()
 		}
 	}
 
-	//SDL_UpdateRect( m_pSurfDisplay, 0,0,0,0);
 	SDL_Flip(m_pSurfDisplay);
 }
 

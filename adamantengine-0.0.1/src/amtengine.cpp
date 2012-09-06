@@ -43,7 +43,8 @@ void amt_app_object_bind(HAPP app, HGAMEOBJECT object)
 
 void amt_app_set_offscreen_col(HAPP app, int flags )
 {
-	((app_t*)app)->SetDetectOffscreenCollision( flags == 1 );
+	bool bEnabled = flags == 1;
+	((app_t*)app)->SetDetectOffscreenCollision( bEnabled  );
 }
 
 HGAMEOBJECT amt_gobj_init( pos3f_t* position, pos2f_t* dimension, rect_t* box )
@@ -58,32 +59,38 @@ void amt_gobj_destroy( HGAMEOBJECT gobj )
 
 void amt_gobj_set_use_collision(HGAMEOBJECT gobj, int use )
 {
-	((adamantengine::gameobject_t*)gobj)->SetUseCollision( use == 1 );
+	bool bEnabled = use == 1;
+	((adamantengine::gameobject_t*)gobj)->SetUseCollision( bEnabled );
 }
 
 void amt_gobj_set_use_update(HGAMEOBJECT gobj, int use )
 {
-	((adamantengine::gameobject_t*)gobj)->SetUseUpdate( use == 1 );
+	bool bEnabled = use == 1;
+	((adamantengine::gameobject_t*)gobj)->SetUseUpdate( bEnabled );
 }
 
 void amt_gobj_set_use_render(HGAMEOBJECT gobj, int use )
 {
-	((adamantengine::gameobject_t*)gobj)->SetUseRender( use == 1 );
+	bool bEnabled = use == 1;
+	((adamantengine::gameobject_t*)gobj)->SetUseRender( bEnabled );
 }
 
 void amt_gobj_set_use_event(HGAMEOBJECT gobj, int use )
 {
-	((adamantengine::gameobject_t*)gobj)->SetUseEvent( use == 1 );
+	bool bEnabled = use == 1;
+	((adamantengine::gameobject_t*)gobj)->SetUseEvent( bEnabled );
 }
 
 void amt_gobj_set_use_cleanup(HGAMEOBJECT gobj, int use )
 {
-	((adamantengine::gameobject_t*)gobj)->SetUseCleanup( use == 1 );
+	bool bEnabled = use == 1;
+	((adamantengine::gameobject_t*)gobj)->SetUseCleanup( bEnabled );
 }
 
 void amt_gobj_set_use_time(HGAMEOBJECT gobj, int use )
 {
-	((adamantengine::gameobject_t*)gobj)->SetUseTime( use == 1 );
+	bool bEnabled = use == 1;
+	((adamantengine::gameobject_t*)gobj)->SetUseTime( bEnabled );
 }
 
 void amt_gobj_set_position(HGAMEOBJECT gobj, pos3f_t* pos )
