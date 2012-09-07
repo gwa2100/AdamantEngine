@@ -14,18 +14,18 @@ namespace adamantengine {
 
 	namespace collision {
 
-		struct CRect
+		struct CRectF
 		{
-			inline CRect( const pos3f_t& position, const pos2f_t& dimension )
-				: top( (long)position.y )
-				, left( (long)position.x )
-				, bottom( top + (long)dimension.y)
-				, right( left + (long)dimension.x )
+			inline CRectF( const pos3f_t& position, const pos2f_t& dimension )
+				: top( position.y )
+				, left( position.x )
+				, bottom( top + dimension.y)
+				, right( left + dimension.x )
 			{
 
 			}
 
-			inline CRect( const CRect& rect)
+			inline CRectF( const CRectF& rect)
 				: top( rect.top)
 				, left( rect.left)
 				, bottom( rect.bottom)
@@ -35,31 +35,85 @@ namespace adamantengine {
 
 			}
 
-			long Width()
+			bool PtInRect( const pos3f_t& position ) const
+			{
+				if ( left <= position.x && right >= position.x &&
+					 top <= position.y && bottom >= position.y )
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			struct vector2
+			{
+				vector2( float xx, float yy )
+					:x(xx),y(yy)
+				{
+				}
+				float x,y;
+			};
+
+			bool LineInRect( vector2 a, vector2 b, vector2 c, vector2 d ) const
+			{
+				float q = (a.y - b.y) * (c.x - d.x) - (a.x - b.x) * (c.y - d.y);
+
+				if ( q == 0.0f ) return false;
+
+				float t = (a.x * b.y - b.x * a.y + b.x * c.y - c.x * b.y + c.x * a.y - a.x * c.y) / q;
+
+				if ( !(t > 0.0f && t < 1.0f ) ) return false;
+				
+				float s = (c.x * d.y - d.x * c.y + d.x * a.y - a.x * d.y + a.x * c.y - c.x * a.y) / q;
+				return s > 0.0f && s < 1.0f;
+			}
+
+			bool LineInRect( const pos3f_t& p1, const pos3f_t& p2 ) const
+			{
+				vector2 c( p1.x,p1.y);
+				vector2 d( p2.x,p2.y);
+
+				if ( LineInRect( vector2( left, top), vector2( right, top), c , d ) )
+					return true;
+
+				if ( LineInRect( vector2( left, bottom), vector2( right, bottom), c , d ) )
+					return true;
+
+				if ( LineInRect( vector2( left, top), vector2( left, bottom), c , d ) )
+					return true;
+
+				if ( LineInRect( vector2( right, top), vector2( right, bottom), c , d ) )
+					return true;
+
+				return false;
+			}
+
+			float Width()
 			{
 				return right - left;
 			}
 
-			long Height()
+			float Height()
 			{
 				return bottom - top;
 			}
 
-			long top;
-			long left;
-			long bottom;
-			long right;
+			float top;
+			float left;
+			float bottom;
+			float right;
 		};
 
 		struct CCollisionItem
 		{
-			inline CCollisionItem( const CRect& rect, size_t uIndex)
+			inline CCollisionItem( const CRectF& rect, size_t uIndex)
 				: m_rcBoundingBox( rect )
 				, m_uIndex( uIndex )
 			{
 			}
 
-			CRect m_rcBoundingBox;
+			CRectF m_rcBoundingBox;
 			size_t m_uIndex;
 		};
 
@@ -67,8 +121,8 @@ namespace adamantengine {
 		{
 			bool operator()(const CCollisionItem& left, const CCollisionItem& right)
 			{
-				long lMid = (left.m_rcBoundingBox.left + left.m_rcBoundingBox.right) / 2;
-				long rMId = (right.m_rcBoundingBox.left + right.m_rcBoundingBox.right) / 2;
+				float lMid = (left.m_rcBoundingBox.left + left.m_rcBoundingBox.right) / 2;
+				float rMId = (right.m_rcBoundingBox.left + right.m_rcBoundingBox.right) / 2;
 
 				return lMid < rMId;
 			}

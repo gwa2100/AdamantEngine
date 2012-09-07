@@ -7,6 +7,27 @@ using std::string;
 
 namespace adamantengine {
 
+enum ECollisionType 
+{
+	eCOLLISION_TYPE_NONE             = 0x0,
+    eCOLLISION_TYPE_TOP              = 0x1,
+    eCOLLISION_TYPE_BOTTOM           = 0x2,
+    eCOLLISION_TYPE_LEFT             = 0x4,
+    eCOLLISION_TYPE_RIGHT            = 0x8,
+    eCOLLISION_TYPE_X_CENTER         = 0x10,
+    eCOLLISION_TYPE_Y_CENTER         = 0x20,
+    eCOLLISION_TYPE_LEFT_SIDE        = 0x40,
+    eCOLLISION_TYPE_RIGHT_SIDE       = 0x80,
+    eCOLLISION_TYPE_TOP_LEFT         = 0x5,  //Combination of eCOLLISION_TOP      | eCOLLISION_LEFT
+    eCOLLISION_TYPE_TOP_RIGHT        = 0x9,  //Combination of eCOLLISION_TOP      | eCOLLISION_RIGHT
+    eCOLLISION_TYPE_BOTTOM_LEFT      = 0x6,  //Combination of eCOLLISION_BOTTOM   | eCOLLISION_LEFT
+    eCOLLISION_TYPE_BOTTOM_RIGHT     = 0xA,  //Combination of eCOLLISION_BOTTOM   | eCOLLISION_RIGHT
+    eCOLLISION_TYPE_TOP_X_CENTER     = 0x11, //Combination of eCOLLISION_TOP      | eCOLLISION_X_CENTER
+    eCOLLISION_TYPE_BOTTOM_X_CENTER  = 0x12, //Combination of eCOLLISION_BOTTOM   | eCOLLISION_X_CENTER
+    eCOLLISION_TYPE_Y_CENTER_LEFT    = 0x24, //Combination of eCOLLISION_Y_CENTER | eCOLLISION_LEFT
+    eCOLLISION_TYPE_Y_CENTER_RIGHT   = 0x28  //Combination of eCOLLISION_Y_CENTER | eCOLLISION_RIGHT
+};
+
 class CVelocity : public pos2f_t
 {
 public:
@@ -74,6 +95,8 @@ public:
 	inline CGameObject(CPosition& position, CDimension& dimension, rect_t& box)
 	{
 		m_hObject = amt_gobj_init( &position, &dimension, &box );
+		amt_gobj_set_userdata( m_hObject, this );
+		Initialize();
 	}
 	
 	inline ~CGameObject()
@@ -150,6 +173,11 @@ public:
 		amt_gobj_set_use_collision( m_hObject, bValue ? 1 : 0 );
 	}
 	
+	inline void SetUseInput( bool bValue )
+	{
+		amt_gobj_set_use_event( m_hObject, bValue ? 1 : 0 );
+	}
+	
 	inline void SetVelocity( CVelocity& velocity )
 	{
 		amt_gobj_set_velocity( m_hObject, &velocity );
@@ -159,11 +187,43 @@ public:
 	{
 		amt_gobj_set_position( m_hObject, &position );
 	}
+	
+	
 protected:
 	inline CGameObject()
 	{
+		
 	}
 
+	inline virtual void Initialize()
+	{
+		amt_gobj_on_input( m_hObject, &CGameObject::InternalOnInput );
+		amt_gobj_on_collision( m_hObject, &CGameObject::InternalOnCollision );
+	}
+	
+	inline virtual void OnInput(CVelocity& inputVelocity)
+	{
+		
+	}
+	
+	inline virtual void OnCollision( ECollisionType eCollisionType, float fXAmt, float fYAmt )
+	{
+	}
+	
+
+	//statics
+	static void __stdcall InternalOnCollision( HGAMEOBJECT hObj, int collision, float fXAmt, float fYAmt, void* userdata )
+	{
+		CGameObject* This = (CGameObject*)userdata;
+		This->OnCollision( (ECollisionType)collision, fXAmt, fYAmt );
+	}
+	
+	static void __stdcall InternalOnInput( HGAMEOBJECT hObj, pos2f_t* input, void* userdata )
+	{
+		CGameObject* This = (CGameObject*)userdata;
+		This->OnInput( CVelocity(input->x, input->y) );
+	}
+	
 
 	HGAMEOBJECT m_hObject;
 	
@@ -173,13 +233,20 @@ class CSprite : public CGameObject
 {
 public:
 	inline CSprite(const string& sFilename)
+		: CGameObject()
 	{
 		m_hObject = amt_spr_create( sFilename.c_str() );
 		SetUseRender( true );
 		amt_gobj_set_userdata( m_hObject, this );
-		amt_gobj_on_render( m_hObject, &CSprite::InternalRender );
+		Initialize();
 	}
 
+	inline virtual void Initialize()
+	{
+		amt_gobj_on_render( m_hObject, &CSprite::InternalRender );
+		CGameObject::Initialize();
+	}
+	
 	inline virtual void Render( void* pDestSurface )
 	{
 		pos3f_t* pos = GetPosition();
