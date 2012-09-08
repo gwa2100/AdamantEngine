@@ -7,7 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="..\..\..\lib\libadamantengine" prefix_auto="1" extension_auto="1" />
+				<Option output="..\..\..\bin\adamantengine" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="..\..\..\bin\" />
 				<Option object_output="obj\Debug\" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -16,22 +17,20 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDLL_EXPORT" />
-					<Add directory="..\..\..\contrib\mingw\include\SDL" />
 					<Add directory="..\..\..\contrib\mingw\include" />
 					<Add directory="..\..\..\contrib\include" />
 				</Compiler>
 				<Linker>
+					<Add option="-lmingw32" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDL.dll.a" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDLmain.a" />
 					<Add directory="..\..\..\contrib\mingw\lib" />
 					<Add directory="..\..\..\contrib\lib" />
 				</Linker>
-				<ExtraCommands>
-					<Add before="cmd.exe /c copy ..\platform.hpp ..\..\..\src" />
-				</ExtraCommands>
 			</Target>
 			<Target title="Release">
-				<Option output="..\..\..\lib\libadamantengine" prefix_auto="1" extension_auto="1" />
+				<Option output="..\..\..\bin\adamantengine" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="..\..\..\bin\" />
 				<Option object_output="obj\Release\" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -40,34 +39,37 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-DDLL_EXPORT" />
-					<Add directory="..\..\..\contrib\mingw\include\SDL" />
 					<Add directory="..\..\..\contrib\mingw\include" />
 					<Add directory="..\..\..\contrib\include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-lmingw32" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDL.dll.a" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDLmain.a" />
 					<Add directory="..\..\..\contrib\mingw\lib" />
 					<Add directory="..\..\..\contrib\lib" />
 				</Linker>
-				<ExtraCommands>
-					<Add before="cmd.exe /c copy ..\platform.hpp ..\..\..\src" />
-				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="..\..\..\src\AdamantEngine.h" />
+		<Unit filename="..\..\..\src\AnimatedSprite.cpp" />
+		<Unit filename="..\..\..\src\AnimatedSprite.h" />
 		<Unit filename="..\..\..\src\App.cpp" />
-		<Unit filename="..\..\..\src\App.hpp" />
+		<Unit filename="..\..\..\src\App.h" />
 		<Unit filename="..\..\..\src\GameObject.cpp" />
-		<Unit filename="..\..\..\src\GameObject.hpp" />
+		<Unit filename="..\..\..\src\GameObject.h" />
+		<Unit filename="..\..\..\src\PositionDataTypes.h" />
+		<Unit filename="..\..\..\src\Sound.cpp" />
+		<Unit filename="..\..\..\src\Sound.h" />
 		<Unit filename="..\..\..\src\Sprite.cpp" />
-		<Unit filename="..\..\..\src\Sprite.hpp" />
-		<Unit filename="..\..\..\src\amtengine.cpp" />
-		<Unit filename="..\..\..\src\defines.h" />
+		<Unit filename="..\..\..\src\Sprite.h" />
+		<Unit filename="..\..\..\src\Timer.cpp" />
+		<Unit filename="..\..\..\src\Timer.h" />
+		<Unit filename="..\..\..\src\version.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

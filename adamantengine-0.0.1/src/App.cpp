@@ -6,7 +6,7 @@
 adamantengine::app_t::app_t()
 	: m_bDetectOffscreenCollision( false )
 	, m_bRunning(true)
-	 
+
 {
 }
 
@@ -84,13 +84,13 @@ void adamantengine::app_t::OnEvent(SDL_Event& anevent)
 	bool bMovement = false;
 	pos2f_t inputVelocity = {0};
 
-	if (anevent.type == SDL_QUIT) 
+	if (anevent.type == SDL_QUIT)
 	{
         m_bRunning = false;
 		return;
     }
 
-	if (anevent.type == SDL_KEYDOWN) 
+	if (anevent.type == SDL_KEYDOWN)
 	{
         switch ( anevent.key.keysym.sym )
 		{
@@ -117,7 +117,7 @@ void adamantengine::app_t::OnEvent(SDL_Event& anevent)
                 break;
         }
     }
-	else if (anevent.type == SDL_KEYUP) 
+	else if (anevent.type == SDL_KEYUP)
 	{
         switch ( anevent.key.keysym.sym )
 		{
@@ -165,7 +165,7 @@ void adamantengine::app_t::OnUpdate()
 	if ( nSize == 0 ) return;
 
 	gameobject_t** ppObjects = m_arObjects.data();
-	
+
 	collision::CCollisionItemVector arItems;
 
 	//process movement
@@ -179,7 +179,7 @@ void adamantengine::app_t::OnUpdate()
 		collision::CCollisionItem item( collision::CRectF( ppObjects[n]->Position(), ppObjects[n]->Dimension() ), n );
 		arItems.push_back( item );
 	}
-	
+
 	//collision detection
 	CollisionDetection(arItems);
 
@@ -230,7 +230,7 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 
 		float fTop = pObject->Position().y;
 
-		auto i = arItems.begin();
+        collision::CCollisionItemVector::iterator i = arItems.begin();
 
 		collision::CRectF test( pObject->Position(), pObject->Dimension());
 		CFindHit hit(test, n);
@@ -265,7 +265,7 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 					iCollision2 |= eCOLLISION_TOP;
 					yAmt = rect.bottom - test.top;
 				}
-				
+
 			}
 
 			if ( test.left < rect.left )
@@ -292,7 +292,7 @@ void adamantengine::app_t::CollisionDetection(collision::CCollisionItemVector& a
 					iCollision2 |= eCOLLISION_LEFT;
 				}
 			}
-				
+
 			pObject->OnCollision( (ECollision)iCollision2, xAmt, yAmt );
 			test = adamantengine::collision::CRectF( pObject->Position(), pObject->Dimension());
 			i++;
