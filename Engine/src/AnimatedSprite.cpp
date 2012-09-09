@@ -46,8 +46,8 @@ bool CAnimatedSprite::Update(float fDeltaTime /*= 0.0f*/)
 
 bool CAnimatedSprite::Render(SDL_Surface* pDestSurf)
 {
-    Pos3i pos = GetPosition3i();
-    Pos2i dim = GetDimensions2i();
+    Pos3f pos = GetPosition3f();
+    Pos2f dim = GetDimensions2f();
     SDL_Rect rect = CDefault_Rect(pos.x, pos.y, dim.x, dim.y);
     SDL_Rect src = CDefault_Rect(pos.x * m_nCurrentFrame, 0, dim.x, dim.y );
 

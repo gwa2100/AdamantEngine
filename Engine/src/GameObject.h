@@ -23,20 +23,19 @@
 #define GAMEOBJECT_H_INCLUDED
 
 #include "PositionDataTypes.h"
-
-enum ECollision;
+#include "CollisionItem.hpp"
 
 class CGameObject
 {
 protected:
     //Position of GameObject X,Y,Z in Pos3i format
-    Pos3i position;
+    Pos3f position;
     //Dimensions of Game Object W,H in Pos2i format
-    Pos2i dimensions;
+    Pos2f dimensions;
     //Dimensions of bounding box used for collisions in SDL_Rect format.
     SDL_Rect boundBox;
     //Velocity of object for use in update movement.
-    Pos3i velocity;
+    Pos3f velocity;
     //The timer
     Uint32 m_uOldTick;
     Uint32 m_uCurrentTick;
@@ -51,7 +50,7 @@ protected:
 public:
     //KMS: maybe make these private and have a const getter..
 
-    CGameObject(Pos3i iPosition = Pos3i(), Pos2i iDimensions = Pos2i(), SDL_Rect iBoundBox = CDefault_Rect(),
+    CGameObject(Pos3f iPosition = Pos3f(), Pos2f iDimensions = Pos2f(), SDL_Rect iBoundBox = CDefault_Rect(),
                bool bUsesCollision = false, bool bUsesUpdate = false, bool bUsesRender = false,
                bool bUsesEvent = false, bool bUsesCleanup = false);
 
@@ -69,13 +68,13 @@ public:
     bool SetPosition(const Pos2f& pos);
 
     //Get Position
-    Pos3i GetPosition3i() const;
+    Pos3f GetPosition3f() const;
 
     //Get Dimensions
-    Pos2i GetDimensions2i() const;
+    Pos2f GetDimensions2f() const;
 
     //Get Velocity
-    Pos3i GetVelocity3i() const;
+    Pos3f GetVelocity3f() const;
 
     //Move Velocity
     bool MoveVelocity(const Pos3i& vel);
@@ -125,7 +124,7 @@ public:
     virtual bool Cleanup();
 
     virtual bool OnInit() { return true; }
-    virtual bool OnCollision( ECollision eCollision) { return true; }
+    virtual void OnCollision( ECollision eCollision, float fXAmt, float fYAmt) { return; }
 
     virtual ~CGameObject();
 };

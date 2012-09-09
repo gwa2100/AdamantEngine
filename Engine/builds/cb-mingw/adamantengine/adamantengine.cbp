@@ -60,6 +60,7 @@
 		<Unit filename="..\..\..\src\AnimatedSprite.h" />
 		<Unit filename="..\..\..\src\App.cpp" />
 		<Unit filename="..\..\..\src\App.h" />
+		<Unit filename="..\..\..\src\CollisionItem.hpp" />
 		<Unit filename="..\..\..\src\GameObject.cpp" />
 		<Unit filename="..\..\..\src\GameObject.h" />
 		<Unit filename="..\..\..\src\PositionDataTypes.h" />

@@ -30,53 +30,12 @@
 #include "PositionDataTypes.h"
 #include "GameObject.h"
 
+
 using std::vector;
 
 const unsigned int MOVE_SPD = 5;
 
 struct SDL_Surface;
-
-
-
-struct CRect
-{
-    CRect( const Pos3i& position, const Pos2i& dimension )
-        : top( position.y )
-        , left( position.x )
-        , bottom( top + dimension.y)
-        , right( left + dimension.x )
-    {
-
-    }
-
-    CRect( const CRect& rect)
-        : top( rect.top)
-        , left( rect.left)
-        , bottom( rect.bottom)
-        , right( rect.right )
-    {
-
-
-    }
-
-    long top;
-    long left;
-    long bottom;
-    long right;
-};
-
-struct CCollisionItem
-{
-    CCollisionItem( const CRect& rect, size_t uIndex)
-        : m_rcBoundingBox( rect )
-        , m_uIndex( uIndex )
-    {
-    }
-
-    CRect m_rcBoundingBox;
-    size_t m_uIndex;
-};
-
 
 class CApp
 {

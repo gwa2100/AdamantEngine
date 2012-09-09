@@ -21,7 +21,7 @@
 #include "GameObject.h"
 #include "App.h"
 
-CGameObject::CGameObject(Pos3i iPosition, Pos2i iDimensions, SDL_Rect iBoundBox,
+CGameObject::CGameObject(Pos3f iPosition, Pos2f iDimensions, SDL_Rect iBoundBox,
             bool bUsesCollision, bool bUsesUpdate, bool bUsesRender,
             bool bUsesEvent, bool bUsesCleanup)
 {
@@ -107,19 +107,19 @@ bool CGameObject::SetPosition(const Pos2f& pos)
 }
 
 //Get Position
-Pos3i CGameObject::GetPosition3i() const
+Pos3f CGameObject::GetPosition3f() const
 {
     return position;
 }
 
 //Get Dimensions
-Pos2i CGameObject::GetDimensions2i() const
+Pos2f CGameObject::GetDimensions2f() const
 {
     return dimensions;
 }
 
 //Get Velocity
-Pos3i CGameObject::GetVelocity3i() const
+Pos3f CGameObject::GetVelocity3f() const
 {
     return velocity;
 }

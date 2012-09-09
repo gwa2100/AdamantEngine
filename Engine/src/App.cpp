@@ -28,7 +28,7 @@ const int g_ciFrameCap = 60;
 //Z Comparison (DEPTH)
 bool operator < (const CGameObject& left, const CGameObject& right)
 {
-	if  (left.GetPosition3i().z < right.GetPosition3i().z) return true;
+	if  (left.GetPosition3f().z < right.GetPosition3f().z) return true;
 	return false;
 }
 
@@ -307,29 +307,7 @@ bool CApp::OnInit()
     return true;
 }
 
-#include <vector>
 #include <algorithm>
-
-using std::vector;
-
-struct CSortCollisionItemForX
-{
-    bool operator()(const CCollisionItem& left, const CCollisionItem& right)
-    {
-        return left.m_rcBoundingBox.left < right.m_rcBoundingBox.left;
-    }
-};
-
-class CCollisionItemVector : public vector< CCollisionItem >
-{
-    public:
-    CCollisionItemVector(){}
-
-    void SortByX()
-    {
-        std::sort( begin(), end(), CSortCollisionItemForX());
-    }
-};
 
 void CApp::OnLoop()
 {
@@ -338,8 +316,8 @@ void CApp::OnLoop()
     size_t uSize = m_arObjectList.size();
     if ( uSize == 0 ) return;
 
-    CCollisionItemVector arXCollide;
-    arXCollide.reserve( uSize );
+    CCollisionItemVector arCollideItems;
+    arCollideItems.reserve( uSize );
 
     CGameObject** ppObjects = m_arObjectList.data();
 
@@ -347,128 +325,93 @@ void CApp::OnLoop()
         if (ppObjects[x]->GetUsesUpdate() )
         {
            ppObjects[x]->Update();
-           Pos3i pos = ppObjects[x]->GetPosition3i();
-           Pos2i dim = ppObjects[x]->GetDimensions2i();
-           CCollisionItem item( CRect(pos,dim), x );
-           arXCollide.push_back( item );
         }
+
+       Pos3f pos = ppObjects[x]->GetPosition3f();
+       Pos2f dim = ppObjects[x]->GetDimensions2f();
+       CCollisionItem item( CRect(pos,dim), x );
+       arCollideItems.push_back( item );
     }
 
-    arXCollide.SortByX();
     //Check for collisions
 
     for( size_t n = 0; n < uSize; n++)
     {
-        if ( (n + 1) >= uSize ) continue;
+        CGameObject* pObject = ppObjects[n];
 
-        bool xhit = false;
-        bool yhit = false;
+		if ( pObject->GetUsesCollision() == false ) continue;
 
-        CCollisionItem& xItemN = arXCollide[n];
-        CCollisionItem& xItemN1 = arXCollide[n + 1];
+        CCollisionItemVector::iterator i = arCollideItems.begin();
 
-        bool bXLeftHit = (xItemN.m_rcBoundingBox.left >= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.left <= xItemN1.m_rcBoundingBox.right);
-        bool bXRightHit = (xItemN.m_rcBoundingBox.right >= xItemN1.m_rcBoundingBox.left && xItemN.m_rcBoundingBox.right <= xItemN1.m_rcBoundingBox.right);
+		CRect test( pObject->GetPosition3f(), pObject->GetDimensions2f());
+		CFindHit hit(test, n);
 
-        long lXN1Middle = (xItemN1.m_rcBoundingBox.left + xItemN1.m_rcBoundingBox.right) / 2;
-        long lCompare = 0;
+		while( (i = std::find_if( i, arCollideItems.end(),  hit) ) != arCollideItems.end() )
+		{
+		    CRect& rect = (*i).m_rcBoundingBox;
 
-        int eCollision = eCOLLISION_NONE;
-        int eCollisionN1 = eCOLLISION_NONE;
+			int iCollision2 = eCOLLISION_NONE;
+			float yAmt = 0.0f;
+			float xAmt = 0.0f;
 
-        if ( bXLeftHit && bXRightHit)
-        {
-            long lXNMiddle = (xItemN.m_rcBoundingBox.left + xItemN.m_rcBoundingBox.right) / 2;
-            lCompare = lXNMiddle - lXN1Middle;
-        }
-        else if ( bXLeftHit)
-        {
-            lCompare = xItemN.m_rcBoundingBox.left - lXN1Middle;
-        }
-        else if ( bXRightHit)
-        {
-            lCompare = xItemN.m_rcBoundingBox.right - lXN1Middle;
-        }
+			if ( test.top < rect.top )
+			{
+				if (test.bottom < rect.bottom )
+				{
+					yAmt = test.bottom - rect.top;
+					iCollision2 |= eCOLLISION_BOTTOM;
+				}
+				else
+				{
+					iCollision2 |= eCOLLISION_Y_CENTER;
+				}
+			}
+			else
+			{
+				if ( test.bottom < rect.bottom )
+				{
+					iCollision2 |= eCOLLISION_Y_CENTER;
+				}
+				else
+				{
+					iCollision2 |= eCOLLISION_TOP;
+					yAmt = rect.bottom - test.top;
+				}
 
-        bool bHitX = bXLeftHit || bXRightHit;
+			}
 
-        if ( bHitX )
-        {
-            if ( lCompare < 0 )
-            {
-                eCollision = eCollision | eCOLLISION_LEFT;
-                eCollisionN1 |= eCOLLISION_RIGHT;
-            }
-            else if ( lCompare > 0)
-            {
-                eCollision |= eCOLLISION_RIGHT;
-                eCollisionN1 |= eCOLLISION_LEFT;
-            }
-            else
-            {
-                eCollision |= eCOLLISION_X_CENTER;
-                eCollisionN1 |= eCOLLISION_X_CENTER;
-            }
-        }
+			if ( test.left < rect.left )
+			{
+				if ( test.right < rect.right )
+				{
+					iCollision2 |= eCOLLISION_RIGHT;
+					xAmt = test.right - rect.left;
+				}
+				else
+				{
+					iCollision2 |= eCOLLISION_X_CENTER;
+				}
+			}
+			else
+			{
+				if ( test.right < rect.right )
+				{
+					iCollision2 |= eCOLLISION_X_CENTER;
+				}
+				else
+				{
+					xAmt = rect.right - test.left;
+					iCollision2 |= eCOLLISION_LEFT;
+				}
+			}
 
+			pObject->OnCollision( (ECollision)iCollision2, xAmt, yAmt );
 
-        bool bYBottomHit = bHitX && (xItemN.m_rcBoundingBox.bottom <= xItemN1.m_rcBoundingBox.bottom && xItemN.m_rcBoundingBox.bottom >= xItemN1.m_rcBoundingBox.top);
-        bool bYTopHit = bHitX && (xItemN.m_rcBoundingBox.top <= xItemN1.m_rcBoundingBox.bottom && xItemN.m_rcBoundingBox.top >= xItemN1.m_rcBoundingBox.top);
-
-        lXN1Middle = (xItemN1.m_rcBoundingBox.top + xItemN1.m_rcBoundingBox.bottom) / 2;
-
-        if ( bYTopHit && bYBottomHit)
-        {
-            long lXNMiddle = (xItemN.m_rcBoundingBox.top + xItemN.m_rcBoundingBox.bottom) / 2;
-            lCompare = lXNMiddle - lXN1Middle;
-        }
-        else if ( bYTopHit )
-        {
-            lCompare = xItemN.m_rcBoundingBox.top - lXN1Middle;
-        }
-        else if ( bYBottomHit )
-        {
-            lCompare = xItemN.m_rcBoundingBox.bottom - lXN1Middle;
-        }
-
-        bool bHitY = bYTopHit || bYBottomHit;
-
-        if ( bHitY )
-        {
-            //Could be missing a point called "eCOLLISION_Y_CENTER
-            if ( lCompare > 0 )
-            {
-                eCollision |= eCOLLISION_TOP;
-                eCollisionN1 |= eCOLLISION_BOTTOM;
-            }
-            else if ( lCompare < 0)
-            {
-                eCollision |= eCOLLISION_BOTTOM;
-                eCollisionN1 |= eCOLLISION_TOP;
-            }
-            else
-            {
-                eCollision |= eCOLLISION_Y_CENTER;
-                eCollisionN1 |= eCOLLISION_Y_CENTER;
-            }
-        }
-
-
-        if ( bHitX && bHitY )
-        {
-            if ( ppObjects[xItemN.m_uIndex]->GetUsesCollision())
-            {
-                ppObjects[xItemN.m_uIndex]->OnCollision((ECollision)eCollision);
-            }
-
-            if ( ppObjects[xItemN1.m_uIndex]->GetUsesCollision())
-            {
-                ppObjects[xItemN1.m_uIndex]->OnCollision((ECollision)eCollisionN1);
-            }
-        }
+			//if object has moved due to collision, then we readjust here
+			test = CRect( pObject->GetPosition3f(), pObject->GetDimensions2f());
+			i++;
+		}
     }
-
-
 }
 
 void CApp::OnRender(){
