@@ -68,12 +68,15 @@
 		<Unit filename="..\..\..\src\Sound.h" />
 		<Unit filename="..\..\..\src\Sprite.cpp" />
 		<Unit filename="..\..\..\src\Sprite.h" />
+		<Unit filename="..\..\..\src\TileEngine.cpp" />
+		<Unit filename="..\..\..\src\TileEngine.h" />
 		<Unit filename="..\..\..\src\Timer.cpp" />
 		<Unit filename="..\..\..\src\Timer.h" />
 		<Unit filename="..\..\..\src\version.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
