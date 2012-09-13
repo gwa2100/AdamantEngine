@@ -38,6 +38,7 @@ bool CAnimatedSprite::Update(float fDeltaTime /*= 0.0f*/)
     if ( uCurrentMs > m_uAnimateMS )
     {
         m_uStartTick = m_uCurrentTick;
+        //Operation here on m_nCurrentFrame may be undefined!  Maybe use m_nCurrentFrame ++ before modulu operation occurs to set current frame.
         m_nCurrentFrame = ++m_nCurrentFrame % m_nMaxFrames;
     }
 
@@ -49,6 +50,7 @@ bool CAnimatedSprite::Render(SDL_Surface* pDestSurf)
     Pos3f pos = GetPosition3f();
     Pos2f dim = GetDimensions2f();
     SDL_Rect rect = CDefault_Rect(pos.x, pos.y, dim.x, dim.y);
+    //*****NOT BEING USED********
     SDL_Rect src = CDefault_Rect(pos.x * m_nCurrentFrame, 0, dim.x, dim.y );
 
     if (SDL_BlitSurface(m_pSurf, NULL, pDestSurf, &rect) != 1)
