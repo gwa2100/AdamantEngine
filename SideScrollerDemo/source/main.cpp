@@ -26,23 +26,24 @@ using namespace std;
 
 
 
-class PlayerSprite: public CSprite
+class PlayerSprite : public CSprite
 {
-    virtual bool Event(SDL_Event*);
+    //virtual bool Event(SDL_Event*);
+    virtual bool Update(float deltaTime = 1.0f){Move(velocity);};
 };
 
-bool PlayerSprite::Event(SDL_Event* pEvent)
+/*bool PlayerSprite::Event(SDL_Event* pEvent)
 {
     if (pEvent->type == SDL_KEYDOWN) {
         switch (pEvent->key.keysym.sym){
             case SDLK_LEFT:
-                velocity.x = -1;
+                velocity.x = 1;
                 break;
             case SDLK_RIGHT:
                 velocity.x = 1;
                 break;
             case SDLK_UP:
-                velocity.y = -1;
+                velocity.y = 1;
                 break;
             case SDLK_DOWN:
                 velocity.y = 1;
@@ -71,22 +72,24 @@ bool PlayerSprite::Event(SDL_Event* pEvent)
     }
     return true;
 }
-
+*/
 
 int main(int argc, char* argv[])
 {
     CApp* theApp = new CApp();
     PlayerSprite* player1 = new PlayerSprite();
-    player1->CreateFromFile("C:/Users/Gaming/Documents/GitHub/AdamantEngine/bin/Debug/Images/toon.bmp");
+    player1->SetFileName("C:/Users/Gaming/Documents/GitHub/AdamantEngine/bin/Debug/Images/toon.bmp");
     player1->SetPosition(Pos2i(50,50));
-    player1->EnableEvent(false);
+    player1->SetVelocity(Pos2i(0,0));
+    player1->EnableEvent(true);
     player1->EnableCleanup(true);
     player1->EnableRender(true);
-    player1->EnableUpdate(false);
+    player1->EnableUpdate(true);
     theApp->BindSprite(player1);
     SDL_Surface* Test;
     Test = SDL_LoadBMP("Images/toon.bmp");
-    SDL_BlitSurface( Test, NULL, m_pSurfaceDisplay, NULL );
+    //SDL_BlitSurface( Test, NULL, m_pSurfaceDisplay, NULL );
 
     return theApp->OnExecute();
+
 }

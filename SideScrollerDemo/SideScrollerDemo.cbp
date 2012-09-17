@@ -13,10 +13,18 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="..\Engine\Source\Headers" />
+					<Add directory="C:\Users\Gaming\Documents\GitHub\AdamantEngine\Engine\src" />
+					<Add directory="C:\Users\Gaming\Documents\GitHub\AdamantEngine\Engine\contrib\mingw\include" />
 				</Compiler>
 				<Linker>
-					<Add library="..\bin\Debug\libAdamantEngine.a" />
+					<Add option="-lmingw32" />
+					<Add option="-lSDL.dll" />
+					<Add option="-lSDLmain" />
+					<Add library="..\Engine\bin\libadamantengine.a" />
+					<Add library="..\Engine\contrib\mingw\lib\libSDL.dll.a" />
+					<Add library="..\Engine\contrib\mingw\lib\libSDLmain.a" />
+					<Add directory="..\Engine\contrib\mingw\lib" />
+					<Add directory="..\Engine\contrib\lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">

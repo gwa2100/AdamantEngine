@@ -19,6 +19,7 @@
 					<Add option="-DDLL_EXPORT" />
 					<Add directory="..\..\..\contrib\mingw\include" />
 					<Add directory="..\..\..\contrib\include" />
+					<Add directory="..\..\..\contrib\mingw\include\SDL" />
 				</Compiler>
 				<Linker>
 					<Add option="-lmingw32" />
@@ -29,7 +30,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="..\..\..\bin\adamantengine" prefix_auto="1" extension_auto="1" />
+				<Option output="..\..\..\bin\Ming\adamantengine" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="..\..\..\bin\" />
 				<Option object_output="obj\Release\" />
 				<Option type="3" />
