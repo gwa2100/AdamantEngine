@@ -4,7 +4,7 @@
 //
 //  Created by Timothy Carlisle on 09/12/12.
 /*
-   Copyright 2011-2012 Timothy Carlisle
+   Copyright 2012 Timothy Carlisle
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -22,6 +22,11 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+
+TileEngine::~TileEngine()
+{
+    SDL_FreeSurface(tileScreen);
+}
 
 void TileEngine::LoadMap(string fileName)
 {

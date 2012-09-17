@@ -288,7 +288,7 @@ bool CApp::OnInit()
     m_nGravRate = 7;
     m_nGravFrame = 0;
 
-    //Jump stuff
+    //Jump stuff ::: TAC: I DONT THINK THIS IS USED ANYMORE.  May just remove it.
     m_bJump = false;
     m_bAlreadyJump = false;
     m_nJumpTime = 0;
@@ -302,6 +302,12 @@ bool CApp::OnInit()
         for (size_t x = 0; x < uSize; x++) {
             ppObjects[x]->OnInit();
         }
+    }
+
+    //If using a tileMap, Generate!
+    if (m_bUseTileEngine)
+    {
+        m_TileEngine.GenerateMap();
     }
 
     return true;
@@ -415,8 +421,14 @@ void CApp::OnLoop()
 }
 
 void CApp::OnRender(){
-    //SpriteList SpriteDrawin !
+    //SpriteList SpriteDrawing!
     SDL_FillRect( m_pSurfDisplay, NULL, 0 );
+
+    //First of all draw the tileMap if it being used.
+    if (m_bUseTileEngine)
+    {
+        m_TileEngine.RenderCurrentViewPort(m_pSurfDisplay);
+    }
 
     size_t uSize = m_arObjectList.size();
 

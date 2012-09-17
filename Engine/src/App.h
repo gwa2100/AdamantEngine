@@ -24,7 +24,7 @@
 
 #include <vector>
 #include <SDL/SDL_events.h>
-
+#include "TileEngine.h"
 #include "Sound.h"
 #include "Timer.h"
 #include "PositionDataTypes.h"
@@ -40,7 +40,8 @@ struct SDL_Surface;
 class CApp
 {
     bool m_bRunning;
-
+    //Tells the system if we are using the tileengine.
+    bool m_bUseTileEngine;
 public:
 
     CApp();
@@ -62,7 +63,10 @@ public:
     bool DrawSurface(SDL_Surface* pSrc, Sint16 nSrcX, Sint16 nSrcY, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY);
     bool DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY);
 
-    //KMS: Should this really be public data??
+    //KMS:  Should this really be public data??
+    //TAC:  No it really should all be gone through and put in private or protected.
+    //      Just need to take the time to actually go through and fix it.
+
     //Input data.
     Pos2i m_inputVelocity;
     short unsigned int m_uMovementSpeed;
@@ -84,6 +88,11 @@ public:
     //You will pretty much always bind a new Sprite to this system. Just use BindSprite, passing it the pointer to the sprite object.
     CGameObjectPtrVector m_arObjectList;
     void BindSprite(CGameObject* pBindMe);
+
+    //The tile engine object.
+    TileEngine m_TileEngine;
+    //Turn on or off the tileEngine.
+    void SetUseTileEngine(bool pA){m_bUseTileEngine = pA;};
 
     //CSound m_TestSound;
 
