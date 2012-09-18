@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="adamantengine" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../bin/adamantengine" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../../../bin/adamantengine" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="`sdl-config --cflags`" />
+			<Add option="-I../../../contrib/linux/include" />
+		</Compiler>
+		<Linker>
+			<Add option="`sdl-config --libs`" />
+			<Add option="-L../../../contrib/lib" />
+		</Linker>
+		<Unit filename="../../../src/AdamantEngine.h" />
+		<Unit filename="../../../src/AnimatedSprite.cpp" />
+		<Unit filename="../../../src/App.cpp" />
+		<Unit filename="../../../src/App.hpp" />
+		<Unit filename="../../../src/GameObject.cpp" />
+		<Unit filename="../../../src/GameObjectPtrVector.cpp" />
+		<Unit filename="../../../src/GameObjectPtrVector.hpp" />
+		<Unit filename="../../../src/Sound.cpp" />
+		<Unit filename="../../../src/Sound.h" />
+		<Unit filename="../../../src/Sprite.cpp" />
+		<Unit filename="../../../src/TileEngine.cpp" />
+		<Unit filename="../../../src/TileEngine.h" />
+		<Unit filename="../../../src/TileEngineTexturePtrVector.cpp" />
+		<Unit filename="../../../src/TileEngineTexturePtrVector.hpp" />
+		<Unit filename="../../../src/Timer.cpp" />
+		<Unit filename="../../../src/Timer.hpp" />
+		<Unit filename="../../../src/adamantengine.cpp" />
+		<Unit filename="../../../src/version.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
