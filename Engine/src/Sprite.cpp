@@ -19,57 +19,51 @@ s
    limitations under the License.
 */
 
-#include "Sprite.h"
-#include "PositionDataTypes.h"
+#include "../include/adamantengine.hpp"
+#include <SDL/SDL_video.h>
 
-bool CSprite::Render(SDL_Surface* pDestSurf)
+void CSprite::Render(HSURFACE hDestSurf)
 {
-    Pos3f pos = GetPosition3f();
-    Pos2f dim = GetDimensions2f();
-    SDL_Rect rect = CDefault_Rect(pos.x, pos.y, dim.x, dim.y);
+    Pos3f pos = GetPosition();
+    Pos2f dim = GetDimensions();
+    CRect dst(pos, dim);
 
-    if (SDL_BlitSurface(m_pSurf, NULL, pDestSurf, &rect) != 1)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    AmtBlit(m_hSurf, NULL, hDestSurf, &dst);
 }
 
 CSprite::CSprite()
-: m_pSurf(NULL)
+: m_hSurf(NULL)
 {
 
 }
 
 CSprite::~CSprite()
 {
-    if (m_pSurf != NULL)
+    if (m_hSurf != NULL)
     {
-        SDL_FreeSurface(m_pSurf);
+        SDL_FreeSurface((SDL_Surface*)m_hSurf);
     }
 }
 
-bool CSprite::CreateFromFile()
+bool CSprite::CreateFromFile( const string& sFilename )
 {
-    SDL_Surface* pTemp = SDL_LoadBMP(m_sFileName.c_str());
+    SDL_Surface* pTemp = SDL_LoadBMP(sFilename.c_str());
     if ( pTemp == NULL) return false;
 
-    m_pSurf = SDL_DisplayFormat(pTemp);
+    SDL_Surface* pSurface = SDL_DisplayFormat(pTemp);
 
-    dimensions.x = m_pSurf->w;
-    dimensions.y = m_pSurf->h;
+    dimensions.x = pSurface->w;
+    dimensions.y = pSurface->h;
 
-    bool bValid = m_pSurf != NULL;
+    bool bValid = pSurface != NULL;
 
     SDL_FreeSurface(pTemp);
 
-    return bValid;
-}
+    if ( bValid )
+    {
+        m_hSurf = pSurface;
+    }
 
-bool CSprite::OnInit()
-{
-    return CreateFromFile();
+    return bValid;
+
 }

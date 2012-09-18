@@ -23,8 +23,8 @@
 #define TILEENGINE_H
 
 #include <string>
-#include "Sprite.h"
-
+#include "../include/Sprite.hpp"
+#include <SDL/SDL_Video.h>
 using namespace std;
 
 //These set the maximums for the map loader.
@@ -98,19 +98,19 @@ public:
     virtual ~TileEngine();
 
     //This sets the view port size.  Typically set to be what size the screen will be that will displaying the map.
-    void SetViewPortSize(Pos2i vSize){viewPortSize = vSize;};
+    void SetViewPortSize(Pos2f vSize){viewPortSize = vSize;};
     //This sets the current view port position.
-    void SetCurrentViewPortCoords(Pos2i cView){currentViewPortCoords = cView;};
+    void SetCurrentViewPortCoords(Pos2f cView){currentViewPortCoords = cView;};
     //To move the viewport.
-    void MoveCurrentViewPortCoords(Pos2i moveXY){currentViewPortCoords.x += moveXY.x; currentViewPortCoords.y += moveXY.y;};
+    void MoveCurrentViewPortCoords(Pos2f moveXY){currentViewPortCoords.x += moveXY.x; currentViewPortCoords.y += moveXY.y;};
     //Return the current map size in type Pos2i.
-    Pos2i GetMapSize(){return Pos2i(tileMap.mapWidth, tileMap.mapHeight);};
+    Pos2f GetMapSize(){return Pos2f(tileMap.mapWidth, tileMap.mapHeight);};
     //Return the current Tile Size in type Pos2i.
-    Pos2i GetTileSize(){return Pos2i(tileMap.tileWidth, tileMap.tileHeight);};
+    Pos2f GetTileSize(){return Pos2f(tileMap.tileWidth, tileMap.tileHeight);};
     //Return the current view port size in type Pos2i.
-    Pos2i GetViewPortSize(){return viewPortSize;};
+    Pos2f GetViewPortSize(){return viewPortSize;};
     //Return the current view port postion in type Pos2i.
-    Pos2i GetCurrentViewPortCoords(){return currentViewPortCoords;};
+    Pos2f GetCurrentViewPortCoords(){return currentViewPortCoords;};
 
     //Primary way of getting the map.
     bool RenderCurrentViewPort(SDL_Surface* pDestSurf);
@@ -133,9 +133,9 @@ protected:
     SDL_Surface* tileScreen;
 
     //The size in pixels of the window to display the map, it will show a piece of the map this size.
-    Pos2i viewPortSize;
+    Pos2f viewPortSize;
     //Top left corner of where the viewport is.
-    Pos2i currentViewPortCoords;
+    Pos2f currentViewPortCoords;
 };
 
 #endif // TILEENGINE_H

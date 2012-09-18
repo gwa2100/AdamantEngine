@@ -21,6 +21,8 @@
 #include "TileEngine.h"
 #include <iostream>
 #include <fstream>
+#include <SDL/SDL_video.h>
+
 using namespace std;
 
 TileEngine::~TileEngine()
@@ -90,11 +92,9 @@ void TileEngine::GenerateMap()
             //Pulls the current tiles filename for loading.
             string tileFileName = tileMap.tileTypes[tileTypeNumber].tileFileName.c_str();
             //Loads the current tiles filename into the CSprite painter.
-            TilePainterSprite.SetFileName(tileFileName);
-            //Initializes the painter.
-            TilePainterSprite.OnInit();
+            TilePainterSprite.CreateFromFile( tileFileName );
             //Create a Pos2i to hold tile position in PIXELS.
-            Pos2i tilePos;
+            Pos2f tilePos;
             //Get the pixel position by multiplying tileheight and widths by the current tile position.
             tilePos.x = tileMap.tileWidth * x;
             tilePos.y = tileMap.tileHeight * y;
@@ -115,7 +115,7 @@ void TileEngine::GenerateMap()
 bool TileEngine::RenderCurrentViewPort(SDL_Surface* pDestSurf)
 {
     //Sets a SDL_Rect for the current viewport information.
-    SDL_Rect viewRect = CDefault_Rect(currentViewPortCoords.x, currentViewPortCoords.y, viewPortSize.x, viewPortSize.y);
+    SDL_Rect viewRect = {currentViewPortCoords.x, currentViewPortCoords.y, viewPortSize.x, viewPortSize.y};
 
     //Renders the current viewport from tilescreen to the target Surface.
     if (SDL_BlitSurface(tileScreen, &viewRect, pDestSurf, NULL) != 1)

@@ -19,16 +19,17 @@
    limitations under the License.
 */
 
-#include "App.h"
+#include "App.hpp"
 #include <SDL/SDL.h>
 #include <SDL/SDL_mixer.h>
+#include <SDL/SDL_events.h>
 
 const int g_ciFrameCap = 60;
 
 //Z Comparison (DEPTH)
 bool operator < (const CGameObject& left, const CGameObject& right)
 {
-	if  (left.GetPosition3f().z < right.GetPosition3f().z) return true;
+	if  (left.GetPosition().z < right.GetPosition().z) return true;
 	return false;
 }
 
@@ -48,11 +49,8 @@ CApp::CApp()
 {
 }
 
-int CApp::OnExecute() {
-    if (OnInit() == false)
-    {
-        return -1;
-    }
+int CApp::Execute() {
+    SDL_Event localEvent;
 
     while (m_bRunning)
     {
@@ -69,10 +67,9 @@ int CApp::OnExecute() {
 
         m_uAccTime = m_uAccTime + m_uCurrTime - m_uPrevTime;
 
-        //KMS: maybe we could make m_event a local variable instead that way we can forward declare SDL_Event unless we look at the "last" event that happend.
-        while (SDL_PollEvent(&m_event))
+        while (SDL_PollEvent(&localEvent))
         {
-            OnEvent(&m_event);
+            OnEvent(&localEvent);
         }
         OnLoop();
         //if ( accTime >= 1000 )
@@ -88,8 +85,9 @@ int CApp::OnExecute() {
     return 0;
 }
 
-void CApp::BindSprite(CGameObject* pBindMe)
+void CApp::Bind(CGameObject* pBindMe)
 {
+
     //lets let vector do the memory management of the internal buffers...
     m_arObjectList.push_back( pBindMe );
 }
@@ -132,7 +130,7 @@ bool CApp::DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst)
 
 bool CApp::DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY)
 {
-    SDL_Rect rect = CDefault_Rect( nDstX, nDstY );
+    SDL_Rect rect = {nDstX, nDstY , 0 , 0};
 
     if (SDL_BlitSurface(pSrc, NULL, pDst, &rect) != 1)
     {
@@ -145,10 +143,11 @@ bool CApp::DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst, Sint16 nDstX, Sint1
 
 }
 
+//KMS: don't use this because it isnt in good shape atm, it only supplies x,y on the source and not what width and height you want
 bool CApp::DrawSurface(SDL_Surface* pSrc, Sint16 nSrcX, Sint16 nSrcY, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY)
 {
-    SDL_Rect rcSrc = CDefault_Rect( nSrcX, nSrcY);
-    SDL_Rect rcDst = CDefault_Rect( nDstX, nDstY);
+    SDL_Rect rcSrc = {nSrcX, nSrcY, 0 ,0};
+    SDL_Rect rcDst = {nDstX, nDstY, 0, 0};
 
     if (SDL_BlitSurface(pSrc, &rcSrc, pDst, &rcDst) != 1)
     {
@@ -231,7 +230,7 @@ void CApp::OnEvent(SDL_Event* pEvent) {
             CGameObject** ppObjects = m_arObjectList.data();
 
             for (size_t x = 0; x < uSize; x++) {
-                if ( ppObjects[x]->GetUsesEvent())
+                if ( ppObjects[x]->GetEvent())
                 {
                     ppObjects[x]->Event(m_inputVelocity);
                 }
@@ -240,7 +239,7 @@ void CApp::OnEvent(SDL_Event* pEvent) {
     }
 }
 
-bool CApp::OnInit()
+bool CApp::Initialize()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return false;
@@ -294,16 +293,6 @@ bool CApp::OnInit()
     m_nJumpTime = 0;
     m_nJumpPower = 7;
 
-    size_t uSize = m_arObjectList.size();
-
-    if ( uSize > 0) {
-        CGameObject** ppObjects = m_arObjectList.data();
-
-        for (size_t x = 0; x < uSize; x++) {
-            ppObjects[x]->OnInit();
-        }
-    }
-
     //If using a tileMap, Generate!
     if (m_bUseTileEngine)
     {
@@ -328,13 +317,13 @@ void CApp::OnLoop()
     CGameObject** ppObjects = m_arObjectList.data();
 
     for (size_t x = 0; x < uSize; x++) {
-        if (ppObjects[x]->GetUsesUpdate() )
+        if (ppObjects[x]->GetUpdate() )
         {
            ppObjects[x]->Update();
         }
 
-       Pos3f pos = ppObjects[x]->GetPosition3f();
-       Pos2f dim = ppObjects[x]->GetDimensions2f();
+       Pos3f pos = ppObjects[x]->GetPosition();
+       Pos2f dim = ppObjects[x]->GetDimensions();
        CCollisionItem item( CRect(pos,dim), x );
        arCollideItems.push_back( item );
     }
@@ -345,11 +334,11 @@ void CApp::OnLoop()
     {
         CGameObject* pObject = ppObjects[n];
 
-		if ( pObject->GetUsesCollision() == false ) continue;
+		if ( pObject->GetCollision() == false ) continue;
 
         CCollisionItemVector::iterator i = arCollideItems.begin();
 
-		CRect test( pObject->GetPosition3f(), pObject->GetDimensions2f());
+		CRect test( pObject->GetPosition(), pObject->GetDimensions());
 		CFindHit hit(test, n);
 
 		while( (i = std::find_if( i, arCollideItems.end(),  hit) ) != arCollideItems.end() )
@@ -414,7 +403,7 @@ void CApp::OnLoop()
 			pObject->OnCollision( (ECollision)iCollision2, xAmt, yAmt );
 
 			//if object has moved due to collision, then we readjust here
-			test = CRect( pObject->GetPosition3f(), pObject->GetDimensions2f());
+			test = CRect( pObject->GetPosition(), pObject->GetDimensions());
 			i++;
 		}
     }
@@ -436,7 +425,7 @@ void CApp::OnRender(){
         CGameObject** ppObjects = m_arObjectList.data();
 
         for (size_t x = 0; x < uSize; x++) {
-            if ( ppObjects[x]->GetUsesRender() ) {
+            if ( ppObjects[x]->GetRender() ) {
                 ppObjects[x]->Render(m_pSurfDisplay);
             }
         }

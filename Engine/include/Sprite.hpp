@@ -22,41 +22,34 @@
 #ifndef Sprite_h
 #define Sprite_h
 
-#include "GameObject.h"
-
+#include "GameObject.hpp"
 #include <string>
 using std::string;
 
-class SDL_Surface;
+class CApp;
 
 class CSprite : public CGameObject
 {
+    friend class CApp;
+    friend class TileEngine;
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Functions<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 public:
     CSprite();
     ~CSprite();
 
-    virtual bool OnInit();
-
-    //Update Function
-    virtual bool Update(float deltaTime = 0.0f) { return false;}
-
-    //Draw the sprite!
-    virtual bool Render(SDL_Surface* pDestSurf);
-
-    void SetFileName( const string& sFileName) { m_sFileName = sFileName; }
-
-    void SetSurface( SDL_Surface* pSurface ) { m_pSurf = pSurface; }
+    //Create from a bmp file.
+    bool CreateFromFile( const string& sFilename );
 
 protected:
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Variables<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    //Our surface pointers for holding the surface!
-    //Surf will hold the sprite image.
-    SDL_Surface* m_pSurf;
-    bool CreateFromFile();
-    string m_sFileName;
 
+    //Update Function
+    virtual void Update(float deltaTime = 0.0f) { }
+
+    //Draw the sprite!
+    virtual void Render(HSURFACE hDestSurf);
+
+
+    HSURFACE m_hSurf;
 };
 
 

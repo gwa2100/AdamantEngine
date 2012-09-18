@@ -23,21 +23,20 @@
 #define CApp_h
 
 #include <vector>
-#include <SDL/SDL_events.h>
 #include "TileEngine.h"
-#include "Sound.h"
-#include "Timer.h"
-#include "PositionDataTypes.h"
-#include "GameObject.h"
-
+#include "../include/adamantengine.hpp"
+#include "timer.hpp"
+#include "GameObjectPtrVector.hpp"
+#include <stdint.h>
 
 using std::vector;
 
 const unsigned int MOVE_SPD = 5;
 
 struct SDL_Surface;
+union SDL_Event;
 
-class CApp
+class CApp : public IEngine
 {
     bool m_bRunning;
     //Tells the system if we are using the tileengine.
@@ -47,35 +46,35 @@ public:
     CApp();
 
     //Engine Core!
-    int OnExecute();
-    bool OnInit();
+    int Execute();
+    bool Initialize();
+    void Bind(CGameObject* pBindMe);
+
+private:
+
+    SDL_Surface* m_pSurfDisplay;
+    //Some nice helper functions for graphics!
+    SDL_Surface* LoadSprite(const char* pszFileName) const;
+    bool DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst);
+    bool DrawSurface(SDL_Surface* pSrc, int16_t nSrcX, int16_t nSrcY, SDL_Surface* pDst, int16_t nDstX, int16_t nDstY);
+    bool DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst, int16_t nDstX, int16_t nDstY);
     void OnEvent( SDL_Event* pEvent);
     void OnLoop();
     void OnRender();
     void OnCleanup();
-
-    SDL_Surface* m_pSurfDisplay;
-
-
-    //Some nice helper functions for graphics!
-    SDL_Surface* LoadSprite(const char* pszFileName) const;
-    bool DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst);
-    bool DrawSurface(SDL_Surface* pSrc, Sint16 nSrcX, Sint16 nSrcY, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY);
-    bool DrawSurface(SDL_Surface* pSrc, SDL_Surface* pDst, Sint16 nDstX, Sint16 nDstY);
 
     //KMS:  Should this really be public data??
     //TAC:  No it really should all be gone through and put in private or protected.
     //      Just need to take the time to actually go through and fix it.
 
     //Input data.
-    Pos2i m_inputVelocity;
+    Pos2f m_inputVelocity;
     short unsigned int m_uMovementSpeed;
     //Timing and Event System Stuff alot of of it needs a cleanup, as most likely it is all not needed.
     CTimer m_timer;
-    SDL_Event m_event;
-    Uint32 m_uPrevTime;
-    Uint32 m_uCurrTime;
-    Uint32 m_uAccTime;
+    uint32_t m_uPrevTime;
+    uint32_t m_uCurrTime;
+    uint32_t m_uAccTime;
     int m_nGravRate;
     int m_nGravFrame;
 
@@ -87,7 +86,6 @@ public:
     //Used for the Sprite Pointer Vector for automated rendering and updating, etc.
     //You will pretty much always bind a new Sprite to this system. Just use BindSprite, passing it the pointer to the sprite object.
     CGameObjectPtrVector m_arObjectList;
-    void BindSprite(CGameObject* pBindMe);
 
     //The tile engine object.
     TileEngine m_TileEngine;

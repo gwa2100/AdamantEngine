@@ -22,7 +22,7 @@
 					<Add directory="..\..\..\contrib\mingw\include\SDL" />
 				</Compiler>
 				<Linker>
-					<Add option="-lmingw32" />
+					<Add option="-lmingw32 -lSDLmain -lSDL -lSDL_mixer -shared" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDL.dll.a" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDLmain.a" />
 					<Add directory="..\..\..\contrib\mingw\lib" />
@@ -45,7 +45,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-lmingw32" />
+					<Add option="-lmingw32  -lSDLmain -lSDL -lSDL_mixer" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDL.dll.a" />
 					<Add library="..\..\..\contrib\mingw\lib\libSDLmain.a" />
 					<Add directory="..\..\..\contrib\mingw\lib" />
@@ -58,21 +58,21 @@
 		</Compiler>
 		<Unit filename="..\..\..\src\AdamantEngine.h" />
 		<Unit filename="..\..\..\src\AnimatedSprite.cpp" />
-		<Unit filename="..\..\..\src\AnimatedSprite.h" />
 		<Unit filename="..\..\..\src\App.cpp" />
-		<Unit filename="..\..\..\src\App.h" />
-		<Unit filename="..\..\..\src\CollisionItem.hpp" />
+		<Unit filename="..\..\..\src\App.hpp" />
 		<Unit filename="..\..\..\src\GameObject.cpp" />
-		<Unit filename="..\..\..\src\GameObject.h" />
-		<Unit filename="..\..\..\src\PositionDataTypes.h" />
+		<Unit filename="..\..\..\src\GameObjectPtrVector.cpp" />
+		<Unit filename="..\..\..\src\GameObjectPtrVector.hpp" />
 		<Unit filename="..\..\..\src\Sound.cpp" />
 		<Unit filename="..\..\..\src\Sound.h" />
 		<Unit filename="..\..\..\src\Sprite.cpp" />
-		<Unit filename="..\..\..\src\Sprite.h" />
 		<Unit filename="..\..\..\src\TileEngine.cpp" />
 		<Unit filename="..\..\..\src\TileEngine.h" />
+		<Unit filename="..\..\..\src\TileEngineTexturePtrVector.cpp" />
+		<Unit filename="..\..\..\src\TileEngineTexturePtrVector.hpp" />
 		<Unit filename="..\..\..\src\Timer.cpp" />
-		<Unit filename="..\..\..\src\Timer.h" />
+		<Unit filename="..\..\..\src\Timer.hpp" />
+		<Unit filename="..\..\..\src\adamantengine.cpp" />
 		<Unit filename="..\..\..\src\version.h" />
 		<Extensions>
 			<code_completion />

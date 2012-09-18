@@ -18,21 +18,21 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#include "GameObject.h"
-#include "App.h"
+#include "../include/GameObject.hpp"
+#include "App.hpp"
 
-CGameObject::CGameObject(Pos3f iPosition, Pos2f iDimensions, SDL_Rect iBoundBox,
-            bool bUsesCollision, bool bUsesUpdate, bool bUsesRender,
-            bool bUsesEvent, bool bUsesCleanup)
+CGameObject::CGameObject(Pos3f iPosition, Pos2f iDimensions, CRect rcBoundBox,
+            bool bCollision, bool bUpdate, bool bRender,
+            bool bEvent, bool bCleanup)
 {
     position = iPosition;
     dimensions = iDimensions;
-    boundBox = iBoundBox;
-    m_bUsesCollision = bUsesCollision;
-    m_bUsesUpdate = bUsesUpdate;
-    m_bUsesRender = bUsesRender;
-    m_bUsesEvent = bUsesEvent;
-    m_bUsesCleanup = bUsesCleanup;
+    boundBox = rcBoundBox;
+    m_bCollision = bCollision;
+    m_bUpdate = bUpdate;
+    m_bRender = bRender;
+    m_bEvent = bEvent;
+    m_bCleanup = bCleanup;
     return;
 }
 
@@ -45,215 +45,83 @@ CGameObject::~CGameObject()
 //Main Functions
 
 //Move Object Directly
-bool CGameObject::Move(const Pos3i& pos)
+void CGameObject::Move(const Pos3f& pos)
 {
     position.x += pos.x;
     position.y += pos.y;
     position.z += pos.z;
-    return true;
 }
 
-bool CGameObject::Move(const Pos2i& pos)
-{
-    position.x += pos.x;
-    position.y += pos.y;
-    return true;
-}
-
-bool CGameObject::Move(const Pos3f& pos)
-{
-    position.x += pos.x;
-    position.y += pos.y;
-    position.z += pos.z;
-    return true;
-}
-
-bool CGameObject::Move(const Pos2f& pos)
-{
-    position.x += pos.x;
-    position.y += pos.y;
-    return true;
-}
-
-//Set Positions
-bool CGameObject::SetPosition(const Pos3i& pos)
+void CGameObject::SetPosition(const Pos3f& pos)
 {
     position.x = pos.x;
     position.y = pos.y;
     position.z = pos.z;
-    return true;
-}
-
-bool CGameObject::SetPosition(const Pos2i& pos)
-{
-    position.x = pos.x;
-    position.y = pos.y;
-    return true;
-}
-
-bool CGameObject::SetPosition(const Pos3f& pos)
-{
-    position.x = pos.x;
-    position.y = pos.y;
-    position.z = pos.z;
-    return true;
-}
-
-bool CGameObject::SetPosition(const Pos2f& pos)
-{
-    position.x = pos.x;
-    position.y = pos.y;
-    return true;
 }
 
 //Get Position
-Pos3f CGameObject::GetPosition3f() const
+Pos3f CGameObject::GetPosition() const
 {
     return position;
 }
 
 //Get Dimensions
-Pos2f CGameObject::GetDimensions2f() const
+Pos2f CGameObject::GetDimensions() const
 {
     return dimensions;
 }
 
 //Get Velocity
-Pos3f CGameObject::GetVelocity3f() const
+Pos3f CGameObject::GetVelocity() const
 {
     return velocity;
 }
 
-//Move Velocity
-bool CGameObject::MoveVelocity(const Pos3i& vel)
+void CGameObject::MoveVelocity(const Pos3f& vel)
 {
     velocity.x += vel.x;
     velocity.y += vel.y;
     velocity.z += vel.z;
-    return true;
 }
 
-bool CGameObject::MoveVelocity(const Pos2i& vel)
-{
-    velocity.x += vel.x;
-    velocity.y += vel.y;
-    return true;
-}
-
-bool CGameObject::MoveVelocity(const Pos3f& vel)
-{
-    velocity.x += vel.x;
-    velocity.y += vel.y;
-    velocity.z += vel.z;
-    return true;
-}
-
-bool CGameObject::MoveVelocity(const Pos2f& vel)
-{
-    velocity.x += vel.x;
-    velocity.y += vel.y;
-    return true;
-}
-
-//Set Velocity
-bool CGameObject::SetVelocity(const Pos3i& vel)
+void CGameObject::SetVelocity(const Pos3f& vel)
 {
     velocity.x = vel.x;
     velocity.y = vel.y;
     velocity.z = vel.z;
-    return true;
-}
-
-bool CGameObject::SetVelocity(const Pos2i& vel)
-{
-    velocity.x = vel.x;
-    velocity.y = vel.y;
-    return true;
-}
-
-bool CGameObject::SetVelocity(const Pos3f& vel)
-{
-    velocity.x = vel.x;
-    velocity.y = vel.y;
-    velocity.z = vel.z;
-    return true;
-}
-bool CGameObject::SetVelocity(const Pos2f& vel)
-{
-    velocity.x = vel.x;
-    velocity.y = vel.y;
-    return true;
 }
 
 //Set Bounding Box for collision
-bool CGameObject::SetBoundingBox(const SDL_Rect& box)
+void CGameObject::SetBoundingBox(const CRect& box)
 {
     boundBox = box;
-    return true;
-}
-
-//Enable Functions
-bool CGameObject::EnableCollision(bool bEnable)
-{
-    m_bUsesCollision = bEnable;
-    return true;
-}
-
-bool CGameObject::EnableUpdate(bool bEnable)
-{
-    m_bUsesUpdate = bEnable;
-    return true;
-}
-
-bool CGameObject::EnableRender(bool bEnable)
-{
-    m_bUsesRender = bEnable;
-    return true;
-}
-
-bool CGameObject::EnableEvent(bool bEnable)
-{
-    m_bUsesEvent = bEnable;
-    return true;
-}
-
-bool CGameObject::EnableCleanup(bool bEnable)
-{
-    m_bUsesCleanup = bEnable;
-    return true;
 }
 
 //Overidable Virtual Function for creating object functionality.
 //These will be run by the engine based on the bool values above.
 //Update will be where velocity effects object position and other
 //update requirements are ran.
-bool CGameObject::Update(float deltaTime)
+void CGameObject::Update(float deltaTime)
 {
     if (deltaTime > 0.00)
     {
-        Pos3i temp;
-        temp.x = int(velocity.x * deltaTime);
-        temp.y = int(velocity.y * deltaTime);
-        temp.z = int(velocity.z * deltaTime);
-
+        Pos3f temp;
+        temp.x = velocity.x * deltaTime;
+        temp.y = velocity.y * deltaTime;
+        temp.z = velocity.z * deltaTime;
         Move(temp);
-        return true;
-    }
-    else
-    {
-        return false;
     }
 }
 //Render time options, non-overrided function will just display the sprite.
-bool CGameObject::Render(SDL_Surface* pDestSurf)
+void CGameObject::Render(HSURFACE hDestSurf)
 {
-    return true;
+
 }
 //Event handling.  This is where input and other events can be reacted to.
 //Note: Need to add event handling parameters.
 //Cleanup is to be called at end of the engine.  This is where you can do things
 //right before shutdown.
-bool CGameObject::Cleanup()
+void CGameObject::Cleanup()
 {
-    return true;
+    return;
 }

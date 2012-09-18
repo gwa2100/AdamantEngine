@@ -18,8 +18,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
-#include "AnimatedSprite.h"
+#include "../include/adamantengine.hpp"
 
 CAnimatedSprite::CAnimatedSprite()
 {
@@ -31,9 +30,9 @@ CAnimatedSprite::~CAnimatedSprite()
     //dtor
 }
 
-bool CAnimatedSprite::Update(float fDeltaTime /*= 0.0f*/)
+void CAnimatedSprite::Update(float fDeltaTime /*= 0.0f*/)
 {
-    Uint32 uCurrentMs = m_uCurrentTick - m_uStartTick;
+    uint32_t uCurrentMs = m_uCurrentTick - m_uStartTick;
 
     if ( uCurrentMs > m_uAnimateMS )
     {
@@ -41,27 +40,18 @@ bool CAnimatedSprite::Update(float fDeltaTime /*= 0.0f*/)
         //Operation here on m_nCurrentFrame may be undefined!  Maybe use m_nCurrentFrame ++ before modulu operation occurs to set current frame.
         m_nCurrentFrame = ++m_nCurrentFrame % m_nMaxFrames;
     }
-
-    return true;
 }
 
-bool CAnimatedSprite::Render(SDL_Surface* pDestSurf)
+void CAnimatedSprite::Render(HSURFACE hDstSurf)
 {
-    Pos3f pos = GetPosition3f();
-    Pos2f dim = GetDimensions2f();
-    SDL_Rect rect = CDefault_Rect(pos.x, pos.y, dim.x, dim.y);
-    //*****NOT BEING USED********
-    SDL_Rect src = CDefault_Rect(pos.x * m_nCurrentFrame, 0, dim.x, dim.y );
+    Pos3f pos = GetPosition();
+    Pos2f dim = GetDimensions();
 
-    if (SDL_BlitSurface(m_pSurf, NULL, pDestSurf, &rect) != 1)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    CRect rect(pos,dim);
 
+    //Eventually this will have a src rect that will point to current frame.
+
+    AmtBlit( m_hSurf, NULL, hDstSurf, &rect);
 }
 
 void CAnimatedSprite::StartAnimation()
@@ -69,14 +59,12 @@ void CAnimatedSprite::StartAnimation()
     m_uStartTick = m_uCurrentTick;
 }
 
-bool CAnimatedSprite::CreateFromFile( const string& sFilename, unsigned int nFrames, Uint32 uDelayInMS )
+bool CAnimatedSprite::CreateFromFile( const string& sFilename, unsigned int nFrames, uint32_t uDelayInMS )
 {
-    m_sFileName = sFilename;
-    bool bValid = CSprite::CreateFromFile();
+    bool bValid = CSprite::CreateFromFile( sFilename );
     if ( !bValid ) return bValid;
 
-    dimensions.x = m_pSurf->w / nFrames;
-    dimensions.y = m_pSurf->h;
+    dimensions.x = dimensions.x / nFrames;
 
     m_nMaxFrames = nFrames;
     m_nCurrentFrame = 0;

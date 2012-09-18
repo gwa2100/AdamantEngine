@@ -1,6 +1,9 @@
 #ifndef __COLLISION_ITEM_HPP__
 #define __COLLISION_ITEM_HPP__
 
+#include "../include/PositionDataTypes.hpp"
+#include <vector>
+
 enum ECollision
 {
     eCOLLISION_NONE             = 0x0,
@@ -20,33 +23,6 @@ enum ECollision
     eCOLLISION_BOTTOM_X_CENTER  = 0xE, //Combination of eCOLLISION_BOTTOM   | eCOLLISION_X_CENTER
     eCOLLISION_Y_CENTER_LEFT    = 0x7, //Combination of eCOLLISION_Y_CENTER | eCOLLISION_LEFT
     eCOLLISION_Y_CENTER_RIGHT   = 0xB  //Combination of eCOLLISION_Y_CENTER | eCOLLISION_RIGHT
-};
-
-struct CRect
-{
-    CRect( const Pos3f& position, const Pos2f& dimension )
-        : top( position.y )
-        , left( position.x )
-        , bottom( top + dimension.y)
-        , right( left + dimension.x )
-    {
-
-    }
-
-    CRect( const CRect& rect)
-        : top( rect.top)
-        , left( rect.left)
-        , bottom( rect.bottom)
-        , right( rect.right )
-    {
-
-
-    }
-
-    float top;
-    float left;
-    float bottom;
-    float right;
 };
 
 struct CCollisionItem
@@ -86,8 +62,6 @@ struct CFindHit
 	size_t nIndex;
 	CRect& toFind;
 };
-
-#include <vector>
 
 class CCollisionItemVector : public std::vector< CCollisionItem >
 {

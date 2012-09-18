@@ -22,16 +22,16 @@
 #ifndef Timer_h
 #define Timer_h
 
-#include "SDL/SDL_stdinc.h"
+#include <stdint.h>
 
 class CTimer
 {
 private:
     //The clock time when the timer started
-    Uint32 m_uStartTicks;
+    uint32_t m_uStartTicks;
 
     //The ticks stored when the timer was paused
-    Uint32 m_uPausedTicks;
+    uint32_t m_uPausedTicks;
 
     //The timer status
     bool m_bPaused;
@@ -48,7 +48,7 @@ public:
     void Resume();
 
     //Gets the timer's time
-    Uint32 GetTicks();
+    uint32_t GetTicks();
 
     //Checks the status of the timer
     bool IsStarted() const;
