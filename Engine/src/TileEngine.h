@@ -24,7 +24,7 @@
 
 #include <string>
 #include "../include/Sprite.hpp"
-#include <SDL/SDL_Video.h>
+#include <SDL_video.h>
 using namespace std;
 
 //These set the maximums for the map loader.

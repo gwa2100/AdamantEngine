@@ -1,6 +1,6 @@
-#include "../include/Adamantengine.hpp"
-#include "app.hpp"
-#include <SDL/SDL_video.h>
+#include "../include/adamantengine.hpp"
+#include "App.hpp"
+#include <SDL_video.h>
 
 IEngine* GetEngine()
 {

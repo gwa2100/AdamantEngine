@@ -25,7 +25,7 @@
 #include <vector>
 #include "TileEngine.h"
 #include "../include/adamantengine.hpp"
-#include "timer.hpp"
+#include "Timer.hpp"
 #include "GameObjectPtrVector.hpp"
 #include <stdint.h>
 

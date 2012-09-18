@@ -20,7 +20,7 @@
 */
 
 #include "Sound.h"
-#include <SDL/SDL_mixer.h>
+#include <SDL_mixer.h>
 
 using std::vector;
 
