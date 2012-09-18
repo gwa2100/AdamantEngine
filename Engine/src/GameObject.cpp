@@ -103,14 +103,7 @@ void CGameObject::SetBoundingBox(const CRect& box)
 //update requirements are ran.
 void CGameObject::Update(float deltaTime)
 {
-    if (deltaTime > 0.00)
-    {
-        Pos3f temp;
-        temp.x = velocity.x * deltaTime;
-        temp.y = velocity.y * deltaTime;
-        temp.z = velocity.z * deltaTime;
-        Move(temp);
-    }
+    Move(velocity);
 }
 //Render time options, non-overrided function will just display the sprite.
 void CGameObject::Render(HSURFACE hDestSurf)

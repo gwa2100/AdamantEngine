@@ -42,9 +42,6 @@ public:
 
 protected:
 
-    //Update Function
-    virtual void Update(float deltaTime = 0.0f) { }
-
     //Draw the sprite!
     virtual void Render(HSURFACE hDestSurf);
 

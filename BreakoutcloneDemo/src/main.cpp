@@ -10,6 +10,7 @@ public:
 		SetVelocity( Pos2f( 0.3f, 0.3f) );
 		SetUpdate( true );
 		SetCollision( true );
+		SetRender(true);
 	}
 
 protected:
@@ -71,7 +72,7 @@ public:
 
 protected:
 
-	inline virtual void OnInput( Pos2f& inputVelocity )
+	inline virtual void Event( const Pos3f& inputVelocity )
 	{
 		SetVelocity( Pos2f( inputVelocity.x, 0.0f ) );
 	}
