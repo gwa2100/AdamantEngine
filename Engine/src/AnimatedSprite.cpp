@@ -21,6 +21,8 @@
 #include "../include/adamantengine.hpp"
 
 CAnimatedSprite::CAnimatedSprite()
+: m_nCurrentFrame(0)
+, m_bAnitmating(false)
 {
     //ctor
 }
@@ -32,13 +34,16 @@ CAnimatedSprite::~CAnimatedSprite()
 
 void CAnimatedSprite::Update(float fDeltaTime /*= 0.0f*/)
 {
+    CSprite::Update( fDeltaTime );
+    if (!m_bAnitmating) return;
+
     uint32_t uCurrentMs = m_uCurrentTick - m_uStartTick;
 
     if ( uCurrentMs > m_uAnimateMS )
     {
+        uint32_t nFrameSkip = uCurrentMs / m_uAnimateMS;
         m_uStartTick = m_uCurrentTick;
-        //Operation here on m_nCurrentFrame may be undefined!  Maybe use m_nCurrentFrame ++ before modulu operation occurs to set current frame.
-        m_nCurrentFrame = ++m_nCurrentFrame % m_nMaxFrames;
+        m_nCurrentFrame = (m_nCurrentFrame + nFrameSkip) % m_nMaxFrames;
     }
 }
 
@@ -49,14 +54,23 @@ void CAnimatedSprite::Render(HSURFACE hDstSurf)
 
     CRect rect(pos,dim);
 
-    //Eventually this will have a src rect that will point to current frame.
+    CRect src;
+    src.left = dimensions.x * m_nCurrentFrame;
+    src.right = src.left + dimensions.x;
+    src.bottom = dimensions.y;
 
-    AmtBlit( m_hSurf, NULL, hDstSurf, &rect);
+    AmtBlit( m_hSurf, &src, hDstSurf, &rect);
 }
 
 void CAnimatedSprite::StartAnimation()
 {
     m_uStartTick = m_uCurrentTick;
+    m_bAnitmating = true;
+}
+
+void CAnimatedSprite::StopAnimation()
+{
+    m_bAnitmating = false;
 }
 
 bool CAnimatedSprite::CreateFromFile( const string& sFilename, unsigned int nFrames, uint32_t uDelayInMS )

@@ -3,6 +3,7 @@
 
 #include "../include/PositionDataTypes.hpp"
 #include <vector>
+#include <stddef.h>
 
 enum ECollision
 {

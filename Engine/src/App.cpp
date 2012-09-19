@@ -26,6 +26,8 @@
 
 const int g_ciFrameCap = 60;
 
+
+
 //Z Comparison (DEPTH)
 bool operator < (const CGameObject& left, const CGameObject& right)
 {
@@ -49,7 +51,72 @@ CApp::CApp()
 {
 }
 
-int CApp::Execute() {
+
+bool CApp::Initialize()
+{
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        return false;
+    }
+
+    // load support for the OGG and MOD sample/music formats
+    int flags = MIX_INIT_OGG | MIX_INIT_MOD | MIX_INIT_MP3;
+    int initted = Mix_Init(flags);
+
+    if((initted & flags) != flags)
+    {
+        printf("Mix_Init: Failed to init required ogg, mod, and mp3 support!\n");
+        printf("Mix_Init: %s\n", Mix_GetError());
+        // handle error
+    }
+
+    //Setting up sound system.
+    //TAC: Probably need to move settings into the CApp class so that they are held there and can be changed from there.
+    int audio_rate = 22050;
+    Uint16 audio_format = AUDIO_S16;    //This is 16bit audio format.
+    int audio_channels = 2;             //We can increase this later after initial tests of this system.
+    int audio_buffers = 4096;
+
+    if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) == -1)
+    {
+        printf("Open_Audio: Failed to init! >> %s\n", Mix_GetError());
+        // handle error
+    }
+
+
+    if ((m_pSurfDisplay = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
+    {
+        return false;
+    }
+
+    //Set the window caption
+    SDL_WM_SetCaption( "Adamant Engine by: Timothy Carlisle. Copyright All Rights Reserved 2011-2012", NULL);
+
+    m_inputVelocity.x = 0;
+    m_inputVelocity.y = 0;
+    m_uMovementSpeed = MOVE_SPD;
+    m_uPrevTime = 0;
+    m_uCurrTime = 0;
+    m_uAccTime = 0;
+    m_nGravRate = 7;
+    m_nGravFrame = 0;
+
+    //Jump stuff ::: TAC: I DONT THINK THIS IS USED ANYMORE.  May just remove it.
+    m_bJump = false;
+    m_bAlreadyJump = false;
+    m_nJumpTime = 0;
+    m_nJumpPower = 7;
+
+    //If using a tileMap, Generate!
+    if (m_bUseTileEngine)
+    {
+        m_TileEngine.GenerateMap();
+    }
+
+    return true;
+}
+
+int CApp::Execute()
+{
     SDL_Event localEvent;
 
     while (m_bRunning)
@@ -87,7 +154,6 @@ int CApp::Execute() {
 
 void CApp::Bind(CGameObject* pBindMe)
 {
-
     //lets let vector do the memory management of the internal buffers...
     m_arObjectList.push_back( pBindMe );
 }
@@ -161,20 +227,39 @@ bool CApp::DrawSurface(SDL_Surface* pSrc, Sint16 nSrcX, Sint16 nSrcY, SDL_Surfac
 }
 
 
-void CApp::OnCleanup(){
+void CApp::OnCleanup()
+{
+    size_t uSize = m_arObjectList.size();
+    if ( uSize > 0 )
+    {
+        CGameObject** ppObjects = m_arObjectList.data();
+
+        for (size_t x = 0; x < uSize; x++)
+        {
+            if ( ppObjects[x]->GetCleanup() )
+            {
+                ppObjects[x]->Cleanup();
+            }
+        }
+    }
+
     SDL_Quit();
 }
 
 
-void CApp::OnEvent(SDL_Event* pEvent) {
-    if (pEvent->type == SDL_QUIT) {
+void CApp::OnEvent(SDL_Event* pEvent)
+{
+    if (pEvent->type == SDL_QUIT)
+    {
         m_bRunning = false;
     }
 
     bool bSendEvent = false;
 
-    if (pEvent->type == SDL_KEYDOWN) {
-        switch (pEvent->key.keysym.sym){
+    if (pEvent->type == SDL_KEYDOWN)
+    {
+        switch (pEvent->key.keysym.sym)
+        {
             case SDLK_LEFT:
                 m_inputVelocity.x = -1;
                 bSendEvent = true;
@@ -198,9 +283,11 @@ void CApp::OnEvent(SDL_Event* pEvent) {
                 break;
         }
     }
-    if (pEvent->type == SDL_KEYUP) {
+    else if (pEvent->type == SDL_KEYUP)
+    {
 
-        switch (pEvent->key.keysym.sym){
+        switch (pEvent->key.keysym.sym)
+        {
             case SDLK_LEFT:
                 m_inputVelocity.x = 0;
                 bSendEvent = true;
@@ -226,10 +313,12 @@ void CApp::OnEvent(SDL_Event* pEvent) {
     {
         size_t uSize = m_arObjectList.size();
 
-        if ( uSize > 0) {
+        if ( uSize > 0)
+        {
             CGameObject** ppObjects = m_arObjectList.data();
 
-            for (size_t x = 0; x < uSize; x++) {
+            for (size_t x = 0; x < uSize; x++)
+            {
                 if ( ppObjects[x]->GetEvent())
                 {
                     ppObjects[x]->Event(m_inputVelocity);
@@ -239,68 +328,6 @@ void CApp::OnEvent(SDL_Event* pEvent) {
     }
 }
 
-bool CApp::Initialize()
-{
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        return false;
-    }
-
-    // load support for the OGG and MOD sample/music formats
-    int flags = MIX_INIT_OGG | MIX_INIT_MOD | MIX_INIT_MP3;
-    int initted = Mix_Init(flags);
-
-    if((initted & flags) != flags)
-    {
-        printf("Mix_Init: Failed to init required ogg, mod, and mp3 support!\n");
-        printf("Mix_Init: %s\n", Mix_GetError());
-        // handle error
-    }
-
-    //Setting up sound system.
-    //TAC: Probably need to move settings into the CApp class so that they are held there and can be changed from there.
-    int audio_rate = 22050;
-    Uint16 audio_format = AUDIO_S16;    //This is 16bit audio format.
-    int audio_channels = 2;             //We can increase this later after initial tests of this system.
-    int audio_buffers = 4096;
-
-    if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) == -1)
-    {
-        printf("Open_Audio: Failed to init! >> %s\n", Mix_GetError());
-        // handle error
-    }
-
-
-    if ((m_pSurfDisplay = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
-    {
-        return false;
-    }
-
-    //Set the window caption
-    SDL_WM_SetCaption( "Adamant Engine by: Timothy Carlisle. Copyright All Rights Reserved 2011-2012", NULL);
-
-    m_inputVelocity.x = 0;
-    m_inputVelocity.y = 0;
-    m_uMovementSpeed = MOVE_SPD;
-    m_uPrevTime = 0;
-    m_uCurrTime = 0;
-    m_uAccTime = 0;
-    m_nGravRate = 7;
-    m_nGravFrame = 0;
-
-    //Jump stuff ::: TAC: I DONT THINK THIS IS USED ANYMORE.  May just remove it.
-    m_bJump = false;
-    m_bAlreadyJump = false;
-    m_nJumpTime = 0;
-    m_nJumpPower = 7;
-
-    //If using a tileMap, Generate!
-    if (m_bUseTileEngine)
-    {
-        m_TileEngine.GenerateMap();
-    }
-
-    return true;
-}
 
 #include <algorithm>
 
@@ -316,7 +343,13 @@ void CApp::OnLoop()
 
     CGameObject** ppObjects = m_arObjectList.data();
 
-    for (size_t x = 0; x < uSize; x++) {
+    for (size_t x = 0; x < uSize; x++)
+    {
+        if ( ppObjects[x]->GetTime())
+        {
+            ppObjects[x]->OnTimer( m_uCurrTime );
+        }
+
         if (ppObjects[x]->GetUpdate() )
         {
            ppObjects[x]->Update();

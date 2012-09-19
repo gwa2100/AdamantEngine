@@ -14,8 +14,9 @@ class CAnimatedSprite : public CSprite
 		bool CreateFromFile( const string& sFilename, unsigned int nFrames, uint32_t uDelay );
 
     protected:
-        //Arg!
+        
         virtual void StartAnimation();
+		virtual void StopAnimation();
         virtual void Update(float fDeltaTime = 0.0f);
         virtual void Render(HSURFACE hDestSurf);
 
@@ -26,6 +27,7 @@ class CAnimatedSprite : public CSprite
     unsigned int m_nCurrentFrame;
     unsigned int m_nMaxFrames;
     uint32_t m_uStartTick;
+	bool m_bAnitmating;
 };
 
 #endif // ANIMATEDSPRITE_H

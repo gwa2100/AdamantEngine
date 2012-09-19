@@ -1,16 +1,18 @@
 #include <adamantengine.hpp>
 
-class CBall : public CSprite
+class CBall : public CAnimatedSprite
 {
 public:
 	CBall()
 	{
-	    CreateFromFile("test_ball.bmp");
+	    CreateFromFile("test_ball2.bmp", 3, 400);
 		SetPosition( Pos3f( 50.0f, 90.0f) );
 		SetVelocity( Pos2f( 0.3f, 0.3f) );
 		SetUpdate( true );
 		SetCollision( true );
 		SetRender(true);
+		SetTime(true);
+		StartAnimation();
 	}
 
 protected:

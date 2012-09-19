@@ -41,7 +41,6 @@ public:
     bool CreateFromFile( const string& sFilename );
 
 protected:
-
     //Draw the sprite!
     virtual void Render(HSURFACE hDestSurf);
 

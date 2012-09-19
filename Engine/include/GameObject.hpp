@@ -44,7 +44,7 @@ protected:
     Pos3f velocity;
     //The timer
     uint32_t m_uOldTick;
-    uint32_t  m_uCurrentTick;
+    uint32_t m_uCurrentTick;
 
     bool m_bCollision;
     bool m_bUpdate;
@@ -109,11 +109,16 @@ protected:
     //Render, do not use
     virtual void Render(HSURFACE hDestSurf);
     //if you want to control the input do it here
-    virtual void Event(const Pos3f& inputVelocity) { SetVelocity( inputVelocity ); }
+    inline virtual void Event(const Pos3f& inputVelocity) { SetVelocity( inputVelocity ); }
     //this is always called?
     virtual void Cleanup();
     //object collision.
-    virtual void OnCollision( ECollision eCollision, float fXAmt, float fYAmt) { return; }
+    inline virtual void OnCollision( ECollision eCollision, float fXAmt, float fYAmt) { return; }
+	inline virtual void OnTimer( uint32_t uCurrentTick ) 
+	{ 
+		m_uOldTick = m_uCurrentTick;
+		m_uCurrentTick = uCurrentTick;
+	}
 };
 
 
