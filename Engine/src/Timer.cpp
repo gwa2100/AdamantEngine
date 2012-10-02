@@ -19,7 +19,7 @@
    limitations under the License.
 */
 #include "Timer.hpp"
-#include <SDL/SDL_timer.h>
+#include <SDL_timer.h>
 
 CTimer::CTimer()    //Initialize the variables
  : m_uStartTicks(0)

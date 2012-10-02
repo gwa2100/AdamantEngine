@@ -26,7 +26,7 @@ struct _Mix_Music;
 typedef struct _Mix_Music Mix_Music;
 
 
-#include "SDL/SDL_stdinc.h"
+#include "SDL_stdinc.h"
 
 #include <vector>
 #include <algorithm>

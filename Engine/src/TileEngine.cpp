@@ -21,7 +21,7 @@
 #include "TileEngine.h"
 #include <iostream>
 #include <fstream>
-#include <SDL/SDL_video.h>
+#include <SDL_video.h>
 
 using namespace std;
 

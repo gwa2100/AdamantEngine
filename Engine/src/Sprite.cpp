@@ -20,7 +20,7 @@ s
 */
 
 #include "../include/adamantengine.hpp"
-#include <SDL/SDL_video.h>
+#include <SDL_video.h>
 
 void CSprite::Render(HSURFACE hDestSurf)
 {
