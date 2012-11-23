@@ -23,7 +23,7 @@
 #define POSITIONDATATYPES_HPP_INCLUDED
 
 #include <cmath>
-
+#include <math.h>
 struct Pos2f
 {
     Pos2f( float nX = 0.00, float nY = 0.00) : x(nX), y(nY) {}

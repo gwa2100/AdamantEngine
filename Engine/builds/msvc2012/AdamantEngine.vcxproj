@@ -40,8 +40,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Gaming\Documents\GitHub\AdamantEngine\Engine\contrib\msvc\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Gaming\Documents\GitHub\AdamantEngine\Engine\contrib\lib;C:\Users\Gaming\Documents\GitHub\AdamantEngine\Engine\contrib\msvc\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../contrib/msvc/include/;$(VCInstallDir)include</IncludePath>
+    <LibraryPath>../../contrib/msvc/lib/x86/;$(LibraryPath);../../contrib/lib/</LibraryPath>
     <TargetExt>.dll</TargetExt>
     <OutDir>..\..\bin\msvcwin32\$(Configuration)\</OutDir>
     <IntDir>Obj\$(Configuration)\</IntDir>
