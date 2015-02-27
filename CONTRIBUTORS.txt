@@ -10,6 +10,6 @@ Founder: Timothy Carlisle
 
 Contributors:
 USER NAME    	NAME              	EMAIL                   	YEARS CONTRIB.
-GWA2100      	Timothy Carlisle  	gwa2100@gmail.com       	2011-2012
+GWA2100      	Timothy Carlisle  	gwa2100@gmail.com       	2011-2015
 ROCKINOUTT93 	Bryan Monsalvatge 	dreadnought93@gmail.com 	2012 
 MAZTHEMAN	Kevin Sucre						2012
