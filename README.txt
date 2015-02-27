@@ -1,8 +1,8 @@
 AdamantEngine
-v0.2.0.4
-This document version: v2.0
+v0.3.0.1
+This document version: v3.0
 Created 2:18 AM 8/28/2012
-Updated 8:00 AM 9/17/2012 
+Updated 84:00 AM 2/27/2015 
 
 README.txt
 
@@ -50,31 +50,36 @@ The major version signifies the maturity of the project at that time.  We will i
 
 Below are the versions of the engine.  Each Version will list the version number and then what was added for that version.  The Version Roadmap is different in that it will display the next planned version number and what will be added.  As features are added an asterick(*) will be added before the item to denote it's inclusion in the development versions.
 
-CURRENT VERSION: v0.2.0.4
+CURRENT VERSION: v0.3.0.1
 
 
 #####Version Roadmap##### 
-v0.3.0.0:
+v0.4.0.0:
+Module/Component architecture
 Sprite Animation.
 Basic Mouse Support.
-*Tile Map Loader.
-*Tile Map Renderer.
+Tile Map Loader.
+Tile Map Renderer.
 Basic GUI System.
-*Basic Physics and Collision Detection.
-*Linux Support.
+Basic Physics and Collision Detection.
+Linux Support.
 Mac Support.
 
-v0.4.0.0:
+v0.5.0.0:
 Effects System.
 Mouse Picking.
 
-v0.5.0.0:
+v0.6.0.0:
 Basic TCP/IP Support.
 
 
 
 
 #####Version Log######
+v0.3.0.0:
+Migrated to SDL v2.0
+
+
 
 v0.2.0.0:
 Added Sound.
