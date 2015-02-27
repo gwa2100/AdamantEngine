@@ -1,6 +1,0 @@
-#ifndef ADAMANTENGINE_H_INCLUDED
-#define ADAMANTENGINE_H_INCLUDED
-
-#include "App.h"
-
-#endif // ADAMANTENGINE_H_INCLUDED
