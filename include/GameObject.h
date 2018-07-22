@@ -21,9 +21,9 @@ limitations under the License.
 */
 #include "PositionDataTypes.h"
 #include <stdint.h>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
-#include <string.h>
+#include <string>
 
 
 //*********************************************************** OBJECT ***********************************************************
@@ -166,7 +166,7 @@ protected:
 	//Pos3f velocity;
 	//Vector of Attached Components
 	GameObjectComponentPtrVector attachedComponents;
-	
+
 
 
 };

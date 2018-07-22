@@ -1,4 +1,4 @@
-#include "..\include\GameView.h"
+#include "GameView.h"
 
 
 GameView::GameView()

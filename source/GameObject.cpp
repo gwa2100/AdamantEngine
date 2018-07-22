@@ -4,7 +4,7 @@
 //
 //  Created by Timothy Carlisle on 02/15/15.
 /*
-Copyright 2011-2015 Timothy Carlisle
+Copyright 2011-2018 Timothy Carlisle
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ limitations under the License.
 
 
 #include "GameObject.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 
 //*********************************************************** GAMEOBJECT ***********************************************************

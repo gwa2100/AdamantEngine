@@ -1,5 +1,5 @@
 #include "main.h"
-#include "SDL\SDL.h"
+#include "SDL2/SDL.h"
 #include <iostream>
 #include "GameObject.h"
 #include "GameObjectComponent.h"
@@ -9,7 +9,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-int SDL_main(int argc, char* args[])
+int main(int argc, char* args[])
 {
 	SDL_Window* window = NULL;
 

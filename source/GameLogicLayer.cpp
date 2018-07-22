@@ -1,4 +1,4 @@
-#include "..\include\GameLogicLayer.h"
+#include "GameLogicLayer.h"
 
 
 GameLogicLayer::GameLogicLayer()
